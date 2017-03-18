@@ -7,12 +7,14 @@ import java.util.Collection;
 public class Tunnel {
     private Collection<Rail> rails;
     private Collection<TunnelEntrance> tunnelEntrances;
+    private Table table;
 
     private int howManyInside;
 
-    public Tunnel() {
+    public Tunnel(Table table) {
         howManyInside = 0;
         rails = new ArrayList<>();
+        this.table = table;
     }
 
     public void enter(TunnelEntrance te) {
@@ -24,7 +26,7 @@ public class Tunnel {
     }
 
     public boolean checkEntrance(TunnelEntrance te) {
-        // TODO
+        // TODO: track trains inside with directions
         return howManyInside <= 0;
     }
 }

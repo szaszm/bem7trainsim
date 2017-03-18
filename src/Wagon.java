@@ -28,7 +28,7 @@ public class Wagon {
     public Rail move(Rail to) {
         Rail old = now;
 
-        // ...
+        now = to;
 
         return old;
     }

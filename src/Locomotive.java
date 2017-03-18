@@ -12,10 +12,11 @@ public class Locomotive {
         before = null;
     }
 
-    public Rail move() {
+    public Rail move() throws TrainCollisionException {
         Rail next = now.next(before);
         before = now;
         now = next;
+        next.arrive(train);
         return before;
     }
 }
