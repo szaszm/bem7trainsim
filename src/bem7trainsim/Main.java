@@ -1,8 +1,6 @@
 package bem7trainsim;
 
-import bem7trainsim.TestCases.BaseTestCase;
-import bem7trainsim.TestCases.GetOffTestCase;
-import bem7trainsim.TestCases.SimpleCollisionTestCase;
+import bem7trainsim.TestCases.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,8 +12,15 @@ public class Main {
 
     public static void main(String[] args) throws TrainCollisionException {
         Map<Integer,BaseTestCase> tests = new HashMap<Integer,BaseTestCase>();
-        tests.put(1, new SimpleCollisionTestCase());
-        tests.put(2, new GetOffTestCase());
+        tests.put(tests.size() + 1, new SimpleCollisionTestCase());
+        tests.put(tests.size() + 1, new GetOffTestCase());
+        tests.put(tests.size() + 1, new CollisionInCrossRail());
+        tests.put(tests.size() + 1, new NotGettingOffTestCase());
+        tests.put(tests.size() + 1, new SwitchSwitchesTestCase());
+        tests.put(tests.size() + 1, new TrainMovesTestCase());
+        tests.put(tests.size() + 1, new TrainMovesInCrossRailTestCase());
+        tests.put(tests.size() + 1, new TrainsCollideInTunnelTestCase());
+        tests.put(tests.size() + 1, new TrainThroughTunnelTestCase());
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         boolean runs = true;
         while (runs) {
