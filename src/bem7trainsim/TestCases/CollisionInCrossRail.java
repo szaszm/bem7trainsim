@@ -7,4 +7,6 @@ public class CollisionInCrossRail extends BaseTestCase {
     @Override
     protected void execute() throws Exception {
     }
+
+    public String getDescription() { return "Utkozes keresztezodesben."; }
 }

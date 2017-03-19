@@ -7,4 +7,6 @@ public class SwitchSwitchesTestCase extends BaseTestCase {
     @Override
     protected void execute() throws Exception {
     }
+
+    public String getDescription() { return "Valto valtasa."; }
 }

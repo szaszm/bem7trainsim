@@ -7,4 +7,6 @@ public class TrainsCollideInTunnelTestCase extends BaseTestCase {
     @Override
     protected void execute() throws Exception {
     }
+
+    public String getDescription() { return "Vonatok utkoznek az alagutban."; }
 }
