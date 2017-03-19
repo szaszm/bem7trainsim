@@ -1,10 +1,11 @@
+package bem7trainsim;
 /**
  * Created by marci on 2017.03.18..
  */
-public class TunnelEntranceStateBuilt implements TunnelEntranceState {
+public class TunnelEntranceStateStraight implements TunnelEntranceState {
     @Override
     public boolean nextStraight() {
-        return false;
+        return true;
     }
 
     @Override

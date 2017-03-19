@@ -1,6 +1,7 @@
 /**
  * Created by marci on 2017.03.18..
  */
+package bem7trainsim;
 public class Decoration extends Field {
     private boolean state;
 

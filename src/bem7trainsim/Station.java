@@ -1,3 +1,4 @@
+package bem7trainsim;
 import java.awt.*;
 
 /**

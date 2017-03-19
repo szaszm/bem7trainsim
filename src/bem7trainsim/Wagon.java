@@ -1,28 +1,30 @@
-import java.awt.*;
+package bem7trainsim;
+import java.awt.Color;
 
 /**
  * Created by marci on 2017.03.17..
  */
 public class Wagon {
     protected Rail now;
-    private Train train;
     private Color color;
-    private boolean _isEmpty;
 
-    public Wagon(Train train, Color color) {
+    public Wagon() {
+        this(Color.GRAY);
+    }
+
+    public Wagon(Color color) {
         this.color = color;
-        this.train = train;
-        _isEmpty = false;
     }
 
     public void empty(Color color) {
         if(color == this.color) {
-            _isEmpty = true;
+            color = Color.GRAY;
+            System.out.println("URULT: "+ Main.identityToString(this));
         }
     }
 
     public boolean isEmpty() {
-        return _isEmpty;
+        return color == Color.GRAY;
     }
 
     public Rail move(Rail to) {
