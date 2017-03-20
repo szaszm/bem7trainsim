@@ -55,6 +55,6 @@ public class Main {
     }
 
     public static void objectCreated(Object obj) {
-        System.out.println(identityToString(obj)+" letrehozva.");
+        System.out.println("LETREHOZVA: "+identityToString(obj));
     }
 }

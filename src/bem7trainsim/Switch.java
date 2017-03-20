@@ -9,6 +9,7 @@ public class Switch extends Rail {
     public Switch() {
         super();
         state = new SwitchStateStraight();
+        Main.objectCreated(this);
     }
 
     @Override
@@ -23,10 +24,11 @@ public class Switch extends Rail {
     public void change() {
         if(state.nextStraight()) state = new SwitchStateCurve();
         else state = new SwitchStateStraight();
-        System.out.println("VALTOTT: "+Main.identityToString(this));
+        System.out.println("VALTOTTAM: "+Main.identityToString(this));
     }
 
     public void addLinkToChange(Rail rail) {
         this.toChangeLink = rail;
+        System.out.println("KAPCSOLODOTT: "+Main.identityToString(this)+" -> "+Main.identityToString(rail)+" VALTASBA");
     }
 }

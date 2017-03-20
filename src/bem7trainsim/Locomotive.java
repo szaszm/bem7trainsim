@@ -13,7 +13,7 @@ public class Locomotive {
         this.train = train;
         now.arrive(train);
         before = null;
-        Main.objectCreated(this);
+        System.out.println("LETREJOTT: "+Main.identityToString(this)+"  IDE: "+now);
     }
 
     public Rail move() throws TrainCollisionException {
@@ -21,6 +21,7 @@ public class Locomotive {
         if(now != null) next = now.next(before);
         before = now;
         now = next;
+        System.out.println("LEP: "+Main.identityToString(this)+"  ->  "+Main.identityToString(now));
         if(next != null) next.arrive(train);
         return before;
     }

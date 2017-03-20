@@ -25,6 +25,7 @@ public class TunnelEntrance extends Rail {
 
     public void addLinkToTunnel(Rail rail) {
         this.linkToTunnel = rail;
+        System.out.println("KAPCSOLODOTT: "+Main.identityToString(this)+"  ->  "+Main.identityToString(rail)+" ALAGUTBA");
     }
 
     public void click() {

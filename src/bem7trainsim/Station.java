@@ -10,9 +10,11 @@ public class Station extends SimpleRail {
     public Station(Color color) {
         super();
         this.color = color;
+        System.out.println("LETREJOTT: "+Main.identityToString(this)+" SZIN "+color.toString());
     }
 
     public void arrive(Train train) {
         train.empty(color);
+        System.out.println("URITES PROBA:"+Main.identityToString(this)+" -> "+Main.identityToString(train));
     }
 }

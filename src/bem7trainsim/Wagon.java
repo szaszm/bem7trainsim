@@ -14,6 +14,7 @@ public class Wagon {
 
     public Wagon(Color color) {
         this.color = color;
+        Main.objectCreated(this);
     }
 
     public void empty(Color color) {
@@ -31,6 +32,7 @@ public class Wagon {
         Rail old = now;
 
         now = to;
+        System.out.println("LEPETT: "+Main.identityToString(this)+"  ->  "+Main.identityToString(now));
 
         return old;
     }

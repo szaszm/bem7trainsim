@@ -27,6 +27,7 @@ public class Train {
         while (it.hasNext() && (wagon = it.next()).isEmpty());
         if(wagon == null) return;
         wagon.empty(color);
+
         // TODO: csak amig ugyanaz a szin
         while(it.hasNext() && (wagon = it.next()) != null) {
             wagon.empty(color);
@@ -35,7 +36,7 @@ public class Train {
 
     public void move() throws TrainCollisionException {
         Rail next = locomotive.move();
-        System.out.println("LEPETT: "+Main.identityToString(this)+"  ->  "+Main.identityToString(next));
+        System.out.println("LEPETEM: "+Main.identityToString(this)+"  ->  "+Main.identityToString(next));
         for(Wagon wagon: wagons) {
             next = wagon.move(next);
         }
