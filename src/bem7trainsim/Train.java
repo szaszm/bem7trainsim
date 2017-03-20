@@ -36,7 +36,7 @@ public class Train {
 
     public void move() throws TrainCollisionException {
         Rail next = locomotive.move();
-        System.out.println("LEPETEM: "+Main.identityToString(this)+"  ->  "+Main.identityToString(next));
+        System.out.println("LEP: "+Main.identityToString(this)+"  ->  "+Main.identityToString(next));
         for(Wagon wagon: wagons) {
             next = wagon.move(next);
         }

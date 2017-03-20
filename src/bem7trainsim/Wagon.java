@@ -32,7 +32,7 @@ public class Wagon {
         Rail old = now;
 
         now = to;
-        System.out.println("LEPETT: "+Main.identityToString(this)+"  ->  "+Main.identityToString(now));
+        System.out.println("LEP: "+Main.identityToString(this)+"  ->  "+Main.identityToString(now));
 
         return old;
     }
