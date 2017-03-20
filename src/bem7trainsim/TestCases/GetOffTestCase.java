@@ -35,4 +35,6 @@ public class GetOffTestCase extends BaseTestCase {
             train.move();
         }
     }
+
+    public String getDescription() { return "Leszallas vonatrol."; }
 }

@@ -21,4 +21,6 @@ public class SimpleCollisionTestCase extends BaseTestCase {
 
         train2.move();
     }
+
+    public String getDescription() { return "Sima utkozes."; }
 }

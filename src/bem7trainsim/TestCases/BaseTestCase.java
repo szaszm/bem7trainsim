@@ -24,4 +24,6 @@ public abstract class BaseTestCase {
     public String getName() {
         return this.getClass().getName();
     }
+
+    public String getDescription() { return "Ennek a tesztnek nincs leirasa."; }
 }

@@ -49,4 +49,6 @@ public class TrainThroughTunnelTestCase extends BaseTestCase {
         train.move();
         train.move();
     }
+
+    public String getDescription() { return "Vonat athalad az alaguton."; }
 }
