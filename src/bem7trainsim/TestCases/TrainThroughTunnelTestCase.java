@@ -12,13 +12,10 @@ public class TrainThroughTunnelTestCase extends BaseTestCase {
     @Override
     protected void execute() throws Exception {
         Field[][] fields = new Field[3][3];
-        SimpleRail prestart = new SimpleRail();
         SimpleRail start = new SimpleRail();
         TunnelEntrance te1 = new TunnelEntrance();
         TunnelEntrance te2 = new TunnelEntrance();
         SimpleRail end = new SimpleRail();
-        prestart.addRail(start);
-        start.addRail(prestart);
         start.addRail(te1);
         te1.addRail(start);
         te1.addRail(te2);
@@ -33,7 +30,7 @@ public class TrainThroughTunnelTestCase extends BaseTestCase {
 
         Table table = new Table(fields);
 
-        Train train = new Train(prestart, new ArrayList<>());
+        Train train = new Train(start, new ArrayList<>());
 
         List<TunnelEntrance> tunnelEntrances = new ArrayList<>();
         tunnelEntrances.add(te1);
@@ -42,7 +39,6 @@ public class TrainThroughTunnelTestCase extends BaseTestCase {
         te1.setTunnel(tunnel);
         te2.setTunnel(tunnel);
 
-        train.move();
         train.move();
         train.move();
         train.move();
