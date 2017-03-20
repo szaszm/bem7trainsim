@@ -11,7 +11,7 @@ public abstract class BaseTestCase {
         try {
             execute();
         } catch (Exception e) {
-            System.out.print("EXCEPTION "+e.getClass().getName()+": "+e.getMessage()+"     @ ");
+            System.out.print("EXCEPTION "+e.getClass().getSimpleName()+": "+e.getMessage()+"     @ ");
             StackTraceElement[] trace = e.getStackTrace();
             for(int i = 0; i < 3 && i < trace.length; ++i) {
                 System.out.print(trace[i] + ", ");
@@ -22,7 +22,7 @@ public abstract class BaseTestCase {
     }
 
     public String getName() {
-        return this.getClass().getName();
+        return this.getClass().getSimpleName();
     }
 
     public String getDescription() { return "Ennek a tesztnek nincs leirasa."; }

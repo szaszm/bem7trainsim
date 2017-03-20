@@ -23,6 +23,7 @@ public class Switch extends Rail {
     public void change() {
         if(state.nextStraight()) state = new SwitchStateCurve();
         else state = new SwitchStateStraight();
+        System.out.println("VALTOTT: "+Main.identityToString(this));
     }
 
     public void addLinkToChange(Rail rail) {

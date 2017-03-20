@@ -1,5 +1,6 @@
 package bem7trainsim;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,6 +10,10 @@ import java.util.List;
 public class Train {
     private Locomotive locomotive;
     private List<Wagon> wagons;
+
+    public Train(Rail start) throws TrainCollisionException {
+        this(start, new ArrayList<>());
+    }
 
     public Train(Rail start, List<Wagon> wagons) throws TrainCollisionException {
         this.wagons = wagons;
