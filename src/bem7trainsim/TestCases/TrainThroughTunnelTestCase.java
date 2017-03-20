@@ -16,12 +16,12 @@ public class TrainThroughTunnelTestCase extends BaseTestCase {
         TunnelEntrance te1 = new TunnelEntrance();
         TunnelEntrance te2 = new TunnelEntrance();
         SimpleRail end = new SimpleRail();
-        start.addRail(te1);
-        te1.addRail(start);
-        te1.addRail(te2);
-        te2.addRail(te1);
-        te2.addRail(end);
-        end.addRail(te2);
+        start.addLink(te1);
+        te1.addLink(start);
+        te1.addLink(te2);
+        te2.addLink(te1);
+        te2.addLink(end);
+        end.addLink(te2);
 
         fields[0][0] = start;
         fields[0][1] = te1;

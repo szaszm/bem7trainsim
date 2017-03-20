@@ -13,7 +13,7 @@ public abstract class Rail extends Field {
         links = new ArrayList<>();
     }
 
-    public void addRail(Rail rail) {
+    public void addLink(Rail rail) {
         links.add(rail);
     }
 

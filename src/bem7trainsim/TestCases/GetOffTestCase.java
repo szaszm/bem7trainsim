@@ -22,8 +22,8 @@ public class GetOffTestCase extends BaseTestCase {
         rails.add(new SimpleRail());
 
         for(int i = 0; i < rails.size(); ++i) {
-            if(i-1 > 0) rails.get(i).addRail(rails.get(i-1));
-            if(i+1 < rails.size()) rails.get(i).addRail(rails.get(i+1));
+            if(i-1 > 0) rails.get(i).addLink(rails.get(i-1));
+            if(i+1 < rails.size()) rails.get(i).addLink(rails.get(i+1));
         }
 
         List<Wagon> wagons = new ArrayList<>();
