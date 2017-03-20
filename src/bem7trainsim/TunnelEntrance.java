@@ -4,12 +4,11 @@ package bem7trainsim;
  */
 public class TunnelEntrance extends Rail {
     private TunnelEntranceState state;
-    private Tunnel tunnel;
     private Rail linkToTunnel;
+    private Tunnel tunnel;
 
-    public TunnelEntrance(Tunnel tunnel) {
+    public TunnelEntrance() {
         super();
-        this.tunnel = tunnel;
         state = new TunnelEntranceStateStraight();
     }
 
@@ -29,7 +28,7 @@ public class TunnelEntrance extends Rail {
     }
 
     public void click() {
-        // TODO
+        tunnel.checkEntrance(this);
     }
 
     public void setState(TunnelEntranceState state) {
@@ -42,10 +41,19 @@ public class TunnelEntrance extends Rail {
 
     public void arrive(Train train) throws TrainCollisionException {
         super.arrive(train);
-        // tunnel.enter(this);
+        if(tunnel != null && !tunnel.hasTrain(train)) {
+            tunnel.enter(this, train);
+        }
     }
 
     public void leave() {
-        // tunnel.leave(this);
+        if(tunnel != null && tunnel.hasTrain(train)) {
+            tunnel.leave(this, train);
+        }
+        super.leave();
+    }
+
+    public void setTunnel(Tunnel tunnel) {
+        this.tunnel = tunnel;
     }
 }
