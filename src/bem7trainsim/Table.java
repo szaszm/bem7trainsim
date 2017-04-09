@@ -35,4 +35,15 @@ public class Table {
 
         return Math.sqrt(Math.pow(te2x - te1x, 2) + Math.pow(te2y - te1y, 2));
     }
+
+    String getDrawData() {
+        String result = "";
+        for (int y = 0; y < fields.length; y++) {
+            for (int x = 0; x < fields[y].length; x++) {
+                result += fields[y][x].getDrawData();
+            }
+            result += "\n";
+        }
+        return result;
+    }
 }

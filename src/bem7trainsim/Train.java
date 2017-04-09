@@ -11,11 +11,11 @@ public class Train {
     private Locomotive locomotive;
     private List<Wagon> wagons;
 
-    public Train(Rail start) throws TrainCollisionException {
+    public Train(Rail start) throws CollisionException {
         this(start, new ArrayList<>());
     }
 
-    public Train(Rail start, List<Wagon> wagons) throws TrainCollisionException {
+    public Train(Rail start, List<Wagon> wagons) throws CollisionException {
         this.wagons = wagons;
         locomotive = new Locomotive(this, start);
         Main.objectCreated(this);
@@ -34,12 +34,22 @@ public class Train {
         }
     }
 
-    public void move() throws TrainCollisionException {
+    public void move() throws CollisionException {
         Rail next = locomotive.move();
         System.out.println("LEP: "+Main.identityToString(this)+"  ->  "+Main.identityToString(next));
         for(Wagon wagon: wagons) {
             next = wagon.move(next);
         }
         if(next != null) next.leave();
+    }
+
+    public boolean getOn(Color color) {
+        for (Wagon wagon:
+             wagons) {
+            if (wagon.getOn(color)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

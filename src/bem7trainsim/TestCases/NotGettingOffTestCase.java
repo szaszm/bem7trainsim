@@ -16,8 +16,8 @@ public class NotGettingOffTestCase extends BaseTestCase {
         rails.add(new SimpleRail());
         rails.add(new SimpleRail());
         rails.add(new SimpleRail());
-        Station station = new Station(Color.YELLOW);
-        rails.add(station);
+        DownStation downStation = new DownStation(Color.YELLOW);
+        rails.add(downStation);
         rails.add(new SimpleRail());
         rails.add(new SimpleRail());
 

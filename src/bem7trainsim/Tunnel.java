@@ -57,7 +57,7 @@ public class Tunnel {
         return false;
     }
 
-    public void checkEntrance(TunnelEntrance te) {
+    public void checkEntrance(TunnelEntrance te) throws CannotBuildException {
         if(tunnelEntrances.size() == 0) {
             te.setState(new TunnelEntranceStateUnderConstruction());
         } else {

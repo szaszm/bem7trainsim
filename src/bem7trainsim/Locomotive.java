@@ -8,7 +8,7 @@ public class Locomotive {
     protected Rail now;
     private Rail before;
 
-    public Locomotive(Train train, Rail now) throws TrainCollisionException {
+    public Locomotive(Train train, Rail now) throws CollisionException {
         this.now = now;
         this.train = train;
         now.arrive(train);
@@ -16,7 +16,7 @@ public class Locomotive {
         System.out.println("LETREJOTT: "+Main.identityToString(this)+"  IDE: "+now);
     }
 
-    public Rail move() throws TrainCollisionException {
+    public Rail move() throws CollisionException {
         Rail next = null;
         if(now != null) next = now.next(before);
         before = now;
@@ -24,5 +24,9 @@ public class Locomotive {
         System.out.println("LEP: "+Main.identityToString(this)+"  ->  "+Main.identityToString(now));
         if(next != null) next.arrive(train);
         return before;
+    }
+
+    public String getDrawData() {
+        return "AV<>"; //TODO: how?
     }
 }

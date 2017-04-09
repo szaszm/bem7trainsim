@@ -5,4 +5,5 @@ package bem7trainsim;
 public interface TunnelEntranceState {
     boolean nextStraight();
     boolean redLight();
+    String getDrawData();
 }

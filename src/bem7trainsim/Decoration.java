@@ -12,4 +12,8 @@ public class Decoration extends Field {
     public void changeState() {
         state = !state;
     }
+
+    public String getDrawData() {
+        return " ";
+    }
 }

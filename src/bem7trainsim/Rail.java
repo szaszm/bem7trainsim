@@ -26,10 +26,10 @@ public abstract class Rail extends Field {
         this.train = null;
     }
 
-    public void arrive(Train train) throws TrainCollisionException {
+    public void arrive(Train train) throws CollisionException {
         if(train == null) return;
         if(this.train != null) {
-            throw new TrainCollisionException(train, this);
+            throw new CollisionException(train, this);
         }
 
         this.train = train;

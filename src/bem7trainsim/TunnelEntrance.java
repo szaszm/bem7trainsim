@@ -40,7 +40,7 @@ public class TunnelEntrance extends Rail {
         return state.redLight();
     }
 
-    public void arrive(Train train) throws TrainCollisionException {
+    public void arrive(Train train) throws CollisionException {
         super.arrive(train);
         if(tunnel != null && !tunnel.hasTrain(train)) {
             tunnel.enter(this, train);
@@ -56,5 +56,9 @@ public class TunnelEntrance extends Rail {
 
     public void setTunnel(Tunnel tunnel) {
         this.tunnel = tunnel;
+    }
+
+    public String getDrawData() {
+        return state.getDrawData();
     }
 }

@@ -16,4 +16,9 @@ public class SimpleRail extends Rail {
             return links.size() > 0 ? links.get(0) : null;
         }
     }
+
+    @Override
+    String getDrawData() {
+        return "═║"; //TODO: needs data from ctor
+    }
 }

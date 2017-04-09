@@ -29,4 +29,8 @@ public class CrossRail extends Rail {
         crossLinks.add(rail);
         System.out.println("KAPCSOLODOTT: "+Main.identityToString(this)+"  ->  "+Main.identityToString(rail)+" KERESZTBEN");
     }
+
+    public String getDrawData() {
+        return "╬";
+    }
 }

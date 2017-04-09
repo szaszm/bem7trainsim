@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Main {
 
-    public static void main(String[] args) throws TrainCollisionException {
+    public static void main(String[] args) throws CollisionException {
         Map<Integer,BaseTestCase> tests = new HashMap<Integer,BaseTestCase>();
         tests.put(tests.size() + 1, new SimpleCollisionTestCase());
         tests.put(tests.size() + 1, new GetOffTestCase());

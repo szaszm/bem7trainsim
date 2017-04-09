@@ -21,7 +21,7 @@ public class Switch extends Rail {
         else return toChangeLink;
     }
 
-    public void change() {
+    public void change() throws CannotSwitchException {
         if(state.nextStraight()) state = new SwitchStateCurve();
         else state = new SwitchStateStraight();
         System.out.println("VALTOTTAM: "+Main.identityToString(this));
@@ -30,5 +30,10 @@ public class Switch extends Rail {
     public void addLinkToChange(Rail rail) {
         this.toChangeLink = rail;
         System.out.println("KAPCSOLODOTT: "+Main.identityToString(this)+" -> "+Main.identityToString(rail)+" VALTASBA");
+    }
+
+    @Override
+    String getDrawData() {
+        return "│┐└┘┌─"; //TODO: needs data from ctor
     }
 }

@@ -12,4 +12,7 @@ public class TunnelEntranceStateBuilt implements TunnelEntranceState {
     public boolean redLight() {
         return false;
     }
+
+    @Override
+    public String getDrawData() { return "T";}
 }

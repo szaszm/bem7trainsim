@@ -16,8 +16,8 @@ public class GetOffTestCase extends BaseTestCase {
         rails.add(new SimpleRail());
         rails.add(new SimpleRail());
         rails.add(new SimpleRail());
-        Station station = new Station(Color.RED);
-        rails.add(station);
+        DownStation downStation = new DownStation(Color.RED);
+        rails.add(downStation);
         rails.add(new SimpleRail());
         rails.add(new SimpleRail());
 
