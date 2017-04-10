@@ -9,6 +9,9 @@ public class Decoration extends Field {
         state = false;
     }
 
+    /**
+     * Changes the state of the decoration
+     */
     public void changeState() {
         state = !state;
     }

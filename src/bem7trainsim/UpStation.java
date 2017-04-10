@@ -8,7 +8,8 @@ import java.awt.*;
 public class UpStation extends SimpleRail {
     private Color color;
     private boolean gone;
-    public UpStation(Color color) {
+    public UpStation(Color color, Orientation orientation) {
+        super(orientation);
         this.color = color;
         this.gone = false;
     }
@@ -22,6 +23,8 @@ public class UpStation extends SimpleRail {
     }
     @Override
     public String getDrawData() {
+        if (coach != null)
+            return coach.getDrawData();
         if (color.equals(Color.RED)) {
             return "p";
         }

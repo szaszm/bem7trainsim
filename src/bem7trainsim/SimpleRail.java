@@ -4,8 +4,25 @@ package bem7trainsim;
  */
 public class SimpleRail extends Rail {
 
-    public SimpleRail() {
+    /**
+     * The orientation of the rail
+     */
+    public enum Orientation {
+        Horizontal, Vertical
+    }
+
+    /**
+     * The orientation of the rail
+     */
+    private Orientation orientation;
+
+    /**
+     * Creates a simple rail with the given orientation.
+     * @param orientation The orientation
+     */
+    public SimpleRail(Orientation orientation) {
         super();
+        this.orientation = orientation;
     }
 
     @Override
@@ -18,7 +35,9 @@ public class SimpleRail extends Rail {
     }
 
     @Override
-    String getDrawData() {
-        return "═║"; //TODO: needs data from ctor
+    public String getDrawData() {
+        if (coach != null)
+            return coach.getDrawData();
+        return (orientation == Orientation.Horizontal) ? "═" : "║";
     }
 }

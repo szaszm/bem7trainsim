@@ -7,8 +7,12 @@ import java.awt.*;
 public class DownStation extends SimpleRail {
     private Color color;
 
-    public DownStation(Color color) {
-        super();
+    /**
+     * Creates a station with given color where people can get off the train
+     * @param color the color of the station
+     */
+    public DownStation(Color color, SimpleRail.Orientation orientation) {
+        super(orientation);
         this.color = color;
     }
 
@@ -17,6 +21,8 @@ public class DownStation extends SimpleRail {
     }
 
     public String getDrawData() {
+        if (coach != null)
+            return coach.getDrawData();
         if (color.equals(Color.RED)) {
             return "P";
         }

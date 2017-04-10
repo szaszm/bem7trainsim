@@ -4,7 +4,7 @@ import java.awt.Color;
 /**
  * Created by marci on 2017.03.17..
  */
-public class Wagon {
+public class Wagon extends Coach {
     protected Rail now;
     private Color color;
     private boolean empty;
@@ -28,6 +28,7 @@ public class Wagon {
         Rail old = now;
 
         now = to;
+        now.arrive(this);
 
         return old;
     }
