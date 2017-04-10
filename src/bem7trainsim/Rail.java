@@ -11,18 +11,15 @@ public abstract class Rail extends Field {
 
     protected Rail() {
         links = new ArrayList<>();
-        Main.objectCreated(this);
     }
 
     public void addLink(Rail rail) {
         links.add(rail);
-        System.out.println("KAPCSOLODOTT: "+Main.identityToString(this)+"  ->  "+Main.identityToString(rail));
     }
 
     public abstract Rail next(Rail from);
 
     public void leave() {
-        System.out.println("ELHAGYTA: "+Main.identityToString(this)+" VONAT "+Main.identityToString(train));
         this.train = null;
     }
 
@@ -33,6 +30,5 @@ public abstract class Rail extends Field {
         }
 
         this.train = train;
-        System.out.println("MEGERKEZETT: "+Main.identityToString(this)+"  <-  "+Main.identityToString(train));
     }
 }

@@ -11,7 +11,6 @@ public class CrossRail extends Rail {
     public CrossRail() {
         super();
         this.crossLinks = new ArrayList<>();
-        Main.objectCreated(this);
     }
 
     @Override
@@ -27,7 +26,6 @@ public class CrossRail extends Rail {
 
     public void addLinkToCross(Rail rail) {
         crossLinks.add(rail);
-        System.out.println("KAPCSOLODOTT: "+Main.identityToString(this)+"  ->  "+Main.identityToString(rail)+" KERESZTBEN");
     }
 
     public String getDrawData() {

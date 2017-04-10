@@ -6,17 +6,29 @@ public class Table {
     private Field[][] fields;
     private Tunnel tunnel;
 
+    /**
+     * Creates table with the given fields
+     * @param fields The array of fields
+     */
     public Table(Field[][] fields) {
         this.fields = fields;
+        //TODO: initialization of tunnel
         tunnel = null;
     }
 
-    public double howFar(TunnelEntrance te1, TunnelEntrance te2) {
+    /**
+     * Gets the difference in length between two tunnel entrances
+     * @param te1 TunnelEntrance1
+     * @param te2 TunnelEntrance2
+     * @return Length
+     */
+    public int howFar(TunnelEntrance te1, TunnelEntrance te2) {
         int height = fields.length;
-        if(height == 0) return 0f;
+        if(height == 0) return 0;
         int width = fields[0].length;
         int te1x = 0, te1y=0, te2x=0, te2y=0;
         boolean te1found = false, te2found = false;
+        // searches for the given tunnel entrances
         for(int y = 0; y < height && (!te1found || !te2found); ++y) {
             for (int x = 0; x < width && (!te1found || !te2found); ++x) {
                 if (fields[x][y] == te1) {
@@ -32,10 +44,14 @@ public class Table {
                 }
             }
         }
-
-        return Math.sqrt(Math.pow(te2x - te1x, 2) + Math.pow(te2y - te1y, 2));
+        // returns the difference between the coordinates
+        return Math.abs(te2x - te1x) + Math.abs(te2y - te1y);
     }
 
+    /**
+     * Gets the data to be drawn
+     * @return Data as String
+     */
     String getDrawData() {
         String result = "";
         for (int y = 0; y < fields.length; y++) {

@@ -12,14 +12,11 @@ public class Wagon {
     public Wagon(Color color) {
         this.color = color;
         empty = false;
-        Main.objectCreated(this);
     }
 
     public void empty(Color color) {
-        //TODO: I think needed to be rethought
         if(color == this.color) {
             empty = true;
-            System.out.println("URULT: "+ Main.identityToString(this));
         }
     }
 
@@ -31,7 +28,6 @@ public class Wagon {
         Rail old = now;
 
         now = to;
-        System.out.println("LEP: "+Main.identityToString(this)+"  ->  "+Main.identityToString(now));
 
         return old;
     }

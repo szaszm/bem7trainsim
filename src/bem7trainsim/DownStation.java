@@ -10,12 +10,10 @@ public class DownStation extends SimpleRail {
     public DownStation(Color color) {
         super();
         this.color = color;
-        System.out.println("LETREJOTT: "+Main.identityToString(this)+" SZIN "+color.toString());
     }
 
     public void arrive(Train train) throws CollisionException {
         train.empty(color);
-        System.out.println("URITES PROBA:"+Main.identityToString(this)+" -> "+Main.identityToString(train));
     }
 
     public String getDrawData() {

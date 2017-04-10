@@ -24,7 +24,6 @@ public class Tunnel {
     public void enter(TunnelEntrance te, Train train) {
         trainTunnelEntranceMap.add(new AbstractMap.SimpleEntry<>(train, te));
         te.setState(new TunnelEntranceStateBuiltRed());
-        System.out.println("ALAGUTBA BE: "+Main.identityToString(train)+"  ->  "+Main.identityToString(this));
     }
 
     private TunnelEntrance otherEntrance(TunnelEntrance te) {
@@ -45,7 +44,6 @@ public class Tunnel {
         if(!containsOther) {
             te.setState(new TunnelEntranceStateBuilt());
         }
-        System.out.println("ALAGUTBOL KI: "+Main.identityToString(train)+"  ->  "+Main.identityToString(this));
     }
 
     public boolean hasTrain(Train train) {

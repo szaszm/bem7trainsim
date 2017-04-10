@@ -3,5 +3,9 @@
  */
 package bem7trainsim;
 public abstract class Field {
+    /**
+     * Gets the draw data of the field
+     * @return the drawn string
+     */
     abstract String getDrawData();
 }

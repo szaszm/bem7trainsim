@@ -7,11 +7,18 @@ import java.awt.*;
  */
 public class UpStation extends SimpleRail {
     private Color color;
+    private boolean gone;
     public UpStation(Color color) {
         this.color = color;
+        this.gone = false;
     }
     public void arrive(Train t) {
         //TODO:
+        if (!this.gone) {
+            if (t.getOn(color)) {
+                gone = true;
+            }
+        }
     }
     @Override
     public String getDrawData() {

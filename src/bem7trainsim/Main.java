@@ -48,13 +48,4 @@ public class Main {
             }
         }
     }
-
-    public static String identityToString(Object obj) {
-        if(obj == null) return "null";
-        return obj.getClass().getSimpleName()+"@"+Integer.toHexString(System.identityHashCode(obj));
-    }
-
-    public static void objectCreated(Object obj) {
-        System.out.println("LETREHOZVA: "+identityToString(obj));
-    }
 }
