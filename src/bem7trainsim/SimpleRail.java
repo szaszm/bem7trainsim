@@ -8,13 +8,13 @@ public class SimpleRail extends Rail {
      * The orientation of the rail
      */
     public enum Orientation {
-        Horizontal, Vertical
+        HORIZONTAL, VERTICAL, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
     }
 
     /**
      * The orientation of the rail
      */
-    private Orientation orientation;
+    protected Orientation orientation;
 
     /**
      * Creates a simple rail with the given orientation.
@@ -23,6 +23,10 @@ public class SimpleRail extends Rail {
     public SimpleRail(Orientation orientation) {
         super();
         this.orientation = orientation;
+    }
+    
+    public void setOrientation(Orientation orientation){
+    	this.orientation = orientation;
     }
 
     @Override
@@ -38,6 +42,15 @@ public class SimpleRail extends Rail {
     public String getDrawData() {
         if (coach != null)
             return coach.getDrawData();
-        return (orientation == Orientation.Horizontal) ? "═" : "║";
+        
+        switch(orientation){
+        case HORIZONTAL: return "═";
+        case VERTICAL: return "║";
+        case TOP_LEFT: return "╝";
+        case TOP_RIGHT: return "╚";
+        case BOTTOM_LEFT: return "╝";
+        case BOTTOM_RIGHT: return "╔";
+        default: return " ";
+        }
     }
 }

@@ -18,7 +18,7 @@ public class Locomotive extends Coach {
     private Rail before;
 
     /**
-     * Ctreates a loco with a starting position
+     * Creates a loco with a starting position
      * @param train The train to be pulled by the loco
      * @param now The rail where it starts
      * @throws CollisionException Thrown if the starting rail is not empty

@@ -44,25 +44,25 @@ public class Wagon extends Coach {
     public String getDrawData() {
         if (empty) {
             if (color.equals(Color.RED)) {
-                return "i";
+                return "p";
             }
             else if (color.equals(Color.YELLOW)) {
-                return "á";
+                return "s";
             }
             else if (color.equals(Color.GREEN)) {
-                return "ö";
+                return "z";
             }
-            return "é";
+            return "k";
         }
         if (color.equals(Color.RED)) {
-            return "I";
+            return "P";
         }
         else if (color.equals(Color.YELLOW)) {
-            return "Á";
+            return "S";
         }
         else if (color.equals(Color.GREEN)) {
-            return "Ö";
+            return "Z";
         }
-        return "É";
+        return "K";
     }
 }

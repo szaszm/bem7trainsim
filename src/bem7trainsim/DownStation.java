@@ -24,14 +24,14 @@ public class DownStation extends SimpleRail {
         if (coach != null)
             return coach.getDrawData();
         if (color.equals(Color.RED)) {
-            return "P";
+            return "I";
         }
         else if (color.equals(Color.YELLOW)) {
-            return "S";
+            return "Á";
         }
         else if (color.equals(Color.GREEN)) {
-            return "Z";
+            return "Ö";
         }
-        return "K";
+        return "É";
     }
 }

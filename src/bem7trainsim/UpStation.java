@@ -26,14 +26,23 @@ public class UpStation extends SimpleRail {
         if (coach != null)
             return coach.getDrawData();
         if (color.equals(Color.RED)) {
-            return "p";
+            return "i";
         }
         else if (color.equals(Color.YELLOW)) {
-            return "s";
+            return "á";
         }
         else if (color.equals(Color.GREEN)) {
-            return "z";
+            return "ö";
         }
-        return "k";
+        else if (color.equals(Color.GREEN)) {
+            return "é";
+        }
+        else if (orientation == SimpleRail.Orientation.HORIZONTAL){
+        	return "═";
+        }
+        else if (orientation == SimpleRail.Orientation.VERTICAL){
+        	return "║";
+        }
+        else return " ";
     }
 }
