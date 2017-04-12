@@ -14,7 +14,6 @@ public class Controller {
     private Table table;
     private List<Train> trains;
     private boolean run;
-    private boolean playstate = false, isGameRun = false, isCreditState = false;
     private enum State{ MAIN_MENU, LEVEL_MENU, PLAY, TEST }
     private State state;
     
@@ -26,7 +25,6 @@ public class Controller {
     }
 
     private void handleCommand(String command) {
-        //TODO: Kezel egy parancsot, Ă©s futtatja a hozzĂˇ tartozĂł mĹ±veleteket.
         String[] s = command.split(" ");
         switch (state){
         case MAIN_MENU:
@@ -62,7 +60,7 @@ public class Controller {
         		state = State.MAIN_MENU;
         	}
         	break;
-        	//TODO play és test bemenetek
+        	//TODO: play és test bemenetek
         case PLAY: break;
         case TEST: break;
         default: break;
@@ -70,7 +68,6 @@ public class Controller {
     }
 
     private void loadMap(String mapFileName) throws IOException{
-        //TODO: BetĂ¶lt egy pĂˇlyĂˇt a megadott fĂˇjlbĂłl, Ă©s beĂˇllĂ­tja azt a jelenlegi pĂˇlyĂˇnak.
     	Field[][] fields;
     	int rows, columns; // a pálya sorainak és oszlopainak száma
     	int startX, startY; // a kezdő sín
@@ -121,48 +118,49 @@ public class Controller {
     			charMap[lineNum][i] = line.charAt(i+1);
     		}
     		
-    		//A karakterek függvényében feltöltjük a Fields[][] tömböt, még nem állítjuk be a sínek kapcsolódását és az irányokat sem
-    		for(int y = 0; y < rows; y++){
-    			for(int x = 0; x < columns; x++){
-    				switch(charMap[y][x]){
-	    				case '╗': fields[y][x] = new SimpleRail(SimpleRail.Orientation.BOTTOM_LEFT); break;
-	    				case '╝': fields[y][x] = new SimpleRail(SimpleRail.Orientation.TOP_LEFT); break;
-	    				case '╚': fields[y][x] = new SimpleRail(SimpleRail.Orientation.TOP_RIGHT); break;
-	    				case '╔': fields[y][x] = new SimpleRail(SimpleRail.Orientation.BOTTOM_RIGHT); break;
-	    				case '═': fields[y][x] = new SimpleRail(SimpleRail.Orientation.HORIZONTAL); break;
-	    				case '║': fields[y][x] = new SimpleRail(SimpleRail.Orientation.VERTICAL); break;
-
-	    				case 'I': fields[y][x] = new DownStation(Color.RED, SimpleRail.Orientation.HORIZONTAL); break;
-	    				case 'Á': fields[y][x] = new DownStation(Color.YELLOW, SimpleRail.Orientation.HORIZONTAL); break;
-	    				case 'Ö': fields[y][x] = new DownStation(Color.GREEN, SimpleRail.Orientation.HORIZONTAL); break;
-	    				case 'É': fields[y][x] = new DownStation(Color.BLUE, SimpleRail.Orientation.HORIZONTAL); break;
-	    				
-	    				case 'i': fields[y][x] = new UpStation(Color.RED, SimpleRail.Orientation.HORIZONTAL); break;
-	    				case 'á': fields[y][x] = new UpStation(Color.YELLOW, SimpleRail.Orientation.HORIZONTAL); break; 
-	    				case 'ö': fields[y][x] = new UpStation(Color.GREEN, SimpleRail.Orientation.HORIZONTAL); break;
-	    				case 'é': fields[y][x] = new UpStation(Color.BLUE, SimpleRail.Orientation.HORIZONTAL); break;
-	    					
-	    				case '┐': fields[y][x] = new Switch(Switch.Orientation.WestRight); break;
-	    				case '└': fields[y][x] = new Switch(Switch.Orientation.EastRight); break;
-	    				case '┘': fields[y][x] = new Switch(Switch.Orientation.WestLeft); break;
-	    				case '┌': fields[y][x] = new Switch(Switch.Orientation.EastLeft); break;
-	    					
-	    				case '╬': fields[y][x] = new CrossRail(); break;
-	    					
-	    				case 't': fields[y][x] = new TunnelEntrance(Switch.Orientation.WestRight); break;
-	    				default : fields[y][x] = new Decoration(); break;
-    				}
-    			}
-    		}
-    		
-    		//TODO a charMap alapján beállítgatni fields mezőinek irányát és összekapcsolni a síneket 
-    		
     		lineNum++;
     	}
+
+		//A karakterek függvényében feltöltjük a Fields[][] tömböt, még nem állítjuk be a sínek kapcsolódását és az irányokat sem
+		for(int y = 0; y < rows; y++){
+			for(int x = 0; x < columns; x++){
+				switch(charMap[y][x]){
+					case '╗': fields[y][x] = new SimpleRail(SimpleRail.Orientation.BOTTOM_LEFT); break;
+					case '╝': fields[y][x] = new SimpleRail(SimpleRail.Orientation.TOP_LEFT); break;
+					case '╚': fields[y][x] = new SimpleRail(SimpleRail.Orientation.TOP_RIGHT); break;
+					case '╔': fields[y][x] = new SimpleRail(SimpleRail.Orientation.BOTTOM_RIGHT); break;
+					case '═': fields[y][x] = new SimpleRail(SimpleRail.Orientation.HORIZONTAL); break;
+					case '║': fields[y][x] = new SimpleRail(SimpleRail.Orientation.VERTICAL); break;
+
+					case 'I': fields[y][x] = new DownStation(Color.RED, SimpleRail.Orientation.HORIZONTAL); break;
+					case 'Á': fields[y][x] = new DownStation(Color.YELLOW, SimpleRail.Orientation.HORIZONTAL); break;
+					case 'Ö': fields[y][x] = new DownStation(Color.GREEN, SimpleRail.Orientation.HORIZONTAL); break;
+					case 'É': fields[y][x] = new DownStation(Color.BLUE, SimpleRail.Orientation.HORIZONTAL); break;
+
+					case 'i': fields[y][x] = new UpStation(Color.RED, SimpleRail.Orientation.HORIZONTAL); break;
+					case 'á': fields[y][x] = new UpStation(Color.YELLOW, SimpleRail.Orientation.HORIZONTAL); break;
+					case 'ö': fields[y][x] = new UpStation(Color.GREEN, SimpleRail.Orientation.HORIZONTAL); break;
+					case 'é': fields[y][x] = new UpStation(Color.BLUE, SimpleRail.Orientation.HORIZONTAL); break;
+
+					case '┐': fields[y][x] = new Switch(Switch.Orientation.WestRight); break;
+					case '└': fields[y][x] = new Switch(Switch.Orientation.EastRight); break;
+					case '┘': fields[y][x] = new Switch(Switch.Orientation.WestLeft); break;
+					case '┌': fields[y][x] = new Switch(Switch.Orientation.EastLeft); break;
+
+					case '╬': fields[y][x] = new CrossRail(); break;
+
+					case 't': fields[y][x] = new TunnelEntrance(Switch.Orientation.WestRight); break;
+					default : fields[y][x] = new Decoration(); break;
+				}
+			}
+		}
+
+		//TODO: a charMap alapján beállítgatni fields mezőinek irányát és összekapcsolni a síneket
+
+		table = new Table(fields);
     }
     
     public void start() {
-        // TODO: ElindĂ­tja az esemĂ©nyek kezelĂ©sĂ©t. Ha teszt van betĂ¶ltve, akkor futtatja a tesztet, majd a vĂ©gĂ©n kiĂ­rja a vĂ©gsĹ‘ Ăˇllapotot.
         run = true;
         while (run) {
             BufferedReader buffer=new BufferedReader(new InputStreamReader(System.in));
