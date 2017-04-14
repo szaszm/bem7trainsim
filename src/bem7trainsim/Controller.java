@@ -25,18 +25,21 @@ public class Controller {
     private int currentTime = 0;
 
     private void moveTrains() throws CollisionException {
-    	for(Iterator<Pair<Integer, List<Wagon>>> iterator = trainData.iterator(); iterator.hasNext();) {
-    		Pair<Integer, List<Wagon>> pair = iterator.next();
-    		int start = pair.getKey();
-    		if(start == currentTime) {
+		// Firstly move existing trains
+		for (Train train: trains) {
+			train.move();
+		}
+
+		// Secondly add new trains as their constructor already moves them to the starting rail
+		for(Iterator<Pair<Integer, List<Wagon>>> iterator = trainData.iterator(); iterator.hasNext();) {
+			Pair<Integer, List<Wagon>> pair = iterator.next();
+			int start = pair.getKey();
+			if(start == currentTime) {
 				List<Wagon> wagons = pair.getValue();
-    			trains.add(new Train(startRail, wagons));
-    			iterator.remove();
+				trains.add(new Train(startRail, wagons));
+				iterator.remove();
 			}
 		}
-        for (Train train: trains) {
-            train.move();
-        }
     }
 
     private void handleCommand(String command) {
@@ -90,6 +93,7 @@ public class Controller {
 					    state = State.MAIN_MENU;
 					    break;
 					}
+					System.out.println(table.getDrawData());
 					currentTime++;
         			break;
 			}
@@ -444,7 +448,7 @@ public class Controller {
     }
     
     public void start() {
-        // TODO: ElindĂ­tja az esemĂ©nyek kezelĂ©sĂ©t. Ha teszt van betĂ¶ltve, akkor futtatja a tesztet, majd a vĂ©gĂ©n kiĂ­rja a vĂ©gsĹ‘ Ăˇllapotot.
+        // TODO: Elinditja az esemenyek kezeleset. Ha teszt van betoltve, akkor futtatja a tesztet, majd a vegen kiirja a vegso allapotot.
         run = true;
         System.out.println("MAIN_MENU");
         while (run) {

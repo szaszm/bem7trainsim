@@ -32,7 +32,7 @@ public class Wagon extends Coach {
         Rail old = now;
 
         now = to;
-        now.arrive(this);
+        if(now != null) now.arrive(this);
 
         return old;
     }
