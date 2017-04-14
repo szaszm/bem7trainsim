@@ -1,9 +1,13 @@
 package bem7trainsim;
 
+import javafx.util.Pair;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.awt.*;
 
@@ -13,13 +17,24 @@ import java.awt.*;
 public class Controller {
     private Table table;
     private List<Train> trains;
+    private Rail startRail;
+    private List<Pair<Integer, List<Wagon>>> trainData;
     private boolean run;
     private enum State{ MAIN_MENU, LEVEL_MENU, PLAY, TEST }
     private State state = State.MAIN_MENU;
-    
+    private int currentTime = 0;
+
     private void moveTrains() throws CollisionException {
-        for (Train train :
-                trains) {
+    	for(Iterator<Pair<Integer, List<Wagon>>> iterator = trainData.iterator(); iterator.hasNext();) {
+    		Pair<Integer, List<Wagon>> pair = iterator.next();
+    		int start = pair.getKey();
+    		if(start == currentTime) {
+				List<Wagon> wagons = pair.getValue();
+    			trains.add(new Train(startRail, wagons));
+    			iterator.remove();
+			}
+		}
+        for (Train train: trains) {
             train.move();
         }
     }
@@ -64,7 +79,21 @@ public class Controller {
         	}
         	break;
         	//TODO play és test bemenetek
-        case PLAY: break;
+        case PLAY:
+        	switch (s[0]) {
+        		default:
+					try {
+						moveTrains();
+					} catch (CollisionException e) {
+						System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
+					    run = false;
+					    state = State.MAIN_MENU;
+					    break;
+					}
+					currentTime++;
+        			break;
+			}
+        	break;
         case TEST: break;
         default: break;
         }
@@ -80,9 +109,9 @@ public class Controller {
     	//pálya méretének beolvasása
     	String line;
     	if((line = br.readLine()) != null){
-    		String[] nums = line.split(""); // ez azért így van, mert UTF-8-nál valamiért az első szám elé még beolvasott egy valamit, amit a split(" ") nem szedett ki
-    		rows = Integer.parseInt(nums[1]);
-    		columns = Integer.parseInt(nums[3]);
+    		String[] nums = line.split(" ");
+    		rows = Integer.parseInt(nums[0]);
+    		columns = Integer.parseInt(nums[1]);
 			fields = new Field[rows][columns];
     	} else throw new IOException("Nem sikerült a pálya méretének beolvasása.");
     	br.readLine();
@@ -152,7 +181,7 @@ public class Controller {
 		
 		//beolvassuk az alagutakat és állomásokat
 		//Frissítjük a charMap[][] tartalmát is
-		while((line = br.readLine()).length() > 1){
+		while((line = br.readLine()).length() > 1) {
 			String[] s = line.split(" ");
 			int y = Integer.parseInt(s[1]) - 1;
 			int x = Integer.parseInt(s[2]) - 1;
@@ -198,6 +227,40 @@ public class Controller {
 					break;
 			}
 		}
+
+		trains = new ArrayList<>();
+		ArrayList<String> trainLines = new ArrayList<>();
+		while((line = br.readLine()) != null && line.length() > 0) {
+			trainLines.add(line);
+		}
+		startRail = (Rail) fields[startY][startX];
+		trainData = new ArrayList<>();
+		for(String trainLine: trainLines) {
+			String[] spl = trainLine.split(" ");
+			int start = Integer.parseInt(spl[0]);
+			String[] wagonColors = spl[1].split("");
+			ArrayList<Wagon> wagons = new ArrayList<>();
+
+			for(String color: wagonColors) {
+				Wagon wagon;
+				switch (color) {
+					case "P": wagon = new Wagon(Color.RED, false); break;
+					case "S": wagon = new Wagon(Color.YELLOW, false); break;
+					case "Z": wagon = new Wagon(Color.GREEN, false); break;
+					case "K": wagon = new Wagon(Color.BLUE, false); break;
+					case "F": wagon = new Wagon(Color.BLACK); break;
+					case "p": wagon = new Wagon(Color.RED, true); break;
+					case "s": wagon = new Wagon(Color.YELLOW, true); break;
+					case "z": wagon = new Wagon(Color.GREEN, true); break;
+					case "k": wagon = new Wagon(Color.BLUE, true); break;
+					default: throw new IOException("Nem megfelelo vonat leiras: "+trainLine);
+				}
+				wagons.add(wagon);
+			}
+
+			trainData.add(new Pair<>(start, wagons));
+		}
+
 		
 		//Összekapcsoljuk a síneket
 		//A vonatok csak a fenti vagy a bal oldali pálya szélen indulhatnak el: '║' | '═'
@@ -376,6 +439,8 @@ public class Controller {
 		}
 
     	br.close();
+
+		table = new Table(fields);
     }
     
     public void start() {

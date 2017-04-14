@@ -10,8 +10,12 @@ public class Wagon extends Coach {
     private boolean empty;
 
     public Wagon(Color color) {
+        this(color, false);
+    }
+
+    public Wagon(Color color, boolean empty) {
         this.color = color;
-        empty = false;
+        this.empty = empty;
     }
 
     public void empty(Color color) {

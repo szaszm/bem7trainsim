@@ -27,11 +27,11 @@ public class DownStation extends SimpleRail {
             return "I";
         }
         else if (color.equals(Color.YELLOW)) {
-            return "¡";
+            return "√Å";
         }
         else if (color.equals(Color.GREEN)) {
-            return "÷";
+            return "√ñ";
         }
-        return "…";
+        return "√â";
     }
 }
