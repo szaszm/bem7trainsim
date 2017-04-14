@@ -1,4 +1,7 @@
 package bem7trainsim;
+
+import bem7trainsim.SimpleRail.Orientation;
+
 /**
  * Created by marci on 2017.03.18..
  */
@@ -18,6 +21,10 @@ public class Switch extends Rail {
         super();
         state = new SwitchStateStraight();
         this.orientation = orientation;
+    }
+    
+    public void setOrientation(Orientation orientation){
+    	this.orientation = orientation;
     }
 
     @Override

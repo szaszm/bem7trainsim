@@ -1,4 +1,7 @@
 package bem7trainsim;
+
+import bem7trainsim.SimpleRail.Orientation;
+
 /**
  * Created by marci on 2017.03.17..
  */
@@ -6,7 +9,7 @@ public class TunnelEntrance extends Rail {
     /**
      * The orientation of the field.
      */
-    private Switch.Orientation orientation;
+    protected SimpleRail.Orientation orientation;
     /**
      * The state
      */
@@ -20,10 +23,18 @@ public class TunnelEntrance extends Rail {
      */
     private Tunnel tunnel;
 
-    public TunnelEntrance(Switch.Orientation orientation) {
+    public TunnelEntrance(SimpleRail.Orientation orientation) {
         super();
         state = new TunnelEntranceStateStraight();
         this.orientation = orientation;
+    }
+    
+    public void setOrientation(Orientation orientation){
+    	this.orientation = orientation;
+    }
+    
+    public SimpleRail.Orientation getOrientation(){
+    	return this.orientation;
     }
 
     @Override
