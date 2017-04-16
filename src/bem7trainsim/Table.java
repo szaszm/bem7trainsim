@@ -97,4 +97,20 @@ public class Table {
 
         return null;
     }
+
+    public void switchAt(int x, int y) {
+        try {
+            ((Switch)(fields[y - 1][x - 1])).change();
+        } catch (CannotSwitchException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void buildAt(int x, int y) {
+        try {
+            ((TunnelEntrance)(fields[y - 1][x - 1])).click();
+        } catch (CannotBuildException e) {
+            e.printStackTrace();
+        }
+    }
 }
