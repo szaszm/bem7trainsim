@@ -13,7 +13,8 @@ public class UpStation extends SimpleRail {
         this.color = color;
         this.gone = false;
     }
-    public void arrive(Train t) {
+    public void arrive(Train t) throws CollisionException {
+        super.arrive(t);
         //TODO:
         if (!this.gone) {
             if (t.getOn(color)) {
@@ -25,7 +26,14 @@ public class UpStation extends SimpleRail {
     public String getDrawData() {
         if (coach != null)
             return coach.getDrawData();
-        if (color.equals(Color.RED)) {
+
+        if (gone && orientation == SimpleRail.Orientation.HORIZONTAL){
+            return "═";
+        }
+        else if (gone && orientation == SimpleRail.Orientation.VERTICAL){
+            return "║";
+        }
+        else if (color.equals(Color.RED)) {
             return "i";
         }
         else if (color.equals(Color.YELLOW)) {
@@ -36,12 +44,6 @@ public class UpStation extends SimpleRail {
         }
         else if (color.equals(Color.GREEN)) {
             return "é";
-        }
-        else if (orientation == SimpleRail.Orientation.HORIZONTAL){
-        	return "═";
-        }
-        else if (orientation == SimpleRail.Orientation.VERTICAL){
-        	return "║";
         }
         else return " ";
     }

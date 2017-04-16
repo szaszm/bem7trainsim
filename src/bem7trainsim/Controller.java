@@ -237,7 +237,7 @@ public class Controller {
 		while((line = br.readLine()) != null && line.length() > 0) {
 			trainLines.add(line);
 		}
-		startRail = (Rail) fields[startY][startX];
+		startRail = (Rail) fields[startY - 1][startX - 1];
 		trainData = new ArrayList<>();
 		for(String trainLine: trainLines) {
 			String[] spl = trainLine.split(" ");

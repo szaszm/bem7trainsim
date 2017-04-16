@@ -17,6 +17,7 @@ public class DownStation extends SimpleRail {
     }
 
     public void arrive(Train train) throws CollisionException {
+        super.arrive(train);
         train.empty(color);
     }
 
