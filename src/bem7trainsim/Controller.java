@@ -64,7 +64,7 @@ public class Controller {
         	if(s[0].startsWith("map_")){
         		try{
         			state = State.PLAY;	
-	        		loadMap(s[0]);
+	        		loadMap(s[0].substring(4));
 					try {
 						moveTrains();
 					} catch (CollisionException e) {
@@ -81,7 +81,7 @@ public class Controller {
         	} else if (s[0].startsWith("test_")){
         		try{
         			state = State.TEST;
-	        		loadMap(s[0]);
+	        		loadMap(s[0].substring(5), true);
         		} catch(IOException e){
         			System.out.println(e.getMessage());
         		}
@@ -112,13 +112,18 @@ public class Controller {
         }
     }
 
-    private void loadMap(String mapFileName) throws IOException{
+    private void loadMap(String mapFileName) throws IOException {
+    	loadMap(mapFileName, false);
+	}
+
+    private void loadMap(String mapFileName, boolean test) throws IOException{
     	Field[][] fields;
     	int rows, columns; // a pálya sorainak és oszlopainak száma
     	int startX, startY; // a kezdő sín
     	String testString; // a test végén kiírandó string
-    	
-		BufferedReader br = new BufferedReader( new InputStreamReader (new FileInputStream(mapFileName + ".txt"), "UTF-8"));
+
+		String pathPrefix = test ? "test/" : "map/";
+		BufferedReader br = new BufferedReader( new InputStreamReader (new FileInputStream(pathPrefix + mapFileName + ".txt"), "UTF-8"));
     	//pálya méretének beolvasása
     	String line;
     	if((line = br.readLine()) != null){
