@@ -72,4 +72,10 @@ public class Wagon extends Coach {
         }
         return "F";
     }
+
+    public Table.Direction updateDirection(Table.Direction direction) {
+        Table.Direction oldDirection = this.direction;
+        this.direction = direction;
+        return oldDirection;
+    }
 }

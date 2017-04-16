@@ -36,7 +36,7 @@ public class Controller {
 			int start = pair.getKey();
 			if(start == currentTime + 1) {
 				List<Wagon> wagons = pair.getValue();
-				trains.add(new Train(startRail, wagons));
+				trains.add(new Train(startRail, table, wagons));
 				iterator.remove();
 			}
 		}

@@ -62,4 +62,39 @@ public class Table {
         }
         return result;
     }
+
+    public enum Direction {
+        Up, Left, Down, Right
+    };
+
+    Direction getDirection(Field from, Field to) {
+        int x = -1, y = -1;
+
+        outerloop:
+        for(y = 0; y < fields.length; ++y) {
+            for(x = 0; x < fields[y].length; ++x) {
+                if(fields[y][x] == from) {
+                    break outerloop;
+                }
+            }
+        }
+
+        if(y > 0 && to == fields[y - 1][x]) {
+            return Direction.Up;
+        }
+
+        if(x > 0 && to == fields[y][x - 1]) {
+            return Direction.Left;
+        }
+
+        if(y < fields.length - 1 && to == fields[y + 1][x]) {
+            return Direction.Down;
+        }
+
+        if(x < fields[y].length - 1 && to == fields[y][x + 1]) {
+            return Direction.Right;
+        }
+
+        return null;
+    }
 }

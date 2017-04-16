@@ -4,6 +4,11 @@
 package bem7trainsim;
 public class Locomotive extends Coach {
     /**
+     * The table on which the Locomotive moves
+     */
+    private Table table;
+
+    /**
      * The train pulled by the locomotive
      */
     private Train train;
@@ -23,10 +28,12 @@ public class Locomotive extends Coach {
      * @param now The rail where it starts
      * @throws CollisionException Thrown if the starting rail is not empty
      */
-    public Locomotive(Train train, Rail now) throws CollisionException {
+    public Locomotive(Train train, Rail now, Table table) throws CollisionException {
         this.now = now;
         this.train = train;
+        this.table = table;
         now.arrive(this);
+        updateDirection();
         before = null;
     }
 
@@ -49,7 +56,27 @@ public class Locomotive extends Coach {
         return before;
     }
 
+    public Table.Direction updateDirection() {
+        Table.Direction newDirection = null;
+        if(now != null) newDirection = table.getDirection(now, now.next(before));
+        if(newDirection != null) direction = newDirection;
+        return direction;
+    }
+
+    /**
+     * @return Returns the character drawn to the terminal when rendering the table
+     */
     public String getDrawData() {
-        return "A"; //TODO: how? maybe ask the Table for the data.
+        if(direction == null)
+            return "???";
+        switch (direction) {
+            case Up: return "A";
+            case Left: return "<";
+            case Down: return "V";
+            case Right: return ">";
+
+            // Impossible case to silence warning
+            default: return "?";
+        }
     }
 }

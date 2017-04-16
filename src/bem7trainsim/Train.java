@@ -11,15 +11,15 @@ public class Train {
     private Locomotive locomotive;
     private List<Wagon> wagons;
 
-    public Train(Rail start) throws CollisionException {
+    public Train(Rail start, Table table) throws CollisionException {
         // creates train with empty list
-        this(start, new ArrayList<>());
+        this(start, table, new ArrayList<>());
     }
 
-    public Train(Rail start, List<Wagon> wagons) throws CollisionException {
+    public Train(Rail start, Table table, List<Wagon> wagons) throws CollisionException {
         this.wagons = wagons;
         // creates a locomotive as every Train needs one in the front
-        locomotive = new Locomotive(this, start);
+        locomotive = new Locomotive(this, start, table);
         start.arrive(this);
     }
 
@@ -39,9 +39,11 @@ public class Train {
     public void move() throws CollisionException {
         // moves the locomotive to the next rail
         Rail next = locomotive.move();
+        Table.Direction nextDirection = locomotive.updateDirection();
         // moves each wagon to the rail previous wagon was on
         for(Wagon wagon: wagons) {
             next = wagon.move(next);
+            nextDirection = wagon.updateDirection(nextDirection);
         }
         // leaves the last rail the train moved from
         if(next != null) next.leave();

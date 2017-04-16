@@ -5,4 +5,7 @@ package bem7trainsim;
  */
 public abstract class Coach {
     public abstract String getDrawData();
+
+
+    protected Table.Direction direction;
 }
