@@ -26,7 +26,7 @@ public class Locomotive extends Coach {
     public Locomotive(Train train, Rail now) throws CollisionException {
         this.now = now;
         this.train = train;
-        now.arrive(train);
+        now.arrive(this);
         before = null;
     }
 
@@ -50,6 +50,6 @@ public class Locomotive extends Coach {
     }
 
     public String getDrawData() {
-        return "AV<>"; //TODO: how? maybe ask the Table for the data.
+        return "A"; //TODO: how? maybe ask the Table for the data.
     }
 }

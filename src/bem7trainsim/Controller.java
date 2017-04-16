@@ -34,7 +34,7 @@ public class Controller {
 		for(Iterator<Pair<Integer, List<Wagon>>> iterator = trainData.iterator(); iterator.hasNext();) {
 			Pair<Integer, List<Wagon>> pair = iterator.next();
 			int start = pair.getKey();
-			if(start == currentTime) {
+			if(start == currentTime + 1) {
 				List<Wagon> wagons = pair.getValue();
 				trains.add(new Train(startRail, wagons));
 				iterator.remove();
@@ -65,6 +65,15 @@ public class Controller {
         		try{
         			state = State.PLAY;	
 	        		loadMap(s[0]);
+					try {
+						moveTrains();
+					} catch (CollisionException e) {
+						System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
+						run = false;
+						state = State.MAIN_MENU;
+						break;
+					}
+	        		System.out.println(table.getDrawData());
         		} catch(IOException e){
         			System.out.println(e.getMessage());
         		}
@@ -85,6 +94,7 @@ public class Controller {
         case PLAY:
         	switch (s[0]) {
         		default:
+					currentTime++;
 					try {
 						moveTrains();
 					} catch (CollisionException e) {
@@ -94,7 +104,6 @@ public class Controller {
 					    break;
 					}
 					System.out.println(table.getDrawData());
-					currentTime++;
         			break;
 			}
         	break;

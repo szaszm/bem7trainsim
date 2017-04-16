@@ -48,7 +48,7 @@ public class SimpleRail extends Rail {
         case VERTICAL: return "║";
         case TOP_LEFT: return "╝";
         case TOP_RIGHT: return "╚";
-        case BOTTOM_LEFT: return "╝";
+        case BOTTOM_LEFT: return "╗";
         case BOTTOM_RIGHT: return "╔";
         default: return " ";
         }

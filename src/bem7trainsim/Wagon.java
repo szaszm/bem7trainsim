@@ -67,6 +67,9 @@ public class Wagon extends Coach {
         else if (color.equals(Color.GREEN)) {
             return "Z";
         }
-        return "K";
+        else if (color.equals(Color.BLUE)) {
+            return "K";
+        }
+        return "F";
     }
 }

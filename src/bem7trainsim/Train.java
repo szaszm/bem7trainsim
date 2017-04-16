@@ -20,6 +20,7 @@ public class Train {
         this.wagons = wagons;
         // creates a locomotive as every Train needs one in the front
         locomotive = new Locomotive(this, start);
+        start.arrive(this);
     }
 
     public void empty(Color color) {
