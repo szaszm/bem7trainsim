@@ -1,0 +1,29 @@
+5 5
+
+Kereszteződésen ütközés tesztelése.
+
+1 3
+
+
+#12345#
+1 ║   1
+2 ║   2
+3=╬=╗ 3
+4 ║ ║ 4
+5 ╚=╝ 5
+#12345#
+
+
+1 KKK
+7 PP
+
+enter 9
+
+#12345#
+1 ║   1
+2 ║   2
+3PP>╗ 3
+4 A ║ 4
+5 KKK 5
+#12345#
+CollisionException

@@ -63,27 +63,22 @@ public class Controller {
         	break;
         case LEVEL_MENU:
         	if(s[0].startsWith("map_")){
-        		try{
-        			state = State.PLAY;	
-	        		loadMap(s[0].substring(4));
-					try {
-						moveTrains();
-					} catch (CollisionException e) {
-						System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
-						run = false;
-						state = State.MAIN_MENU;
-						break;
-					} catch (TableLeftException e){
-						System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: "+Integer.toString(currentTime));
-						run = false;
-						state = State.MAIN_MENU;
-						break;
-					}
+        		try {
+					state = State.PLAY;
+					loadMap(s[0].substring(4));
+					moveTrains();
 					System.out.println(table.getDrawData());
-        		} catch(IOException e){
-        			System.out.println(e.getMessage());
-        		}
-        		
+				}catch(IOException e){
+					System.out.println(e.getMessage());
+				} catch (CollisionException e) {
+					System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
+					run = false;
+					state = State.MAIN_MENU;
+				} catch (TableLeftException e){
+					System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: "+Integer.toString(currentTime));
+					run = false;
+					state = State.MAIN_MENU;
+					}
         	} else if (s[0].startsWith("test_")){
         		try{
         			state = State.TEST;
@@ -102,8 +97,8 @@ public class Controller {
         		//switch y x
 				case "switch":
 				{
-				    int x = Integer.parseInt(s[2]);
-					int y = Integer.parseInt(s[1]);
+				    int x = Integer.parseInt(s[1]);
+					int y = Integer.parseInt(s[2]);
 					try{
 						table.switchAt(x - 1, y - 1);
 					} catch(CannotSwitchException e){
@@ -115,8 +110,8 @@ public class Controller {
 				// build y x
 				case "build":
 				{
-					int x = Integer.parseInt(s[2]);
-					int y = Integer.parseInt(s[1]);
+					int x = Integer.parseInt(s[1]);
+					int y = Integer.parseInt(s[2]);
 					try{
 						table.buildAt(x - 1, y - 1);
 					} catch(CannotBuildException e){
@@ -127,55 +122,16 @@ public class Controller {
 				}
 					break;
 				//enter 10
-				case "enter":
-				{
+				case "enter": {
 					int moveTimes = Integer.parseInt(s[1]);
-					try{
-						for(int i = 0; i < moveTimes; i++){
-							currentTime++;
-							moveTrains();
-							System.out.println(table.getDrawData());
-							if(isWin()) {
-								System.out.println("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
-								run = false;
-								state = State.MAIN_MENU;
-							}
-						}
-					}catch (CollisionException e) {
-						System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
-						run = false;
-						state = State.MAIN_MENU;
-						break;
-					}catch (TableLeftException e){
-						System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: "+Integer.toString(currentTime));
-						run = false;
-						state = State.MAIN_MENU;
-						break;
+					for (int i = 0; i < moveTimes; i++) {
+						tick();
 					}
 				}
-					break;
+				break;
 				//default = enter 1
         		default:
-					currentTime++;
-					try {
-						moveTrains();
-					} catch (CollisionException e) {
-						System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
-						run = false;
-						state = State.MAIN_MENU;
-					    break;
-					}catch (TableLeftException e){
-						System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: "+Integer.toString(currentTime));
-						run = false;
-						state = State.MAIN_MENU;
-						break;
-					}
-					System.out.println(table.getDrawData());
-					if(isWin()) {
-						System.out.println("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
-						run = false;
-						state = State.MAIN_MENU;
-					}
+					tick();
         			break;
 			}
         	break;
@@ -183,6 +139,27 @@ public class Controller {
         default: break;
         }
     }
+
+	private void tick() {
+		currentTime++;
+		try {
+			moveTrains();
+		} catch (CollisionException e) {
+			System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
+			run = false;
+			state = State.MAIN_MENU;
+		} catch (TableLeftException e){
+			System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: "+Integer.toString(currentTime));
+			run = false;
+			state = State.MAIN_MENU;
+		}
+		System.out.println(table.getDrawData());
+		if(isWin()) {
+			System.out.println("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
+			run = false;
+			state = State.MAIN_MENU;
+		}
+	}
 
     private void loadMap(String mapFileName) throws IOException {
     	loadMap(mapFileName, false);
