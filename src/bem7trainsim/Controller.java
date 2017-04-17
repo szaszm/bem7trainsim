@@ -70,6 +70,7 @@ public class Controller {
 					System.out.println(table.getDrawData());
 				}catch(IOException e){
 					System.out.println(e.getMessage());
+					state = State.MAIN_MENU;
 				} catch (CollisionException e) {
 					System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
 					run = false;
@@ -85,6 +86,7 @@ public class Controller {
 	        		loadMap(s[0].substring(5), true);
         		} catch(IOException e){
         			System.out.println(e.getMessage());
+					state = State.MAIN_MENU;
         		}
         	} else if (s[0].equals("back")){
         		state = State.MAIN_MENU;
