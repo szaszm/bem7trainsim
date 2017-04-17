@@ -94,6 +94,20 @@ public class Controller {
         	//TODO play és test bemenetek
         case PLAY:
         	switch (s[0]) {
+				case "switch":
+				{
+				    int x = Integer.parseInt(s[1]);
+					int y = Integer.parseInt(s[2]);
+					table.switchAt(x, y);
+				}
+                break;
+				case "build":
+				{
+					int x = Integer.parseInt(s[1]);
+					int y = Integer.parseInt(s[2]);
+					table.buildAt(x, y);
+				}
+					break;
         		default:
 					currentTime++;
 					try {
@@ -202,7 +216,10 @@ public class Controller {
 			}
 		}
 		br.readLine();
-		
+
+		ArrayList<TunnelEntrance> tunnelEntrances = new ArrayList<>();
+		Tunnel tunnel = new Tunnel(table, tunnelEntrances);
+
 		//beolvassuk az alagutakat és állomásokat
 		//Frissítjük a charMap[][] tartalmát is
 		upstations = new ArrayList<>();
@@ -251,7 +268,9 @@ public class Controller {
 					break;
 			//TunnelEntrance
 				case 't':
-					fields[y][x] = new TunnelEntrance(((SimpleRail)fields[y][x]).orientation);
+					TunnelEntrance tunnelEntrance = new TunnelEntrance(tunnel, ((SimpleRail) fields[y][x]).orientation);
+					tunnelEntrances.add(tunnelEntrance);
+					fields[y][x] = tunnelEntrance;
 					charMap[y][x] = 't';
 					break;
 			}

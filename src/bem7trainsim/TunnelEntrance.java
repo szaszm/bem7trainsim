@@ -23,10 +23,11 @@ public class TunnelEntrance extends Rail {
      */
     private Tunnel tunnel;
 
-    public TunnelEntrance(SimpleRail.Orientation orientation) {
+    public TunnelEntrance(Tunnel tunnel, SimpleRail.Orientation orientation) {
         super();
         state = new TunnelEntranceStateStraight();
         this.orientation = orientation;
+        this.tunnel = tunnel;
     }
     
     public void setOrientation(Orientation orientation){
@@ -92,11 +93,6 @@ public class TunnelEntrance extends Rail {
             tunnel.leave(this, train);
         }
         super.leave();
-    }
-
-    // TODO: ezt kivenni, egy tunnel van midnenkihez azt beszeltuk, ezt ctorban kene megadni.
-    public void setTunnel(Tunnel tunnel) {
-        this.tunnel = tunnel;
     }
 
     public String getDrawData() {
