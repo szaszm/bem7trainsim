@@ -1,0 +1,24 @@
+7 3
+
+Váltón állás tesztelése.
+
+1 2
+
+#1234567#
+1       1
+2=-==== 2
+3 ╚==== 3
+#1234567#
+
+1 PP
+
+enter 3
+switch 2 2
+enter 1
+
+#1234567#
+1       1
+2=-pp>= 2
+3 ╚==== 3
+#1234567#
+CannotSwitchException

@@ -15,15 +15,55 @@ import java.awt.*;
  * Created by Csuto on 4/9/2017.
  */
 public class Controller {
-    private Table table;
-    private List<Train> trains;
-    private List<UpStation> upstations;
-    private Rail startRail;
-    private List<Pair<Integer, List<Wagon>>> trainData;
-    private boolean run;
-    private enum State{ MAIN_MENU, LEVEL_MENU, PLAY, TEST }
-    private State state = State.MAIN_MENU;
-    private int currentTime = 0;
+	/**
+	 * A játékmező
+	 */
+	private Table table;
+
+	/**
+	 * A már elindult vonatok listája
+	 */
+	private List<Train> trains;
+
+	/**
+	 * A felszálló állomások listája
+	 */
+	private List<UpStation> upstations;
+
+	/**
+	 * A vonatok induló mezője. A vonatok indításához kell ismerni.
+	 */
+	private Rail startRail;
+
+	/**
+	 * A még el nem indult vonatok indulási idejei és vagonjai.
+	 */
+	private List<Pair<Integer, List<Wagon>>> trainData;
+
+	/**
+	 * A játék kilépését lehetővé tevő változó.
+	 */
+	private boolean run;
+
+	/**
+	 * A jelenlegi vezérlőállapotot leíró típus
+	 */
+	private enum State{ MAIN_MENU, LEVEL_MENU, PLAY, TEST }
+
+	/**
+	 * Az aktuális vezérlőállapot
+	 */
+	private State state = State.MAIN_MENU;
+
+	/**
+	 * Az aktuális időpillanat
+	 */
+	private int currentTime = 0;
+
+	/**
+	 * A teszt végén kiírandó szöveg
+	 */
+	private String testString;
 
     private void moveTrains() throws CollisionException {
 		// Firstly move existing trains
@@ -66,14 +106,7 @@ public class Controller {
         		try{
         			state = State.PLAY;	
 	        		loadMap(s[0].substring(4));
-					try {
-						moveTrains();
-					} catch (CollisionException e) {
-						System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
-						run = false;
-						state = State.MAIN_MENU;
-						break;
-					}
+					move();
 	        		System.out.println(table.getDrawData());
         		} catch(IOException e){
         			System.out.println(e.getMessage());
@@ -107,23 +140,18 @@ public class Controller {
 					int y = Integer.parseInt(s[2]);
 					table.buildAt(x, y);
 				}
-					break;
+				break;
+				case "enter":
+				{
+					int cycles = 1;
+				    if(s.length > 1) cycles = Integer.parseInt(s[1]);
+				    for(int i = 0; run && i < cycles; ++i){
+						tick();
+					}
+				}
+				break;
         		default:
-					currentTime++;
-					try {
-						moveTrains();
-					} catch (CollisionException e) {
-						System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
-					    run = false;
-					    state = State.MAIN_MENU;
-					    break;
-					}
-					System.out.println(table.getDrawData());
-					if(isWin()) {
-						System.out.println("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
-						run = false;
-						state = State.MAIN_MENU;
-					}
+        			tick();
         			break;
 			}
         	break;
@@ -131,6 +159,29 @@ public class Controller {
         default: break;
         }
     }
+
+    private void tick() {
+		currentTime++;
+		if(!move()) return;
+		System.out.println(table.getDrawData());
+		if(isWin()) {
+			System.out.println("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
+			run = false;
+			state = State.MAIN_MENU;
+		}
+	}
+
+	private boolean move() {
+		try {
+			moveTrains();
+		} catch (CollisionException e) {
+			System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
+			run = false;
+			state = State.MAIN_MENU;
+			return false;
+		}
+		return true;
+	}
 
     private void loadMap(String mapFileName) throws IOException {
     	loadMap(mapFileName, false);
@@ -140,7 +191,6 @@ public class Controller {
     	Field[][] fields;
     	int rows, columns; // a pálya sorainak és oszlopainak száma
     	int startX, startY; // a kezdő sín
-    	String testString; // a test végén kiírandó string
 
 		String pathPrefix = test ? "test/" : "map/";
 		BufferedReader br = new BufferedReader( new InputStreamReader (new FileInputStream(pathPrefix + mapFileName + ".txt"), "UTF-8"));
@@ -148,8 +198,8 @@ public class Controller {
     	String line;
     	if((line = br.readLine()) != null){
     		String[] nums = line.split(" ");
-    		rows = Integer.parseInt(nums[0]);
-    		columns = Integer.parseInt(nums[1]);
+    		columns = Integer.parseInt(nums[0]);
+			rows = Integer.parseInt(nums[1]);
 			fields = new Field[rows][columns];
     	} else throw new IOException("Nem sikerült a pálya méretének beolvasása.");
     	br.readLine();
@@ -167,8 +217,8 @@ public class Controller {
     	//beolvassuk a kezdő pozíciót
     	if((line = br.readLine()) != null){
     		String[] nums = line.split(" ");
-    		startY = Integer.parseInt(nums[0]);
-    		startX = Integer.parseInt(nums[1]);
+    		startX = Integer.parseInt(nums[0]);
+			startY = Integer.parseInt(nums[1]);
     	} else throw new IOException("Nem sikerült a kezdő pozíció beolvasása.");
     	br.readLine();
     	
@@ -197,14 +247,14 @@ public class Controller {
 		for(int y = 0; y < rows; y++){
 			for(int x = 0; x < columns; x++){
 				switch(charMap[y][x]){
-				//Oriantation CORRECT
+				// Orientation CORRECT
     				case '╗': fields[y][x] = new SimpleRail(SimpleRail.Orientation.BOTTOM_LEFT); break;
     				case '╝': fields[y][x] = new SimpleRail(SimpleRail.Orientation.TOP_LEFT); break;
     				case '╚': fields[y][x] = new SimpleRail(SimpleRail.Orientation.TOP_RIGHT); break;
     				case '╔': fields[y][x] = new SimpleRail(SimpleRail.Orientation.BOTTOM_RIGHT); break;
     				case '═': fields[y][x] = new SimpleRail(SimpleRail.Orientation.HORIZONTAL); break;
     				case '║': fields[y][x] = new SimpleRail(SimpleRail.Orientation.VERTICAL); break;
-        		//Oriantation WRONG
+        		// Orientation WRONG
     				case '┐': fields[y][x] = new Switch(Switch.Orientation.WestRight); break;
     				case '└': fields[y][x] = new Switch(Switch.Orientation.EastRight); break;
     				case '┘': fields[y][x] = new Switch(Switch.Orientation.WestLeft); break;
@@ -225,8 +275,8 @@ public class Controller {
 		upstations = new ArrayList<>();
 		while((line = br.readLine()).length() > 1) {
 			String[] s = line.split(" ");
-			int y = Integer.parseInt(s[1]) - 1;
-			int x = Integer.parseInt(s[2]) - 1;
+			int x = Integer.parseInt(s[1]) - 1;
+			int y = Integer.parseInt(s[2]) - 1;
 			switch(s[0].charAt(0)){
 			//DownStation
 				case 'I':
