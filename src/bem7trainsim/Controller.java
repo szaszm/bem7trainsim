@@ -25,7 +25,7 @@ public class Controller {
     private State state = State.MAIN_MENU;
     private int currentTime = 0;
 
-    private void moveTrains() throws CollisionException {
+    private void moveTrains() throws CollisionException, TableLeftException {
 		// Firstly move existing trains
 		for (Train train: trains) {
 			train.move();
@@ -73,8 +73,13 @@ public class Controller {
 						run = false;
 						state = State.MAIN_MENU;
 						break;
+					} catch (TableLeftException e){
+						System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: "+Integer.toString(currentTime));
+						run = false;
+						state = State.MAIN_MENU;
+						break;
 					}
-	        		System.out.println(table.getDrawData());
+					System.out.println(table.getDrawData());
         		} catch(IOException e){
         			System.out.println(e.getMessage());
         		}
@@ -136,13 +141,17 @@ public class Controller {
 								state = State.MAIN_MENU;
 							}
 						}
-					}  catch (CollisionException e) {
+					}catch (CollisionException e) {
 						System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
 						run = false;
 						state = State.MAIN_MENU;
 						break;
+					}catch (TableLeftException e){
+						System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: "+Integer.toString(currentTime));
+						run = false;
+						state = State.MAIN_MENU;
+						break;
 					}
-
 				}
 					break;
 				//default = enter 1
@@ -152,9 +161,14 @@ public class Controller {
 						moveTrains();
 					} catch (CollisionException e) {
 						System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
-					    run = false;
-					    state = State.MAIN_MENU;
+						run = false;
+						state = State.MAIN_MENU;
 					    break;
+					}catch (TableLeftException e){
+						System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: "+Integer.toString(currentTime));
+						run = false;
+						state = State.MAIN_MENU;
+						break;
 					}
 					System.out.println(table.getDrawData());
 					if(isWin()) {

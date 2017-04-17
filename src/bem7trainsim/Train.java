@@ -42,7 +42,7 @@ public class Train {
         }
     }
 
-    public void move() throws CollisionException {
+    public void move() throws CollisionException, TableLeftException {
         // moves the locomotive to the next rail
         Rail next = locomotive.move();
         Table.Direction nextDirection = Table.Direction.Up;
