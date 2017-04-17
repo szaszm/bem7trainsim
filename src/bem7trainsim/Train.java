@@ -60,4 +60,12 @@ public class Train {
         // returns false if cannot
         return false;
     }
+    public boolean isEmpty(){
+        boolean empty = true;
+        for(Wagon wagon: wagons) {
+            if(!wagon.isEmpty())
+                empty = false;
+        }
+        return empty;
+    }
 }

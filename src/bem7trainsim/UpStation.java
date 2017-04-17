@@ -42,9 +42,12 @@ public class UpStation extends SimpleRail {
         else if (color.equals(Color.GREEN)) {
             return "ö";
         }
-        else if (color.equals(Color.GREEN)) {
+        else if (color.equals(Color.BLUE)) {
             return "é";
         }
         else return " ";
+    }
+    public boolean isGone(){
+        return gone;
     }
 }

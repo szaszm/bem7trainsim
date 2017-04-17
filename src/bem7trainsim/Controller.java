@@ -17,6 +17,7 @@ import java.awt.*;
 public class Controller {
     private Table table;
     private List<Train> trains;
+    private List<UpStation> upstations;
     private Rail startRail;
     private List<Pair<Integer, List<Wagon>>> trainData;
     private boolean run;
@@ -104,6 +105,11 @@ public class Controller {
 					    break;
 					}
 					System.out.println(table.getDrawData());
+					if(isWin()) {
+						System.out.println("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
+						run = false;
+						state = State.MAIN_MENU;
+					}
         			break;
 			}
         	break;
@@ -199,6 +205,7 @@ public class Controller {
 		
 		//beolvassuk az alagutakat és állomásokat
 		//Frissítjük a charMap[][] tartalmát is
+		upstations = new ArrayList<>();
 		while((line = br.readLine()).length() > 1) {
 			String[] s = line.split(" ");
 			int y = Integer.parseInt(s[1]) - 1;
@@ -224,18 +231,22 @@ public class Controller {
 			//UpStation
 				case 'i':
 					fields[y][x] = new UpStation(Color.RED, ((SimpleRail)fields[y][x]).orientation);
+					upstations.add((UpStation) fields[y][x]);
 					charMap[y][x] = 'i';
 					break;
 				case 'á':
 					fields[y][x] = new UpStation(Color.YELLOW, ((SimpleRail)fields[y][x]).orientation);
+					upstations.add((UpStation) fields[y][x]);
 					charMap[y][x] = 'á';
 					break;
 				case 'ö':
 					fields[y][x] = new UpStation(Color.GREEN, ((SimpleRail)fields[y][x]).orientation);
+					upstations.add((UpStation) fields[y][x]);
 					charMap[y][x] = 'ö';
 					break;
 				case 'é':
 					fields[y][x] = new UpStation(Color.BLUE, ((SimpleRail)fields[y][x]).orientation);
+					upstations.add((UpStation) fields[y][x]);
 					charMap[y][x] = 'é';
 					break;
 			//TunnelEntrance
@@ -342,10 +353,10 @@ public class Controller {
     				case '┐':
     					if(charMap[y][x+1] == ' ' ||
     						"╚╔║".contains(Character.toString(charMap[y][x+1])) ||
-    						"IÁÖÉiáöé".contains(Character.toString(charMap[y][x+1])) &&
-    							(((SimpleRail) fields[y][x]).orientation == SimpleRail.Orientation.VERTICAL ||
-    							 ((SimpleRail) fields[y][x]).orientation == SimpleRail.Orientation.TOP_RIGHT ||
-    							 ((SimpleRail) fields[y][x]).orientation == SimpleRail.Orientation.BOTTOM_RIGHT))
+								("IÁÖÉiáöé".contains(Character.toString(charMap[y][x+1])) &&
+    							(((SimpleRail) fields[y][x+1]).orientation == SimpleRail.Orientation.VERTICAL ||
+    							 ((SimpleRail) fields[y][x+1]).orientation == SimpleRail.Orientation.TOP_RIGHT ||
+    							 ((SimpleRail) fields[y][x+1]).orientation == SimpleRail.Orientation.BOTTOM_RIGHT)))
     					{
     						((Switch)fields[y][x]).setOrientation(Switch.Orientation.SouthLeft);
     						((Switch)fields[y][x]).addLink((Rail)fields[y-1][x]);
@@ -360,11 +371,11 @@ public class Controller {
     					break;
     				case '└':
     					if(charMap[y][x-1] == ' ' ||
-						"╗╝║".contains(Character.toString(charMap[y][x-1])) ||
-						"IÁÖÉiáöé".contains(Character.toString(charMap[y][x-1])) &&
-							(((SimpleRail) fields[y][x]).orientation == SimpleRail.Orientation.VERTICAL ||
-							 ((SimpleRail) fields[y][x]).orientation == SimpleRail.Orientation.TOP_LEFT ||
-							 ((SimpleRail) fields[y][x]).orientation == SimpleRail.Orientation.BOTTOM_LEFT))
+							"╗╝║".contains(Character.toString(charMap[y][x-1])) ||
+								("IÁÖÉiáöé".contains(Character.toString(charMap[y][x-1])) &&
+								(((SimpleRail) fields[y][x-1]).orientation == SimpleRail.Orientation.VERTICAL ||
+							 	((SimpleRail) fields[y][x-1]).orientation == SimpleRail.Orientation.TOP_LEFT ||
+							 	((SimpleRail) fields[y][x-1]).orientation == SimpleRail.Orientation.BOTTOM_LEFT)))
     					{
     						((Switch)fields[y][x]).setOrientation(Switch.Orientation.NorthLeft);
     						((Switch)fields[y][x]).addLink((Rail)fields[y-1][x]);
@@ -379,11 +390,11 @@ public class Controller {
     					break;
     				case '┘':
     					if(charMap[y][x+1] == ' ' ||
-						"╚╔║".contains(Character.toString(charMap[y][x+1])) ||
-						"IÁÖÉiáöé".contains(Character.toString(charMap[y][x+1])) &&
-							(((SimpleRail) fields[y][x]).orientation == SimpleRail.Orientation.VERTICAL ||
-							 ((SimpleRail) fields[y][x]).orientation == SimpleRail.Orientation.TOP_RIGHT ||
-							 ((SimpleRail) fields[y][x]).orientation == SimpleRail.Orientation.BOTTOM_RIGHT))
+							"╚╔║".contains(Character.toString(charMap[y][x+1])) ||
+								("IÁÖÉiáöé".contains(Character.toString(charMap[y][x+1])) &&
+								(((SimpleRail) fields[y][x+1]).orientation == SimpleRail.Orientation.VERTICAL ||
+							 	((SimpleRail) fields[y][x+1]).orientation == SimpleRail.Orientation.TOP_RIGHT ||
+							 	((SimpleRail) fields[y][x+1]).orientation == SimpleRail.Orientation.BOTTOM_RIGHT)))
     					{
     						((Switch)fields[y][x]).setOrientation(Switch.Orientation.NorthRight);
     						((Switch)fields[y][x]).addLink((Rail)fields[y-1][x]);
@@ -398,11 +409,11 @@ public class Controller {
     					break;
     				case '┌':
     					if(charMap[y][x-1] == ' ' ||
-						"╗╝║".contains(Character.toString(charMap[y][x-1])) ||
-						"IÁÖÉiáöé".contains(Character.toString(charMap[y][x-1])) &&
-							(((SimpleRail) fields[y][x]).orientation == SimpleRail.Orientation.VERTICAL ||
-							 ((SimpleRail) fields[y][x]).orientation == SimpleRail.Orientation.TOP_LEFT ||
-							 ((SimpleRail) fields[y][x]).orientation == SimpleRail.Orientation.BOTTOM_LEFT))
+							"╗╝║".contains(Character.toString(charMap[y][x-1])) ||
+								("IÁÖÉiáöé".contains(Character.toString(charMap[y][x-1])) &&
+								(((SimpleRail) fields[y][x-1]).orientation == SimpleRail.Orientation.VERTICAL ||
+							 	((SimpleRail) fields[y][x-1]).orientation == SimpleRail.Orientation.TOP_LEFT ||
+							 	((SimpleRail) fields[y][x-1]).orientation == SimpleRail.Orientation.BOTTOM_LEFT)))
     					{
     						((Switch)fields[y][x]).setOrientation(Switch.Orientation.SouthRight);
     						((Switch)fields[y][x]).addLink((Rail)fields[y-1][x]);
@@ -460,7 +471,22 @@ public class Controller {
 
 		table = new Table(fields);
     }
-    
+
+    private boolean isWin(){
+    	boolean win = true;
+		for (Train train: trains) {
+			if (!train.isEmpty())
+				win = false;
+		}
+		for(UpStation upstation: upstations){
+			if(!upstation.isGone())
+				win = false;
+		}
+		if(!trainData.isEmpty())
+			win = false;
+		return  win;
+	}
+
     public void start() {
         // TODO: Elinditja az esemenyek kezeleset. Ha teszt van betoltve, akkor futtatja a tesztet, majd a vegen kiirja a vegso allapotot.
         run = true;
