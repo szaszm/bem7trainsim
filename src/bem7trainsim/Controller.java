@@ -106,13 +106,17 @@ public class Controller {
         		try{
         			state = State.PLAY;	
 	        		loadMap(s[0].substring(4));
-					move();
+                    moveTrains();
 	        		System.out.println(table.getDrawData());
         		} catch(IOException e){
         			System.out.println(e.getMessage());
-        		}
-        		
-        	} else if (s[0].startsWith("test_")){
+        		} catch (CollisionException e) {
+					System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
+					run = false;
+					state = State.MAIN_MENU;
+				}
+
+			} else if (s[0].startsWith("test_")){
         		try{
         			state = State.TEST;
 	        		loadMap(s[0].substring(5), true);
@@ -127,32 +131,47 @@ public class Controller {
         	//TODO play és test bemenetek
         case PLAY:
         	switch (s[0]) {
+        		//switch y x
 				case "switch":
 				{
 				    int x = Integer.parseInt(s[1]);
 					int y = Integer.parseInt(s[2]);
-					table.switchAt(x, y);
+					try{
+						table.switchAt(x - 1, y - 1);
+					} catch(CannotSwitchException e){
+						System.out.println(e.getMessage());
+					}
+					System.out.println(table.getDrawData());
 				}
                 break;
+				// build y x
 				case "build":
 				{
 					int x = Integer.parseInt(s[1]);
 					int y = Integer.parseInt(s[2]);
-					table.buildAt(x, y);
+					try{
+						table.buildAt(x - 1, y - 1);
+					} catch(CannotBuildException e){
+						System.out.println(e.getMessage());
+					}
+
+					System.out.println(table.getDrawData());
 				}
 				break;
+				//enter 10
 				case "enter":
 				{
-					int cycles = 1;
-				    if(s.length > 1) cycles = Integer.parseInt(s[1]);
-				    for(int i = 0; run && i < cycles; ++i){
-						tick();
-					}
+					int moveTimes = Integer.parseInt(s[1]);
+					for(int i = 0; i < moveTimes; i++){
+                        tick();
+                    }
+
 				}
-				break;
+                break;
+				//default = enter 1
         		default:
-        			tick();
-        			break;
+					tick();
+					break;
 			}
         	break;
         case TEST: break;
@@ -162,25 +181,19 @@ public class Controller {
 
     private void tick() {
 		currentTime++;
-		if(!move()) return;
-		System.out.println(table.getDrawData());
-		if(isWin()) {
-			System.out.println("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
-			run = false;
-			state = State.MAIN_MENU;
-		}
-	}
-
-	private boolean move() {
 		try {
 			moveTrains();
 		} catch (CollisionException e) {
 			System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
 			run = false;
 			state = State.MAIN_MENU;
-			return false;
 		}
-		return true;
+		System.out.println(table.getDrawData());
+		if(isWin()) {
+			System.out.println("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
+			run = false;
+			state = State.MAIN_MENU;
+		}
 	}
 
     private void loadMap(String mapFileName) throws IOException {
@@ -267,8 +280,8 @@ public class Controller {
 		}
 		br.readLine();
 
+		// ez a lista gyűjti az alagútbejáratokat, hogy a Table konstruktorában könnyen használhassuk őket
 		ArrayList<TunnelEntrance> tunnelEntrances = new ArrayList<>();
-		Tunnel tunnel = new Tunnel(table, tunnelEntrances);
 
 		//beolvassuk az alagutakat és állomásokat
 		//Frissítjük a charMap[][] tartalmát is
@@ -318,7 +331,8 @@ public class Controller {
 					break;
 			//TunnelEntrance
 				case 't':
-					TunnelEntrance tunnelEntrance = new TunnelEntrance(tunnel, ((SimpleRail) fields[y][x]).orientation);
+					//Tunnel paraméter null, mivel még nincs meg az alagutunk, azt majd csak a Table hozza létre
+					TunnelEntrance tunnelEntrance = new TunnelEntrance(null, ((SimpleRail) fields[y][x]).orientation);
 					tunnelEntrances.add(tunnelEntrance);
 					fields[y][x] = tunnelEntrance;
 					charMap[y][x] = 't';
@@ -538,7 +552,8 @@ public class Controller {
 
     	br.close();
 
-		table = new Table(fields);
+		//létrehozzuk a pályát, ő majd létrehozza az alagútbejáratot és összerak mindent
+		table = new Table(fields, tunnelEntrances);
     }
 
     private boolean isWin(){
