@@ -11,15 +11,21 @@ public class Train {
     private Locomotive locomotive;
     private List<Wagon> wagons;
 
+    // sajnos kell, hogy mikor vizsgálja a kirajzolandó karaktert, akkor ezt ne tegye, különben alagútban elszáll
+    //ennek értékét mindig a Tunnel enter() és leave() függvényei állítják be
+    public boolean onSurface;
+
     public Train(Rail start, Table table) throws CollisionException {
         // creates train with empty list
         this(start, table, new ArrayList<>());
+        onSurface = true;
     }
 
     public Train(Rail start, Table table, List<Wagon> wagons) throws CollisionException {
         this.wagons = wagons;
         // creates a locomotive as every Train needs one in the front
         locomotive = new Locomotive(this, start, table);
+        onSurface = true;
         start.arrive(this);
     }
 
@@ -39,7 +45,11 @@ public class Train {
     public void move() throws CollisionException {
         // moves the locomotive to the next rail
         Rail next = locomotive.move();
-        Table.Direction nextDirection = locomotive.updateDirection();
+        Table.Direction nextDirection = Table.Direction.Up;
+        if(onSurface){
+            nextDirection = locomotive.updateDirection();
+        }
+
         // moves each wagon to the rail previous wagon was on
         for(Wagon wagon: wagons) {
             next = wagon.move(next);

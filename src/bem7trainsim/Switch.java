@@ -37,8 +37,12 @@ public class Switch extends Rail {
     }
 
     public void change() throws CannotSwitchException {
-        if(state.nextStraight()) state = new SwitchStateCurve();
-        else state = new SwitchStateStraight();
+        if(train == null){
+            if(state.nextStraight()) state = new SwitchStateCurve();
+            else state = new SwitchStateStraight();
+        } else {
+            throw new CannotSwitchException("There is a train on that switch.");
+        }
     }
 
     public void addLinkToChange(Rail rail) {

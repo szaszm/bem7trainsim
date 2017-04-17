@@ -1,4 +1,8 @@
 package bem7trainsim;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by marci on 2017.03.17..
  */
@@ -10,10 +14,14 @@ public class Table {
      * Creates table with the given fields
      * @param fields The array of fields
      */
-    public Table(Field[][] fields) {
+    public Table(Field[][] fields, List<TunnelEntrance> tunnelEntrances) {
         this.fields = fields;
-        //TODO: initialization of tunnel
-        tunnel = null;
+        // az alagút kezdetben bejáratok nélkül kerül a pályára, DE MINDIG VAN EGY ALAGÚT CSAK MAX NINCS BEJÁRATA!
+        this.tunnel = new Tunnel(this, new ArrayList<TunnelEntrance>());
+        //beállítjuk az alagútbejáratokat, hogy ismerjék az alagutat
+        for(int i = 0; i < tunnelEntrances.size(); i++){
+            tunnelEntrances.get(i).setTunnel(this.tunnel);
+        }
     }
 
     /**
@@ -45,7 +53,7 @@ public class Table {
             }
         }
         // returns the difference between the coordinates
-        return Math.abs(te2x - te1x) + Math.abs(te2y - te1y);
+        return Math.abs(te2x - te1x) + Math.abs(te2y - te1y) - 1; //mert a sarok mindkettőben benne van
     }
 
     /**
@@ -53,13 +61,24 @@ public class Table {
      * @return Data as String
      */
     String getDrawData() {
-        String result = "";
+        String result = "#";
+        for(int i = 0; i < fields[0].length; i++){
+            result += Integer.toString(i + 1);
+        }
+        result += "#\n";
         for (int y = 0; y < fields.length; y++) {
+            result += Integer.toString(y + 1);
             for (int x = 0; x < fields[y].length; x++) {
                 result += fields[y][x].getDrawData();
             }
+            result += Integer.toString(y + 1);
             result += "\n";
         }
+        result += "#";
+        for(int i = 0; i < fields[0].length; i++){
+            result += Integer.toString(i + 1);
+        }
+        result += "#\n";
         return result;
     }
 
@@ -98,19 +117,11 @@ public class Table {
         return null;
     }
 
-    public void switchAt(int x, int y) {
-        try {
-            ((Switch)(fields[y - 1][x - 1])).change();
-        } catch (CannotSwitchException e) {
-            e.printStackTrace();
-        }
+    public void switchAt(int x, int y) throws CannotSwitchException{
+        ((Switch)(fields[y][x])).change();
     }
 
-    public void buildAt(int x, int y) {
-        try {
-            ((TunnelEntrance)(fields[y - 1][x - 1])).click();
-        } catch (CannotBuildException e) {
-            e.printStackTrace();
-        }
+    public void buildAt(int x, int y) throws CannotBuildException{
+        ((TunnelEntrance)(fields[y][x])).click();
     }
 }

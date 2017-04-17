@@ -29,6 +29,10 @@ public class TunnelEntrance extends Rail {
         this.orientation = orientation;
         this.tunnel = tunnel;
     }
+
+    public void setTunnel(Tunnel tunnel){
+        this.tunnel = tunnel;
+    }
     
     public void setOrientation(Orientation orientation){
     	this.orientation = orientation;
@@ -38,14 +42,19 @@ public class TunnelEntrance extends Rail {
     	return this.orientation;
     }
 
+    //Úgy írtam át, hogy minden irányból az alagút felé megy
     @Override
     public Rail next(Rail from) {
         if(from == links.get(1)) {
-            return links.get(0);
-        } else if(linkToTunnel == null || state.nextStraight()) {
-            return links.get(1);
+            if(state.nextStraight())
+                return links.get(0);
+            else return linkToTunnel;
+        } else if(from == links.get(0)) {
+            if(state.nextStraight())
+                return links.get(1);
+            else return linkToTunnel;
         } else {
-            return linkToTunnel;
+            return links.get(0);
         }
     }
 
@@ -62,7 +71,11 @@ public class TunnelEntrance extends Rail {
      * @throws CannotBuildException Thrown if cannot be built
      */
     public void click() throws CannotBuildException {
-        tunnel.checkEntrance(this);
+        if(train == null){
+            tunnel.checkEntrance(this);
+        } else {
+            throw new CannotBuildException("There is a train in the tunnel. You cannot build until it leaves!");
+        }
     }
 
     /**
@@ -83,13 +96,19 @@ public class TunnelEntrance extends Rail {
 
     public void arrive(Train train) throws CollisionException {
         super.arrive(train);
-        if(tunnel != null && !tunnel.hasTrain(train)) {
-            tunnel.enter(this, train);
+        //Ha a vonat kintről jött és az alagúrba terel a vágány, akkor belépünk az alagútba
+        if(tunnel != null && !tunnel.fromInside(train, this)) {
+            if(!state.nextStraight())
+                tunnel.enter(this, train);
+        } else {
+            //ha nem kintről jött, akkor újra a felszínre lépett
+            train.onSurface = true;
         }
     }
 
     public void leave() {
-        if(tunnel != null && tunnel.hasTrain(train)) {
+        //ha bentről jött a vonat, akkor elhagyja az alagutat
+        if(tunnel != null && tunnel.fromInside(train, this)) {
             tunnel.leave(this, train);
         }
         super.leave();
