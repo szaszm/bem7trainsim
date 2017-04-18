@@ -39,12 +39,6 @@ public class LevelSelectControllerState extends ControllerState {
             } catch(IOException e){
                 System.out.println(e.getMessage());
                 return new MainMenuControllerState();
-            } catch (CollisionException e) {
-                System.out.println("CollisionException");
-                return new MainMenuControllerState();
-            } catch (TableLeftException e){
-                System.out.println("TableLeftException");
-                return new MainMenuControllerState();
             }
         } else if (s[0].equals("back")){
             return new MainMenuControllerState();

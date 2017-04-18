@@ -29,7 +29,7 @@ public class TestControllerState extends PlayControllerState {
 
     PrintStream out;
 
-    public TestControllerState(String map) throws CollisionException, TableLeftException, IOException  {
+    public TestControllerState(String map) throws IOException  {
         super(map); // loads the map
     }
 
@@ -48,7 +48,7 @@ public class TestControllerState extends PlayControllerState {
         } catch (TableLeftException e) {
             out.println("TableLeftException");
         }
-        // TODO: check if succeeded
+        // TODO: check if succeeded, maybe out should be put to the super
         String content = table.getDrawData();
         content += new String(baos.toByteArray(), StandardCharsets.UTF_8);
         out = System.out;
@@ -87,10 +87,10 @@ public class TestControllerState extends PlayControllerState {
         try {
             moveTrains();
         } catch (CollisionException e) {
-            System.out.println("CollisionException");
+            out.println("CollisionException");
             return new MainMenuControllerState();
         } catch (TableLeftException e){
-            System.out.println("TableLeftException");
+            out.println("TableLeftException");
             return new MainMenuControllerState();
         }
         if(isWin()) {
