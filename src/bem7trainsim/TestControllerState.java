@@ -43,7 +43,7 @@ public class TestControllerState extends PlayControllerState {
         } catch (TableLeftException e) {
             out.println("TableLeftException");
         }
-
+        // TODO: check if succeeded
         String content = table.getDrawData();
         content += new String(baos.toByteArray(), StandardCharsets.UTF_8);
         out = System.out;
