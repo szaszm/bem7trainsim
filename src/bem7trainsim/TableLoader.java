@@ -35,26 +35,32 @@ public class TableLoader {
      */
     public List<Pair<Integer, List<Wagon>>> trainData;
 
-    private Field[][] fields;
-    private char[][] charMap;
-    private int rows, columns; // a pálya sorainak és oszlopainak száma
-    private int startX, startY; // a kezdő sín
+    protected Field[][] fields;
+    protected char[][] charMap;
+    protected int rows, columns; // a pálya sorainak és oszlopainak száma
+    protected int startX, startY; // a kezdő sín
+    protected ArrayList<TunnelEntrance> tunnelEntrances;
 
     public Table LoadTable(String mapFileName) throws IOException {
-        //TODO: make test use this.
-
-        String pathPrefix = "map/";
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(pathPrefix + mapFileName + ".txt"), "UTF-8"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("map/" + mapFileName + ".txt"), "UTF-8"));
         //pálya méretének beolvasása
-        String line;
         LoadSize(br);
-
         //beolvassuk a kezdő pozíciót
         LoadStart(br);
-
         //beolvassuk a mezőket
         LoadChars(br);
+        LoadRails();
+        br.readLine();
+        LoadSpecials(br);
+        LoadTrains(br);
+        br.close();
+        ConnectRails();
 
+        //létrehozzuk a pályát, ő majd létrehozza az alagútbejáratot és összerak mindent
+        return new Table(fields, tunnelEntrances);
+    }
+
+    protected void LoadRails() {
         //A karakterek függvényében feltöltjük a Fields[][] tömböt
         //Ekkor még csak síneket és váltókat látunk
         for (int y = 0; y < rows; y++) {
@@ -102,10 +108,67 @@ public class TableLoader {
                 }
             }
         }
-        br.readLine();
+    }
 
+    protected void LoadTrains(BufferedReader br) throws IOException {
+        String line;
+        trains = new ArrayList<>();
+        ArrayList<String> trainLines = new ArrayList<>();
+        while ((line = br.readLine()) != null && line.length() > 0) {
+            trainLines.add(line);
+        }
+        startRail = (Rail) fields[startY - 1][startX - 1];
+        trainData = new ArrayList<>();
+        for (String trainLine : trainLines) {
+            String[] spl = trainLine.split(" ");
+            int start = Integer.parseInt(spl[0]);
+            String[] wagonColors = spl[1].split("");
+            ArrayList<Wagon> wagons = new ArrayList<>();
+
+            for (String color : wagonColors) {
+                Wagon wagon;
+                switch (color) {
+                    case "P":
+                        wagon = new Wagon(Color.RED, false);
+                        break;
+                    case "S":
+                        wagon = new Wagon(Color.YELLOW, false);
+                        break;
+                    case "Z":
+                        wagon = new Wagon(Color.GREEN, false);
+                        break;
+                    case "K":
+                        wagon = new Wagon(Color.BLUE, false);
+                        break;
+                    case "F":
+                        wagon = new Wagon(Color.BLACK);
+                        break;
+                    case "p":
+                        wagon = new Wagon(Color.RED, true);
+                        break;
+                    case "s":
+                        wagon = new Wagon(Color.YELLOW, true);
+                        break;
+                    case "z":
+                        wagon = new Wagon(Color.GREEN, true);
+                        break;
+                    case "k":
+                        wagon = new Wagon(Color.BLUE, true);
+                        break;
+                    default:
+                        throw new IOException("Nem megfelelo vonat leiras: " + trainLine);
+                }
+                wagons.add(wagon);
+            }
+
+            trainData.add(new Pair<>(start, wagons));
+        }
+    }
+
+    protected void LoadSpecials(BufferedReader br) throws IOException {
+        String line;
         // ez a lista gyűjti az alagútbejáratokat, hogy a Table konstruktorában könnyen használhassuk őket
-        ArrayList<TunnelEntrance> tunnelEntrances = new ArrayList<>();
+        tunnelEntrances = new ArrayList<>();
 
         //beolvassuk az alagutakat és állomásokat
         //Frissítjük a charMap[][] tartalmát is
@@ -163,60 +226,9 @@ public class TableLoader {
                     break;
             }
         }
+    }
 
-        trains = new ArrayList<>();
-        ArrayList<String> trainLines = new ArrayList<>();
-        while ((line = br.readLine()) != null && line.length() > 0) {
-            trainLines.add(line);
-        }
-        startRail = (Rail) fields[startY - 1][startX - 1];
-        trainData = new ArrayList<>();
-        for (String trainLine : trainLines) {
-            String[] spl = trainLine.split(" ");
-            int start = Integer.parseInt(spl[0]);
-            String[] wagonColors = spl[1].split("");
-            ArrayList<Wagon> wagons = new ArrayList<>();
-
-            for (String color : wagonColors) {
-                Wagon wagon;
-                switch (color) {
-                    case "P":
-                        wagon = new Wagon(Color.RED, false);
-                        break;
-                    case "S":
-                        wagon = new Wagon(Color.YELLOW, false);
-                        break;
-                    case "Z":
-                        wagon = new Wagon(Color.GREEN, false);
-                        break;
-                    case "K":
-                        wagon = new Wagon(Color.BLUE, false);
-                        break;
-                    case "F":
-                        wagon = new Wagon(Color.BLACK);
-                        break;
-                    case "p":
-                        wagon = new Wagon(Color.RED, true);
-                        break;
-                    case "s":
-                        wagon = new Wagon(Color.YELLOW, true);
-                        break;
-                    case "z":
-                        wagon = new Wagon(Color.GREEN, true);
-                        break;
-                    case "k":
-                        wagon = new Wagon(Color.BLUE, true);
-                        break;
-                    default:
-                        throw new IOException("Nem megfelelo vonat leiras: " + trainLine);
-                }
-                wagons.add(wagon);
-            }
-
-            trainData.add(new Pair<>(start, wagons));
-        }
-
-
+    protected void ConnectRails() {
         //Összekapcsoljuk a síneket
         //A vonatok csak a fenti vagy a bal oldali pálya szélen indulhatnak el: '║' | '═'
         //Váltó mellett nem állhat váltó és alagútbejárat sem!
@@ -391,14 +403,9 @@ public class TableLoader {
                 }
             }
         }
-
-        br.close();
-
-        //létrehozzuk a pályát, ő majd létrehozza az alagútbejáratot és összerak mindent
-        return new Table(fields, tunnelEntrances);
     }
 
-    private void LoadChars(BufferedReader br) throws IOException {
+    protected void LoadChars(BufferedReader br) throws IOException {
         String line;
         int lineNum = 0;
         charMap = new char[rows][columns];
@@ -420,7 +427,7 @@ public class TableLoader {
         }
     }
 
-    private void LoadStart(BufferedReader br) throws IOException {
+    protected void LoadStart(BufferedReader br) throws IOException {
         String line;
         if ((line = br.readLine()) != null) {
             String[] nums = line.split(" ");
@@ -430,7 +437,7 @@ public class TableLoader {
         br.readLine();
     }
 
-    private void LoadSize(BufferedReader br) throws IOException {
+    protected void LoadSize(BufferedReader br) throws IOException {
         String line;
         if ((line = br.readLine()) != null) {
             String[] nums = line.split(" ");
