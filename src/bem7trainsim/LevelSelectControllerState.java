@@ -28,11 +28,10 @@ public class LevelSelectControllerState extends ControllerState {
             try{
                 TestControllerState newState = new TestControllerState(s[0].substring(5));
                 newState.start();
-                return newState;
             } catch(IOException e){
                 System.out.println(e.getMessage());
-                return new MainMenuControllerState();
             }
+            return new LevelSelectControllerState();
         } else if (s[0].equals("back")){
             return new MainMenuControllerState();
         }
