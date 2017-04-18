@@ -59,10 +59,7 @@ public class PlayControllerState extends ControllerState {
     public ControllerState handleCommand(String command) {
         try{
             return handleCommandWithoutException(command);
-        } catch(CannotSwitchException e){
-            System.out.println(e.getMessage());
-        }
-        catch(CannotBuildException e){
+        } catch(CannotSwitchException | CannotBuildException e){
             System.out.println(e.getMessage());
         }
         return this;

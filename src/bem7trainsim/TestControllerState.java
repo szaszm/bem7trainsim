@@ -1,12 +1,11 @@
 package bem7trainsim;
 
-import javafx.util.Pair;
-
-import java.awt.*;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Csuto on 4/18/2017.

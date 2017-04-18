@@ -1,7 +1,5 @@
 package bem7trainsim;
 
-import bem7trainsim.SimpleRail.Orientation;
-
 /**
  * Created by marci on 2017.03.17..
  */
