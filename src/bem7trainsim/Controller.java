@@ -47,7 +47,7 @@ public class Controller {
 	/**
 	 * An enumeration of the possible states of the controller
 	 */
-	private enum State{ MAIN_MENU, LEVEL_MENU, PLAY, TEST }
+	private enum State { MAIN_MENU, LEVEL_MENU, PLAY, TEST }
 
 	/**
 	 * The state of the controller
@@ -76,7 +76,7 @@ public class Controller {
 
 	private PrintStream out = System.out;
 
-    private void moveTrains() throws CollisionException {
+    private void moveTrains() throws CollisionException, TableLeftException {
 		// Firstly move existing trains
 		for (Train train: trains) {
 			train.move();
@@ -121,13 +121,17 @@ public class Controller {
 	        		out.println(table.getDrawData());
         		} catch(IOException e){
         			out.println(e.getMessage());
+					state = State.MAIN_MENU;
         		} catch (CollisionException e) {
 					out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
 					run = false;
 					state = State.MAIN_MENU;
-				}
-
-			} else if (s[0].startsWith("test_")){
+				} catch (TableLeftException e){
+					System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: "+Integer.toString(currentTime));
+					run = false;
+					state = State.MAIN_MENU;
+					}
+        	} else if (s[0].startsWith("test_")){
         		try{
         			state = State.TEST;
 	        		loadMap(s[0].substring(5), true);
@@ -141,6 +145,8 @@ public class Controller {
 						}
 					} catch (CollisionException e) {
 					    out.println("CollisionException");
+					} catch (TableLeftException e) {
+					    out.println("TableLeftException");
 					}
 
 					String content = table.getDrawData();
@@ -165,6 +171,7 @@ public class Controller {
 
         		} catch(IOException e){
         			out.println(e.getMessage());
+					state = State.MAIN_MENU;
         		}
         	} else if (s[0].equals("back")){
         		state = State.MAIN_MENU;
@@ -203,34 +210,36 @@ public class Controller {
 
 					if(state == State.PLAY) out.println(table.getDrawData());
 				}
-				break;
+					break;
 				//enter 10
-				case "enter":
-				{
+				case "enter": {
 					int moveTimes = Integer.parseInt(s[1]);
-					for(int i = 0; i < moveTimes; i++){
-                        tick();
-                    }
-
+					for (int i = 0; i < moveTimes; i++) {
+						tick();
+					}
 				}
-                break;
+				break;
 				//default = enter 1
         		default:
 					tick();
-					break;
+        			break;
 			}
         	break;
         default: break;
         }
     }
 
-    private void tick() {
+	private void tick() {
 		currentTime++;
 		try {
 			moveTrains();
 		} catch (CollisionException e) {
 		    if(state == State.PLAY) out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
 		    else out.println("CollisionException");
+			state = State.MAIN_MENU;
+		} catch (TableLeftException e){
+			System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: "+Integer.toString(currentTime));
+			run = false;
 			state = State.MAIN_MENU;
 		}
 		if(state == State.PLAY) out.println(table.getDrawData());
@@ -248,6 +257,7 @@ public class Controller {
     	Field[][] fields;
     	int rows, columns; // a pálya sorainak és oszlopainak száma
     	int startX, startY; // a kezdő sín
+    	String testString; // a test végén kiírandó string
 
 		String pathPrefix = test ? "test/" : "map/";
 		BufferedReader br = new BufferedReader( new InputStreamReader (new FileInputStream(pathPrefix + mapFileName + ".txt"), "UTF-8"));
@@ -255,8 +265,8 @@ public class Controller {
     	String line;
     	if((line = br.readLine()) != null){
     		String[] nums = line.split(" ");
-    		columns = Integer.parseInt(nums[0]);
-			rows = Integer.parseInt(nums[1]);
+    		rows = Integer.parseInt(nums[0]);
+    		columns = Integer.parseInt(nums[1]);
 			fields = new Field[rows][columns];
     	} else throw new IOException("Nem sikerült a pálya méretének beolvasása.");
     	br.readLine();
@@ -274,8 +284,8 @@ public class Controller {
     	//beolvassuk a kezdő pozíciót
     	if((line = br.readLine()) != null){
     		String[] nums = line.split(" ");
-    		startX = Integer.parseInt(nums[0]);
-			startY = Integer.parseInt(nums[1]);
+    		startY = Integer.parseInt(nums[0]);
+    		startX = Integer.parseInt(nums[1]);
     	} else throw new IOException("Nem sikerült a kezdő pozíció beolvasása.");
     	br.readLine();
     	
@@ -304,14 +314,14 @@ public class Controller {
 		for(int y = 0; y < rows; y++){
 			for(int x = 0; x < columns; x++){
 				switch(charMap[y][x]){
-				// Orientation CORRECT
+				//Oriantation CORRECT
     				case '╗': fields[y][x] = new SimpleRail(SimpleRail.Orientation.BOTTOM_LEFT); break;
     				case '╝': fields[y][x] = new SimpleRail(SimpleRail.Orientation.TOP_LEFT); break;
     				case '╚': fields[y][x] = new SimpleRail(SimpleRail.Orientation.TOP_RIGHT); break;
     				case '╔': fields[y][x] = new SimpleRail(SimpleRail.Orientation.BOTTOM_RIGHT); break;
     				case '═': fields[y][x] = new SimpleRail(SimpleRail.Orientation.HORIZONTAL); break;
     				case '║': fields[y][x] = new SimpleRail(SimpleRail.Orientation.VERTICAL); break;
-        		// Orientation WRONG
+        		//Oriantation WRONG
     				case '┐': fields[y][x] = new Switch(Switch.Orientation.WestRight); break;
     				case '└': fields[y][x] = new Switch(Switch.Orientation.EastRight); break;
     				case '┘': fields[y][x] = new Switch(Switch.Orientation.WestLeft); break;
@@ -332,8 +342,8 @@ public class Controller {
 		upstations = new ArrayList<>();
 		while((line = br.readLine()).length() > 1) {
 			String[] s = line.split(" ");
-			int x = Integer.parseInt(s[1]) - 1;
-			int y = Integer.parseInt(s[2]) - 1;
+			int y = Integer.parseInt(s[1]) - 1;
+			int x = Integer.parseInt(s[2]) - 1;
 			switch(s[0].charAt(0)){
 			//DownStation
 				case 'I':
