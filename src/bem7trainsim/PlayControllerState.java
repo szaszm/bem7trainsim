@@ -73,11 +73,11 @@ public class PlayControllerState extends ControllerState {
     public ControllerState handleCommand(String command) {
         try{
             ControllerState newState = handleCommandWithoutException(command);
-            System.out.println(table.getDrawData()); // Draws the table if there was no exception
             return newState;
         } catch(CannotSwitchException | CannotBuildException e){
             System.out.println(e.getMessage());
         }
+        System.out.println(table.getDrawData()); // Draws the table if there was no exception and statechange
         return this;
     }
 
@@ -91,6 +91,8 @@ public class PlayControllerState extends ControllerState {
     protected ControllerState handleCommandWithoutException(String command) throws CannotSwitchException, CannotBuildException {
         String[] s = command.split(" ");
         switch (s[0]) {
+            case "back":
+                return new LevelSelectControllerState();
             //switch x y
             case "switch":
             {
