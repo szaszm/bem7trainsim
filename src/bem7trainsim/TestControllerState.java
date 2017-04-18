@@ -43,9 +43,9 @@ public class TestControllerState extends PlayControllerState {
                 handleCommand(cmd);
             }
         } catch (CollisionException e) {
-            out.println("CollisionException");
+            out.print("CollisionException\n");
         } catch (TableLeftException e) {
-            out.println("TableLeftException");
+            out.print("TableLeftException\n");
         }
         String content = table.getDrawData();
         content += new String(baos.toByteArray(), StandardCharsets.UTF_8);
@@ -71,10 +71,10 @@ public class TestControllerState extends PlayControllerState {
         try{
             return handleCommandWithoutException(command);
         } catch(CannotSwitchException e){
-            out.println("CannotSwitchException");
+            out.print("CannotSwitchException\n");
         }
         catch(CannotBuildException e){
-            out.println("CannotBuildException");
+            out.print("CannotBuildException\n");
         }
         return new MainMenuControllerState(); // exit if exception happened
     }
@@ -85,10 +85,10 @@ public class TestControllerState extends PlayControllerState {
         try {
             moveTrains();
         } catch (CollisionException e) {
-            out.println("CollisionException");
+            out.print("CollisionException\n");
             return new MainMenuControllerState();
         } catch (TableLeftException e){
-            out.println("TableLeftException");
+            out.print("TableLeftException\n");
             return new MainMenuControllerState();
         }
         if(isWin()) {
