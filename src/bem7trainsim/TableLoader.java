@@ -35,52 +35,25 @@ public class TableLoader {
      */
     public List<Pair<Integer, List<Wagon>>> trainData;
 
+    private Field[][] fields;
+    private char[][] charMap;
+    private int rows, columns; // a pálya sorainak és oszlopainak száma
+    private int startX, startY; // a kezdő sín
+
     public Table LoadTable(String mapFileName) throws IOException {
         //TODO: make test use this.
-        Field[][] fields;
-        int rows, columns; // a pálya sorainak és oszlopainak száma
-        int startX, startY; // a kezdő sín
-        String testString; // a test végén kiírandó string
 
         String pathPrefix = "map/";
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(pathPrefix + mapFileName + ".txt"), "UTF-8"));
         //pálya méretének beolvasása
         String line;
-        if ((line = br.readLine()) != null) {
-            String[] nums = line.split(" ");
-            columns = Integer.parseInt(nums[0]);
-            rows = Integer.parseInt(nums[1]);
-            fields = new Field[rows][columns];
-        } else throw new IOException("Nem sikerült a pálya méretének beolvasása.");
-        br.readLine();
+        LoadSize(br);
 
         //beolvassuk a kezdő pozíciót
-        if ((line = br.readLine()) != null) {
-            String[] nums = line.split(" ");
-            startX = Integer.parseInt(nums[0]);
-            startY = Integer.parseInt(nums[1]);
-        } else throw new IOException("Nem sikerült a kezdő pozíció beolvasása.");
-        br.readLine();
+        LoadStart(br);
 
         //beolvassuk a mezőket
-        int lineNum = 0;
-        char[][] charMap = new char[rows][columns];
-        while ((line = br.readLine()) != null && lineNum <= rows) {
-            if (lineNum == 0 || lineNum == rows + 1) {
-                if (!line.matches("#[1-9]+#")) {
-                    throw new IOException("Nem megfelelően struktúrált a pályaleírás eleje és vége.");
-                }
-            } else {
-                if (!line.startsWith(Integer.toString(lineNum)) || !line.endsWith(Integer.toString(lineNum)))
-                    throw new IOException("Nem egyezik meg az " + Integer.toString(lineNum) + ". sor számozása.");
-
-                // feltöltjük a char[][] egy sorát a beolvasott karakterekkel
-                for (int i = 0; i < columns; i++) {
-                    charMap[lineNum - 1][i] = line.charAt(i + 1);
-                }
-            }
-            lineNum++;
-        }
+        LoadChars(br);
 
         //A karakterek függvényében feltöltjük a Fields[][] tömböt
         //Ekkor még csak síneket és váltókat látunk
@@ -423,5 +396,48 @@ public class TableLoader {
 
         //létrehozzuk a pályát, ő majd létrehozza az alagútbejáratot és összerak mindent
         return new Table(fields, tunnelEntrances);
+    }
+
+    private void LoadChars(BufferedReader br) throws IOException {
+        String line;
+        int lineNum = 0;
+        charMap = new char[rows][columns];
+        while ((line = br.readLine()) != null && lineNum <= rows) {
+            if (lineNum == 0 || lineNum == rows + 1) {
+                if (!line.matches("#[1-9]+#")) {
+                    throw new IOException("Nem megfelelően struktúrált a pályaleírás eleje és vége.");
+                }
+            } else {
+                if (!line.startsWith(Integer.toString(lineNum)) || !line.endsWith(Integer.toString(lineNum)))
+                    throw new IOException("Nem egyezik meg az " + Integer.toString(lineNum) + ". sor számozása.");
+
+                // feltöltjük a char[][] egy sorát a beolvasott karakterekkel
+                for (int i = 0; i < columns; i++) {
+                    charMap[lineNum - 1][i] = line.charAt(i + 1);
+                }
+            }
+            lineNum++;
+        }
+    }
+
+    private void LoadStart(BufferedReader br) throws IOException {
+        String line;
+        if ((line = br.readLine()) != null) {
+            String[] nums = line.split(" ");
+            startX = Integer.parseInt(nums[0]);
+            startY = Integer.parseInt(nums[1]);
+        } else throw new IOException("Nem sikerült a kezdő pozíció beolvasása.");
+        br.readLine();
+    }
+
+    private void LoadSize(BufferedReader br) throws IOException {
+        String line;
+        if ((line = br.readLine()) != null) {
+            String[] nums = line.split(" ");
+            columns = Integer.parseInt(nums[0]);
+            rows = Integer.parseInt(nums[1]);
+            fields = new Field[rows][columns];
+        } else throw new IOException("Nem sikerült a pálya méretének beolvasása.");
+        br.readLine();
     }
 }
