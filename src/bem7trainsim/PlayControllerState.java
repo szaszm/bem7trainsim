@@ -71,14 +71,14 @@ public class PlayControllerState extends ControllerState {
      */
     @Override
     public ControllerState handleCommand(String command) {
+        ControllerState newState = this;
         try{
-            ControllerState newState = handleCommandWithoutException(command);
-            return newState;
+            newState = handleCommandWithoutException(command);
         } catch(CannotSwitchException | CannotBuildException e){
             System.out.println(e.getMessage());
         }
         System.out.println(table.getDrawData()); // Draws the table if there was no exception and statechange
-        return this;
+        return newState;
     }
 
     /**
