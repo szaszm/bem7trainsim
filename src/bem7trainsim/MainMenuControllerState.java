@@ -4,9 +4,6 @@ package bem7trainsim;
  * Created by Csuto on 4/18/2017.
  */
 public class MainMenuControllerState extends ControllerState {
-    public MainMenuControllerState() {
-        System.out.println("MAIN_MENU");
-    }
     @Override
     public ControllerState handleCommand(String command) {
         String[] s = command.split(" ");
@@ -20,5 +17,9 @@ public class MainMenuControllerState extends ControllerState {
                 return null;
         }
         return this;
+    }
+    @Override
+    public void changedTo() {
+        System.out.println("MAIN_MENU");
     }
 }

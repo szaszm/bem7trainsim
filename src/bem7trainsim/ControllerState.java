@@ -5,4 +5,5 @@ package bem7trainsim;
  */
 abstract public class ControllerState {
     public abstract ControllerState handleCommand(String command);
+    public abstract void changedTo();
 }

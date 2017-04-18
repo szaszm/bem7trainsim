@@ -118,10 +118,18 @@ public class Table {
     }
 
     public void switchAt(int x, int y) throws CannotSwitchException{
-        ((Switch)(fields[y][x])).change();
+        try {
+            ((Switch) (fields[y][x])).change();
+        } catch (ClassCastException e) {
+            throw new CannotSwitchException("That is not a switch.");
+        }
     }
 
     public void buildAt(int x, int y) throws CannotBuildException{
-        ((TunnelEntrance)(fields[y][x])).click();
+        try {
+            ((TunnelEntrance)(fields[y][x])).click();
+        } catch (ClassCastException e) {
+            throw new CannotBuildException("That is not a tunnel entrance.");
+        }
     }
 }
