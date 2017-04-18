@@ -46,15 +46,29 @@ public class PlayControllerState extends ControllerState {
      */
     protected int currentTime = 0;
 
+    /**
+     * @param map The name of the map in string format. Available names in the documentation.
+     * @throws IOException thrown when the input is not correct.
+     */
     public PlayControllerState(String map) throws IOException {
         loadMap(map);
     }
 
+    /**
+     * Starts the movement of the trains
+     * @throws CollisionException thrown when trains collide
+     * @throws TableLeftException thrown when a not empty train leaves the table
+     */
     public void start() throws CollisionException, TableLeftException {
         moveTrains();
         System.out.println(table.getDrawData());
     }
 
+    /**
+     * Handles the commands but not throwing exceptions.
+     * @param command The command in string format. Available commands list is in the documentation.
+     * @return The controller state which the controller steps into
+     */
     @Override
     public ControllerState handleCommand(String command) {
         try{
@@ -67,6 +81,13 @@ public class PlayControllerState extends ControllerState {
         return this;
     }
 
+    /**
+     * Handles the command and throws exceptions while doing so.
+     * @param command The command in string format. Available commands list is in the documentation.
+     * @return The controller state which the controller steps into
+     * @throws CannotSwitchException thrown when the switch cannot switch
+     * @throws CannotBuildException thrown when a tunnel entrance cannot be built
+     */
     protected ControllerState handleCommandWithoutException(String command) throws CannotSwitchException, CannotBuildException {
         String[] s = command.split(" ");
         switch (s[0]) {
@@ -106,6 +127,11 @@ public class PlayControllerState extends ControllerState {
         return this;
     }
 
+    /**
+     * Moves the trains by one step
+     * @throws CollisionException thrown when trains collide
+     * @throws TableLeftException thrown when a not empty train leaves the table
+     */
     protected void moveTrains() throws CollisionException, TableLeftException {
         // Firstly move existing trains
         for (Train train: trains) {
@@ -124,6 +150,10 @@ public class PlayControllerState extends ControllerState {
         }
     }
 
+    /**
+     * Tries moving the trains and increments time.
+     * @return The controller state which the controller steps into
+     */
     protected ControllerState tick() {
         currentTime++;
         try {
@@ -143,6 +173,10 @@ public class PlayControllerState extends ControllerState {
         return this;
     }
 
+    /**
+     * @param mapFileName the name of the map in string format. Available names in the documentation.
+     * @throws IOException thrown when the input is not correct.
+     */
     protected void loadMap(String mapFileName) throws IOException{
         TableLoader tl = new TableLoader();
         table = tl.LoadTable(mapFileName);
@@ -152,6 +186,9 @@ public class PlayControllerState extends ControllerState {
         trainData = tl.trainData;
     }
 
+    /**
+     * @return if the winning condition is fulfilled returns true, else false.
+     */
     protected boolean isWin(){
         boolean win = true;
         for (Train train: trains) {

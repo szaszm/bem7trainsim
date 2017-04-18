@@ -4,8 +4,10 @@ import java.io.IOException;
 
 /**
  * Created by Csuto on 4/18/2017.
+ * represents the controller state where the user can choose the level
  */
 public class LevelSelectControllerState extends ControllerState {
+
     @Override
     public ControllerState handleCommand(String command) {
         String[] s = command.split(" ");

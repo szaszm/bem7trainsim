@@ -1,7 +1,8 @@
-/**
- * Created by marci on 2017.03.17..
- */
 package bem7trainsim;
+/**
+ * Created by marci on 2017.03.17.
+ * Represents the locomotive, which is the first object of the train
+ */
 public class Locomotive extends Coach {
     /**
      * The table on which the Locomotive moves
@@ -14,17 +15,18 @@ public class Locomotive extends Coach {
     private Train train;
 
     /**
-     * The rail where going now
+     * The rail where the locomotive is going now
      */
     protected Rail now;
+
     /**
-     * The rail where the loco was before
+     * The rail where the locomotive was before
      */
     private Rail before;
 
     /**
-     * Creates a loco with a starting position
-     * @param train The train to be pulled by the loco
+     * Creates a locomotive with a starting position
+     * @param train The train to be pulled by the locomotive
      * @param now The rail where it starts
      * @throws CollisionException Thrown if the starting rail is not empty
      */
@@ -38,8 +40,8 @@ public class Locomotive extends Coach {
     }
 
     /**
-     * Gets the next rail from the rail where the loco is
-     * @return The rail moved from.
+     * Gets the next rail from the rail where the locomotive is
+     * @return The rail which the locomotive was moved from.
      * @throws CollisionException Thrown if the new rail is not empty
      * @throws TableLeftException Thrown if a not empty train left the table
      */
@@ -58,6 +60,10 @@ public class Locomotive extends Coach {
         return before;
     }
 
+    /**
+     * Updates the direction of the locomotive
+     * @return the updated direction of the locomotive
+     */
     public Table.Direction updateDirection() {
         Table.Direction newDirection = null;
         if(now != null) newDirection = table.getDirection(now, now.next(before));

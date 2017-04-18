@@ -35,19 +35,42 @@ public class TableLoader {
      */
     public List<Pair<Integer, List<Wagon>>> trainData;
 
+    /**
+     * The fields as a two-dimensional grid
+     */
     protected Field[][] fields;
+
+    /**
+     * The characters representing fields as a two-dimensional grid
+     */
     protected char[][] charMap;
-    protected int rows, columns; // a pálya sorainak és oszlopainak száma
-    protected int startX, startY; // a kezdő sín
+
+    /**
+     * The number of rows and columns in the grid
+     */
+    protected int rows, columns;
+
+    /**
+     * The starting rail's position
+     */
+    protected int startX, startY;
+
+    /**
+     * The arraylist of tunnel entrances
+     */
     protected ArrayList<TunnelEntrance> tunnelEntrances;
 
+    /**
+     * Loads the table given by its name.
+     * @param mapFileName The name of the map in string format. Available names in the documentation.
+     * @return the loaded table
+     * @throws IOException thrown when the input is not correct
+     */
     public Table LoadTable(String mapFileName) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("map/" + mapFileName + ".txt"), "UTF-8"));
-        //pálya méretének beolvasása
+        //reads the size, start, chars etc. of the table
         LoadSize(br);
-        //beolvassuk a kezdő pozíciót
         LoadStart(br);
-        //beolvassuk a mezőket
         LoadChars(br);
         LoadRails();
         br.readLine();
@@ -56,13 +79,16 @@ public class TableLoader {
         br.close();
         ConnectRails();
 
-        //létrehozzuk a pályát, ő majd létrehozza az alagútbejáratot és összerak mindent
+        //Creating the table with the necessary parameters.
         return new Table(fields, tunnelEntrances);
     }
 
+    /**
+     * Loading the rails
+     */
     protected void LoadRails() {
-        //A karakterek függvényében feltöltjük a Fields[][] tömböt
-        //Ekkor még csak síneket és váltókat látunk
+        //Filling the Fields[][] based on the characters
+        //We only see rails and switches
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < columns; x++) {
                 switch (charMap[y][x]) {
@@ -110,6 +136,11 @@ public class TableLoader {
         }
     }
 
+    /**
+     * Loading the trains with a bufferedreader
+     * @param br
+     * @throws IOException thrown when the characters read are not correct.
+     */
     protected void LoadTrains(BufferedReader br) throws IOException {
         String line;
         trains = new ArrayList<>();
@@ -165,13 +196,18 @@ public class TableLoader {
         }
     }
 
+    /**
+     * loading special fields, such as tunnel entrance, stations etc.
+     * @param br
+     * @throws IOException
+     */
     protected void LoadSpecials(BufferedReader br) throws IOException {
         String line;
-        // ez a lista gyűjti az alagútbejáratokat, hogy a Table konstruktorában könnyen használhassuk őket
+        //Collecting tunnel entrances for future use
         tunnelEntrances = new ArrayList<>();
 
-        //beolvassuk az alagutakat és állomásokat
-        //Frissítjük a charMap[][] tartalmát is
+        //reading tunnels and stations
+        //refreshing charMap[][]
         upstations = new ArrayList<>();
         while ((line = br.readLine()).length() > 1) {
             String[] s = line.split(" ");
@@ -218,7 +254,7 @@ public class TableLoader {
                     break;
                 //TunnelEntrance
                 case 't':
-                    //Tunnel paraméter null, mivel még nincs meg az alagutunk, azt majd csak a Table hozza létre
+                    //Tunnel parameter null, becuase we do not have any tunnels, that will be created by the Table
                     TunnelEntrance tunnelEntrance = new TunnelEntrance(((SimpleRail) fields[y][x]).orientation);
                     tunnelEntrances.add(tunnelEntrance);
                     fields[y][x] = tunnelEntrance;
@@ -228,14 +264,16 @@ public class TableLoader {
         }
     }
 
+    /**
+     * Connecting rails on the table
+     */
     protected void ConnectRails() {
-        //Összekapcsoljuk a síneket
-        //A vonatok csak a fenti vagy a bal oldali pálya szélen indulhatnak el: '║' | '═'
-        //Váltó mellett nem állhat váltó és alagútbejárat sem!
+        //Trains can only start from:'║' or '═'
+        //There can not be a switch or tunnel entrance next to a switch
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < columns; x++) {
                 switch (charMap[y][x]) {
-                    //Ezek mind SimpleRail leszármazottak, ezért egyben kezelhetők
+                    //All of them are children of SimpleRail, we can manage them together
                     case '╗':
                     case '╝':
                     case '╚':
@@ -287,6 +325,7 @@ public class TableLoader {
                                 break;
                         }
                         break;
+
                     //A váltóknál varázsolni kell, ezért mindegyiknél megvizsgálom a tőle jobbra levő mezőt
                     //Ha ez dekoráció, másfele mutató sín vagy állomás, aminek az orientációja más felé néz, akkor az egyik eset van
                     //különben a másik
@@ -405,6 +444,11 @@ public class TableLoader {
         }
     }
 
+    /**
+     * Loading characters with a bufferedreader
+     * @param br
+     * @throws IOException thrown when the input is not correct
+     */
     protected void LoadChars(BufferedReader br) throws IOException {
         String line;
         int lineNum = 0;
@@ -418,7 +462,7 @@ public class TableLoader {
                 if (!line.startsWith(Integer.toString(lineNum)) || !line.endsWith(Integer.toString(lineNum)))
                     throw new IOException("Nem egyezik meg az " + Integer.toString(lineNum) + ". sor számozása.");
 
-                // feltöltjük a char[][] egy sorát a beolvasott karakterekkel
+                // filling a row in char[][]
                 for (int i = 0; i < columns; i++) {
                     charMap[lineNum - 1][i] = line.charAt(i + 1);
                 }
@@ -427,6 +471,11 @@ public class TableLoader {
         }
     }
 
+    /**
+     * Loading start with a bufferedreader
+     * @param br
+     * @throws IOException thrown when the input is not correct
+     */
     protected void LoadStart(BufferedReader br) throws IOException {
         String line;
         if ((line = br.readLine()) != null) {
@@ -437,6 +486,11 @@ public class TableLoader {
         br.readLine();
     }
 
+    /**
+     * Loading size with a bufferedreader
+     * @param br
+     * @throws IOException thrown when the input is not correct
+     */
     protected void LoadSize(BufferedReader br) throws IOException {
         String line;
         if ((line = br.readLine()) != null) {

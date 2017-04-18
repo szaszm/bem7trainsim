@@ -11,16 +11,30 @@ public class Train {
     private Locomotive locomotive;
     private List<Wagon> wagons;
 
-    // sajnos kell, hogy mikor vizsgálja a kirajzolandó karaktert, akkor ezt ne tegye, különben alagútban elszáll
-    //ennek értékét mindig a Tunnel enter() és leave() függvényei állítják be
+    /**
+     * Represents the trains position. Surface or under surface.
+     */
     public boolean onSurface;
 
+    /**
+     * Creates train
+     * @param start Starting field
+     * @param table
+     * @throws CollisionException thrown if trains collided
+     */
     public Train(Rail start, Table table) throws CollisionException {
         // creates train with empty list
         this(start, table, new ArrayList<>());
         onSurface = true;
     }
 
+    /**
+     * Creates train
+     * @param start Starting field
+     * @param table
+     * @param wagons list of wagons
+     * @throws CollisionException thrown if trains collided
+     */
     public Train(Rail start, Table table, List<Wagon> wagons) throws CollisionException {
         this.wagons = wagons;
         // creates a locomotive as every Train needs one in the front
@@ -29,6 +43,10 @@ public class Train {
         start.arrive(this);
     }
 
+    /**
+     * empties the wagons determined by the color
+     * @param color
+     */
     public void empty(Color color) {
         Iterator<Wagon> it = wagons.iterator();
         Wagon wagon = null;
@@ -42,6 +60,12 @@ public class Train {
         }
     }
 
+
+    /**
+     * Moves the train
+     * @throws CollisionException thrown when trains collide
+     * @throws TableLeftException thrown when a not empty train leaves the table
+     */
     public void move() throws CollisionException, TableLeftException {
         // moves the locomotive to the next rail
         Rail next = locomotive.move();
@@ -59,6 +83,11 @@ public class Train {
         if(next != null) next.leave();
     }
 
+    /**
+     * Gets the passangers on the train
+     * @param color
+     * @return true if the getting on is succesful
+     */
     public boolean getOn(Color color) {
         // tries to put the color on each wagon
         for (Wagon wagon:
@@ -70,6 +99,10 @@ public class Train {
         // returns false if cannot
         return false;
     }
+
+    /**
+     * @return true if the train is empty
+     */
     public boolean isEmpty(){
         boolean empty = true;
         for(Wagon wagon: wagons) {

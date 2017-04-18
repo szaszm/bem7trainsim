@@ -1,7 +1,5 @@
 package bem7trainsim;
 
-//import TestCases.*;
-
 public class Main {
 
     /**

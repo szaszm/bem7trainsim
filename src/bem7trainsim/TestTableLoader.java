@@ -25,14 +25,18 @@ public class TestTableLoader extends TableLoader {
      * The commands of test cases when running a test
      */
     public List<String> testCommands;
+
+    /**
+     * Loads the table given by its name.
+     * @param mapFileName The name of the map in string format. Available names in the documentation.
+     * @return the loaded table
+     * @throws IOException thrown when the input is not correct
+     */
     public Table LoadTable(String mapFileName) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("test/" + mapFileName + ".txt"), "UTF-8"));
-        //pálya méretének beolvasása
         LoadSize(br);
         LoadTestText(br);
-        //beolvassuk a kezdő pozíciót
         LoadStart(br);
-        //beolvassuk a mezőket
         LoadChars(br);
         LoadRails();
         br.readLine();
@@ -43,10 +47,15 @@ public class TestTableLoader extends TableLoader {
         br.close();
         ConnectRails();
 
-        //létrehozzuk a pályát, ő majd létrehozza az alagútbejáratot és összerak mindent
+        //Creating the table with the necessary parameters.
         return new Table(fields, tunnelEntrances);
     }
 
+    /**
+     * Loading the expected results with a bufferedreader
+     * @param br
+     * @throws IOException thrown when the input is not correct
+     */
     private void LoadExpectedResults(BufferedReader br) throws IOException {
         String line;
         expectedOutput = "";
@@ -55,6 +64,11 @@ public class TestTableLoader extends TableLoader {
         }
     }
 
+    /**
+     * Loading the test commands with a bufferedreader
+     * @param br
+     * @throws IOException thrown when the input is not correct
+     */
     private void LoadTestCommands(BufferedReader br) throws IOException {
         String line;
         testCommands = new ArrayList<>();
@@ -63,6 +77,11 @@ public class TestTableLoader extends TableLoader {
         }
     }
 
+    /**
+     * Loading the test text with a bufferedreader
+     * @param br
+     * @throws IOException thrown when the input is not correct
+     */
     private void LoadTestText(BufferedReader br) throws IOException {
         String line;
         if((line = br.readLine()) != null){

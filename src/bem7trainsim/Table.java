@@ -4,21 +4,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by marci on 2017.03.17..
+ * Created by marci on 2017.03.17.
+ * Represents the table, where the player plays
  */
 public class Table {
+
+    /**
+     * The fields contained by the table, in a two-dimensional grid
+     */
     private Field[][] fields;
+
+    /**
+     * The tunnel on the table
+     */
     private Tunnel tunnel;
 
     /**
-     * Creates table with the given fields
-     * @param fields The array of fields
+     * Creates a table with the given fields and tunnel entrances
+     * @param fields The array of fields of the table
+     * @param tunnelEntrances The tunnel entrances of the table
      */
     public Table(Field[][] fields, List<TunnelEntrance> tunnelEntrances) {
         this.fields = fields;
-        // az alagút kezdetben bejáratok nélkül kerül a pályára, DE MINDIG VAN EGY ALAGÚT CSAK MAX NINCS BEJÁRATA!
+
+         /**
+         * In the beginning the tunnel is set without any entrances, because there is always a tunnel
+         * but it is possible that it does not have any entrances.
+         */
         this.tunnel = new Tunnel(this, new ArrayList<TunnelEntrance>());
-        //beállítjuk az alagútbejáratokat, hogy ismerjék az alagutat
+
+        //Linking the entrances to the tunnel, so the entrances know about their tunnel.
         for(int i = 0; i < tunnelEntrances.size(); i++){
             tunnelEntrances.get(i).setTunnel(this.tunnel);
         }
@@ -28,7 +43,7 @@ public class Table {
      * Gets the difference in length between two tunnel entrances
      * @param te1 TunnelEntrance1
      * @param te2 TunnelEntrance2
-     * @return Length
+     * @return Length of the tunnel
      */
     public int howFar(TunnelEntrance te1, TunnelEntrance te2) {
         int height = fields.length;
@@ -53,7 +68,9 @@ public class Table {
             }
         }
         // returns the difference between the coordinates
-        return Math.abs(te2x - te1x) + Math.abs(te2y - te1y) - 1; //mert a sarok mindkettőben benne van
+        //(-1):because there is a field which is in both
+        return Math.abs(te2x - te1x) + Math.abs(te2y - te1y) - 1;
+
     }
 
     /**
@@ -82,10 +99,19 @@ public class Table {
         return result;
     }
 
+    /**
+     * The direction of the coaches
+     */
     public enum Direction {
         Up, Left, Down, Right
     };
 
+    /**
+     * Computing the direction determined by two fields.
+     * @param from The starting field
+     * @param to The destination field
+     * @return the direction determined by the two fields
+     */
     Direction getDirection(Field from, Field to) {
         int x = -1, y = -1;
 
@@ -117,6 +143,12 @@ public class Table {
         return null;
     }
 
+    /**
+     * Trying to switch the field in the given coordinates
+     * @param x x-coordinate of the field
+     * @param y y-coordinate of the field
+     * @throws CannotSwitchException thrown when the switch cannot switch
+     */
     public void switchAt(int x, int y) throws CannotSwitchException{
         try {
             ((Switch) (fields[y][x])).change();
@@ -125,6 +157,13 @@ public class Table {
         }
     }
 
+
+    /**
+     * Trying to build an entrance in the field in the given coordinates
+     * @param x x-coordinate of the field
+     * @param y y-coordinate of the field
+     * @throws CannotBuildException  thrown when the entrance cannot be built
+     */
     public void buildAt(int x, int y) throws CannotBuildException{
         try {
             ((TunnelEntrance)(fields[y][x])).click();
