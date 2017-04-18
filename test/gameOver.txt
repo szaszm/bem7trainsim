@@ -11,6 +11,7 @@ Játék végének tesztelése.
 4        4
 #12345678#
 
+
 1 Z
 5 S
 
