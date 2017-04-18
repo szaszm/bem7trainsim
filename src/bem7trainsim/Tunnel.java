@@ -6,12 +6,33 @@ import java.util.*;
  * Created by marci on 2017.03.17..
  */
 public class Tunnel {
+
+    /**
+     * Rails of the tunnel.
+     */
     private List<Rail> rails;
+
+    /**
+     * Entrances of the tunnel
+     */
     private List<TunnelEntrance> tunnelEntrances;
+
+    /**
+     * Table of the table
+     */
     private Table table;
+
+    /**
+     * Linked entrances
+     */
     private List<Map.Entry<Train, TunnelEntrance>> trainTunnelEntranceMap;
 
 
+    /**
+     * Creates tunnel with the given table and entrances
+     * @param table
+     * @param tunnelEntrances
+     */
     public Tunnel(Table table, List<TunnelEntrance> tunnelEntrances) {
         rails = new ArrayList<>();
         this.tunnelEntrances = tunnelEntrances;
@@ -19,18 +40,33 @@ public class Tunnel {
         this.table = table;
     }
 
+    /**
+     * Putting the train into the tunnel through the tunnel entrance
+     * @param te
+     * @param train
+     */
     public void enter(TunnelEntrance te, Train train) {
         trainTunnelEntranceMap.add(new AbstractMap.SimpleEntry<>(train, te));
         te.setState(new TunnelEntranceStateBuiltRed());
-        //a vonat az alagútba lép, ergó nincs a felszínen
+        //the train gets into the tunnel, we are setting onSurface to false
         train.onSurface = false;
     }
 
+    /**
+     * Returns the other entrance of the tunnel
+     * @param te an entrance
+     * @return the other entrance
+     */
     private TunnelEntrance otherEntrance(TunnelEntrance te) {
         if(tunnelEntrances.indexOf(te) == 1) return tunnelEntrances.get(0);
         return  tunnelEntrances.get(1);
     }
 
+    /**
+     * Getting the train out of the tunnel through the entrance
+     * @param te
+     * @param train
+     */
     public void leave(TunnelEntrance te, Train train) {
         trainTunnelEntranceMap.removeIf(x->x.getKey() == train);
         TunnelEntrance other = otherEntrance(te);
@@ -48,6 +84,11 @@ public class Tunnel {
         train.onSurface = true;
     }
 
+    /**
+     * @param train
+     * @param te
+     * @return true if the train got into the tunnel through the entrance and is still there
+     */
     public boolean hasTrain(Train train, TunnelEntrance te) {
         for (Map.Entry<Train, TunnelEntrance> entry : trainTunnelEntranceMap) {
             if (entry.getKey() == train && entry.getValue() != te) {
@@ -57,6 +98,11 @@ public class Tunnel {
         return false;
     }
 
+    /**
+     * Sets the entrance's state determined by the other entracnce
+     * @param te other entrance
+     * @throws CannotBuildException
+     */
     public void checkEntrance(TunnelEntrance te) throws CannotBuildException {
         //ha még nincs felépítve egy bejárat sem, akkor ez UnderConstruction lesz
         if(tunnelEntrances.size() == 0) {

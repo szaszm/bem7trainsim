@@ -12,6 +12,7 @@ import java.util.Objects;
 
 /**
  * Created by Csuto on 4/9/2017.
+ * Controls the application
  */
 public class Controller {
     public void start() {

@@ -27,12 +27,22 @@ public class TestControllerState extends PlayControllerState {
      */
     protected List<String> testCommands;
 
+    /**
+     * A printstream for the outputs
+     */
     PrintStream out;
 
+    /**
+     * @param map The name of the map in string format. Available names in the documentation.
+     * @throws IOException thrown when the input is not correct
+     */
     public TestControllerState(String map) throws IOException  {
         super(map); // loads the map
     }
 
+    /**
+     * Runs the test
+     */
     @Override
     public void start() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -68,6 +78,11 @@ public class TestControllerState extends PlayControllerState {
         }
     }
 
+    /**
+     * Handles the commands but not throwing exceptions.
+     * @param command The command in string format. Available commands list is in the documentation.
+     * @return The controller state which the controller steps into
+     */
     @Override
     public ControllerState handleCommand(String command) {
         try{
@@ -81,6 +96,10 @@ public class TestControllerState extends PlayControllerState {
         return this;
     }
 
+    /**
+     * Tries moving the trains and increments time.
+     * @return The controller state which the controller steps into
+     */
     @Override
     protected ControllerState tick() {
         currentTime++;
@@ -99,6 +118,10 @@ public class TestControllerState extends PlayControllerState {
         return this;
     }
 
+    /**
+     * @param mapFileName the name of the map in string format. Available names in the documentation.
+     * @throws IOException thrown when the input is not correct.
+     */
     @Override
     protected void loadMap(String mapFileName) throws IOException {
         TestTableLoader tl = new TestTableLoader();

@@ -17,7 +17,7 @@ public class CrossRail extends Rail {
     }
 
     /**
-     * Gets the next rail to go to if the train comes from the given rail
+     * Gets the next rail to go to, if the train comes from the given rail
      * @param from the rail before
      * @return the next rail
      */
@@ -40,6 +40,11 @@ public class CrossRail extends Rail {
         crossLinks.add(rail);
     }
 
+
+    /**
+     * Gets the draw data of the field
+     * @return the string representing the field
+     */
     public String getDrawData() {
         if (coach != null)
             return coach.getDrawData();

@@ -11,11 +11,11 @@ public abstract class Rail extends Field {
      */
     protected Train train;
     /**
-     * The coahc of the rail
+     * The coach of the rail
      */
     protected Coach coach;
     /**
-     * The rails where this rail is connected
+     * The rails which this rail is connected to
      */
     protected List<Rail> links;
 
@@ -42,7 +42,7 @@ public abstract class Rail extends Field {
     public abstract Rail next(Rail from);
 
     /**
-     * Handles when the train leaving this rail
+     * Handles the event when the train leaving this rail
      */
     public void leave() {
         this.train = null;
@@ -50,9 +50,9 @@ public abstract class Rail extends Field {
     }
 
     /**
-     * Handles when a train arriving to this rail
+     * Handles the event when a train arriving to this rail
      * @param train The train which is arrived
-     * @throws CollisionException Thrown if the rail has a train
+     * @throws CollisionException Thrown if the rail already has a train
      */
     public void arrive(Train train) throws CollisionException {
         if(train == null) return;
@@ -63,7 +63,7 @@ public abstract class Rail extends Field {
     }
 
     /**
-     * Handles when a coach arriving to this rail
+     * Handles the event when a coach arriving to this rail
      * @param coach The coach which is arrived
      */
     public void arrive(Coach coach) {

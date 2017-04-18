@@ -23,17 +23,30 @@ public class TunnelEntrance extends Rail {
      */
     private Tunnel tunnel;
 
+    /**
+     * Creates entrance with the given orientation
+     * @param orientation
+     */
     public TunnelEntrance(SimpleRail.Orientation orientation) {
         super();
         state = new TunnelEntranceStateStraight();
         this.orientation = orientation;
     }
 
+    /**
+     * sets the tunnel of the entrance
+     * @param tunnel
+     */
     public void setTunnel(Tunnel tunnel){
         this.tunnel = tunnel;
     }
-    
-    //Úgy írtam át, hogy minden irányból az alagút felé megy
+
+
+    /**
+     * Gets the next rail if the rail is given where the train comes from
+     * @param from The rail where the train comes from
+     * @return The next rail
+     */
     @Override
     public Rail next(Rail from) {
         if(from == links.get(1)) {
@@ -97,6 +110,9 @@ public class TunnelEntrance extends Rail {
         }
     }
 
+    /**
+     * the train leaves the tunnel
+     */
     public void leave() {
         //ha bentről jött a vonat, akkor elhagyja az alagutat
         if(tunnel != null && tunnel.hasTrain(train, this)) {
@@ -105,6 +121,10 @@ public class TunnelEntrance extends Rail {
         super.leave();
     }
 
+    /**
+     * Gets the draw data of the field
+     * @return the string representing the field
+     */
     public String getDrawData() {
         if (coach != null)
             return coach.getDrawData();

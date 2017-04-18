@@ -1,7 +1,5 @@
 package bem7trainsim;
 
-//import TestCases.*;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
