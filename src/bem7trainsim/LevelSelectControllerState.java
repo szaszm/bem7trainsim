@@ -17,7 +17,6 @@ public class LevelSelectControllerState extends ControllerState {
     public ControllerState handleCommand(String command) {
         String[] s = command.split(" ");
         if(s[0].startsWith("map_")){
-            // TODO: move to playstate ctor.
             try{
                 return new PlayControllerState(s[0].substring(4));
             } catch(IOException e){
@@ -31,7 +30,6 @@ public class LevelSelectControllerState extends ControllerState {
                 return new MainMenuControllerState();
             }
         } else if (s[0].startsWith("test_")){
-            // TODO: move to teststate ctor.
             try{
                 return new TestControllerState(s[0].substring(5));
             } catch(IOException e){

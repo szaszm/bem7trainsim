@@ -5,8 +5,8 @@ import javafx.util.Pair;
 import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by Csuto on 4/18/2017.
@@ -17,8 +17,18 @@ public class TestControllerState extends PlayControllerState {
      */
     private String expectedOutput;
 
+    /**
+     * The description of the current test case
+     */
+    protected String testDescription;
+
+    /**
+     * The commands of test cases when running a test
+     */
+    protected List<String> testCommands;
+
     public TestControllerState(String map) throws CollisionException, TableLeftException, IOException  {
-        super(map);
+        super(map); // TODO: maybe remove super, cuz movetrains loadmap runs in it.
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(baos);
@@ -86,6 +96,7 @@ public class TestControllerState extends PlayControllerState {
 
     @Override
     protected void loadMap(String mapFileName) throws IOException {
+        //TODO: merge to table loader, maybe with separating loadtable into private functions and create loadtesttable funtion.
         Field[][] fields;
         int rows, columns; // a pálya sorainak és oszlopainak száma
         int startX, startY; // a kezdő sín
