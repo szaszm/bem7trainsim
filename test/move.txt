@@ -14,7 +14,7 @@ Vonat pályán való haladásának tesztelése.
 
 1 K
 
-enter 11
+enter 10
 
 #123456789#
 1   K>══╗ 1

@@ -104,8 +104,7 @@ public class TunnelEntrance extends Rail {
     }
 
     public String getDrawData() {
-        if (coach != null)
-            return coach.getDrawData();
+        //if (coach != null) return coach.getDrawData();
         return state.getDrawData();
     }
 }
