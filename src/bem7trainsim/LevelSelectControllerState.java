@@ -18,7 +18,9 @@ public class LevelSelectControllerState extends ControllerState {
         String[] s = command.split(" ");
         if(s[0].startsWith("map_")){
             try{
-                return new PlayControllerState(s[0].substring(4));
+                PlayControllerState newState = new PlayControllerState(s[0].substring(4));
+                newState.start();
+                return newState;
             } catch(IOException e){
                 System.out.println(e.getMessage());
                 return new MainMenuControllerState();
@@ -31,7 +33,9 @@ public class LevelSelectControllerState extends ControllerState {
             }
         } else if (s[0].startsWith("test_")){
             try{
-                return new TestControllerState(s[0].substring(5));
+                TestControllerState newState = new TestControllerState(s[0].substring(5));
+                newState.start();
+                return newState;
             } catch(IOException e){
                 System.out.println(e.getMessage());
                 return new MainMenuControllerState();
