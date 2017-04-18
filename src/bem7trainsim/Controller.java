@@ -508,8 +508,8 @@ public class Controller {
     							 ((SimpleRail) fields[y][x+1]).orientation == SimpleRail.Orientation.BOTTOM_RIGHT)))
     					{
     						((Switch)fields[y][x]).setOrientation(Switch.Orientation.SouthLeft);
-    						((Switch)fields[y][x]).addLink((Rail)fields[y-1][x]);
     						((Switch)fields[y][x]).addLink((Rail)fields[y+1][x]);
+    						((Switch)fields[y][x]).addLink((Rail)fields[y-1][x]);
     						((Switch)fields[y][x]).addLinkToChange((Rail)fields[y][x-1]);
     					} else {
     						((Switch)fields[y][x]).setOrientation(Switch.Orientation.WestRight);
@@ -532,8 +532,8 @@ public class Controller {
     						((Switch)fields[y][x]).addLinkToChange((Rail)fields[y][x+1]);
     					} else {
     						((Switch)fields[y][x]).setOrientation(Switch.Orientation.EastRight);
-    						((Switch)fields[y][x]).addLink((Rail)fields[y][x-1]);
     						((Switch)fields[y][x]).addLink((Rail)fields[y][x+1]);
+    						((Switch)fields[y][x]).addLink((Rail)fields[y][x-1]);
     						((Switch)fields[y][x]).addLinkToChange((Rail)fields[y-1][x]);
     					}
     					break;
@@ -565,13 +565,13 @@ public class Controller {
 							 	((SimpleRail) fields[y][x-1]).orientation == SimpleRail.Orientation.BOTTOM_LEFT)))
     					{
     						((Switch)fields[y][x]).setOrientation(Switch.Orientation.SouthRight);
+    						((Switch)fields[y][x]).addLink((Rail)fields[y+11][x]);
     						((Switch)fields[y][x]).addLink((Rail)fields[y-1][x]);
-    						((Switch)fields[y][x]).addLink((Rail)fields[y+1][x]);
     						((Switch)fields[y][x]).addLinkToChange((Rail)fields[y][x+1]);
     					} else {
     						((Switch)fields[y][x]).setOrientation(Switch.Orientation.EastLeft);
-    						((Switch)fields[y][x]).addLink((Rail)fields[y][x-1]);
     						((Switch)fields[y][x]).addLink((Rail)fields[y][x+1]);
+    						((Switch)fields[y][x]).addLink((Rail)fields[y][x-1]);
     						((Switch)fields[y][x]).addLinkToChange((Rail)fields[y+1][x]);
     					}
     					break;
