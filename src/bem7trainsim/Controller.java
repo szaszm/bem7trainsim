@@ -16,12 +16,12 @@ import java.util.Objects;
 public class Controller {
     public void start() {
     	ControllerState state = new MainMenuControllerState();
-		BufferedReader buffer=new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
         while (state != null) {
             try {
                 state = state.handleCommand(buffer.readLine());
             } catch (IOException e) {
-                // TODO: do something
+                // Shall never happen
                 e.printStackTrace();
             }
         }

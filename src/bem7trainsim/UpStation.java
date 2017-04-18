@@ -15,7 +15,6 @@ public class UpStation extends SimpleRail {
     }
     public void arrive(Train t) throws CollisionException {
         super.arrive(t);
-        //TODO:
         if (!this.gone) {
             if (t.getOn(color)) {
                 gone = true;
