@@ -258,6 +258,7 @@ public class Controller {
     	int rows, columns; // a pálya sorainak és oszlopainak száma
     	int startX, startY; // a kezdő sín
     	String testString; // a test végén kiírandó string
+        currentTime = 0;
 
 		String pathPrefix = test ? "test/" : "map/";
 		BufferedReader br = new BufferedReader( new InputStreamReader (new FileInputStream(pathPrefix + mapFileName + ".txt"), "UTF-8"));
