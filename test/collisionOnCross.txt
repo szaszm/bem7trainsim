@@ -11,6 +11,7 @@ Kereszteződésen ütközés tesztelése.
 3 ╚╬=╗ 3
 4  ║ ║ 4
 5  ╚=╝ 5
+6      6
 #123456#
 
 t 2 2
@@ -26,5 +27,6 @@ enter 10
 3 ╚V<K 3
 4  ║ K 4
 5  ╚=K 5
+6      6
 #123456#
 CollisionException
