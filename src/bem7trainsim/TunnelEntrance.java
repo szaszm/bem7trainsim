@@ -1,7 +1,5 @@
 package bem7trainsim;
 
-import bem7trainsim.SimpleRail.Orientation;
-
 /**
  * Created by marci on 2017.03.17..
  */
@@ -126,8 +124,7 @@ public class TunnelEntrance extends Rail {
      * @return the string representing the field
      */
     public String getDrawData() {
-        if (coach != null)
-            return coach.getDrawData();
+        //if (coach != null) return coach.getDrawData();
         return state.getDrawData();
     }
 }

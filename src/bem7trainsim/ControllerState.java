@@ -10,4 +10,5 @@ abstract public class ControllerState {
      * @return The controller state which the controller steps into
      */
     public abstract ControllerState handleCommand(String command);
+    public abstract void changedTo();
 }

@@ -1,12 +1,11 @@
 package bem7trainsim;
 
-import javafx.util.Pair;
-
-import java.awt.*;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Csuto on 4/18/2017.
@@ -54,11 +53,10 @@ public class TestControllerState extends PlayControllerState {
                 handleCommand(cmd);
             }
         } catch (CollisionException e) {
-            out.println("CollisionException");
+            out.print("CollisionException\n");
         } catch (TableLeftException e) {
-            out.println("TableLeftException");
+            out.print("TableLeftException\n");
         }
-        // TODO: check if succeeded, maybe out should be put to the super
         String content = table.getDrawData();
         content += new String(baos.toByteArray(), StandardCharsets.UTF_8);
         out = System.out;
@@ -88,12 +86,12 @@ public class TestControllerState extends PlayControllerState {
         try{
             return handleCommandWithoutException(command);
         } catch(CannotSwitchException e){
-            out.println("CannotSwitchException");
+            out.print("CannotSwitchException\n");
         }
         catch(CannotBuildException e){
-            out.println("CannotBuildException");
+            out.print("CannotBuildException\n");
         }
-        return this;
+        return new MainMenuControllerState(); // exit if exception happened
     }
 
     /**
@@ -106,10 +104,10 @@ public class TestControllerState extends PlayControllerState {
         try {
             moveTrains();
         } catch (CollisionException e) {
-            out.println("CollisionException");
+            out.print("CollisionException\n");
             return new MainMenuControllerState();
         } catch (TableLeftException e){
-            out.println("TableLeftException");
+            out.print("TableLeftException\n");
             return new MainMenuControllerState();
         }
         if(isWin()) {
@@ -133,5 +131,9 @@ public class TestControllerState extends PlayControllerState {
         testCommands = tl.testCommands;
         testDescription = tl.testDescription;
         expectedOutput = tl.expectedOutput;
+    }
+
+    @Override
+    public void changedTo() {
     }
 }

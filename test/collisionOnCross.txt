@@ -8,26 +8,25 @@ Kereszteződésen ütközés tesztelése.
 1  ║   1
 2 ╔┘   2
 3 ║║   3
-4 ╚╬=╗ 4
+4 ╚╬═╗ 4
 5  ║ ║ 5
-6  ╚=╝ 6
+6  ╚═╝ 6
 7      7
 #123456#
 
 
 1 KKK
-7 PP
+8 PP
 
-switch 3 2
-enter 11
+enter 10
 
 #123456#
-1 ║    1
+1  ║   1
 2 ╔P   2
 3 ║P   3
 4 ╚V<K 4
 5  ║ K 5
-6  ╚=K 6
+6  ╚═K 6
 7      7
 #123456#
 CollisionException

@@ -6,9 +6,6 @@ package bem7trainsim;
  * showing the credits or quitting the game.
  */
 public class MainMenuControllerState extends ControllerState {
-    public MainMenuControllerState() {
-        System.out.println("MAIN_MENU");
-    }
     @Override
     public ControllerState handleCommand(String command) {
         String[] s = command.split(" ");
@@ -22,5 +19,9 @@ public class MainMenuControllerState extends ControllerState {
                 return null;
         }
         return this;
+    }
+    @Override
+    public void changedTo() {
+        System.out.println("MAIN_MENU");
     }
 }

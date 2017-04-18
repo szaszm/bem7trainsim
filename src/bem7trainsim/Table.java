@@ -54,13 +54,13 @@ public class Table {
         // searches for the given tunnel entrances
         for(int y = 0; y < height && (!te1found || !te2found); ++y) {
             for (int x = 0; x < width && (!te1found || !te2found); ++x) {
-                if (fields[x][y] == te1) {
+                if (fields[y][x] == te1) {
                     te1found = true;
                     te1x = x;
                     te1y = y;
                 }
 
-                if (fields[x][y] == te2) {
+                if (fields[y][x] == te2) {
                     te2found = true;
                     te2x = x;
                     te2y = y;
@@ -150,7 +150,11 @@ public class Table {
      * @throws CannotSwitchException thrown when the switch cannot switch
      */
     public void switchAt(int x, int y) throws CannotSwitchException{
-        ((Switch)(fields[y][x])).change();
+        try {
+            ((Switch) (fields[y][x])).change();
+        } catch (ClassCastException e) {
+            throw new CannotSwitchException("That is not a switch.");
+        }
     }
 
 
@@ -161,6 +165,10 @@ public class Table {
      * @throws CannotBuildException  thrown when the entrance cannot be built
      */
     public void buildAt(int x, int y) throws CannotBuildException{
-        ((TunnelEntrance)(fields[y][x])).click();
+        try {
+            ((TunnelEntrance)(fields[y][x])).click();
+        } catch (ClassCastException e) {
+            throw new CannotBuildException("That is not a tunnel entrance.");
+        }
     }
 }

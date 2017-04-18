@@ -1,14 +1,8 @@
 package bem7trainsim;
 
-import javafx.util.Pair;
-
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.awt.*;
-import java.util.Objects;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Created by Csuto on 4/9/2017.
@@ -17,10 +11,17 @@ import java.util.Objects;
 public class Controller {
     public void start() {
     	ControllerState state = new MainMenuControllerState();
+    	state.changedTo();
 		BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
         while (state != null) {
             try {
-                state = state.handleCommand(buffer.readLine());
+                ControllerState newState = state.handleCommand(buffer.readLine());
+                if (newState != state) {
+                    state = newState;
+                    if (newState != null) {
+                        state.changedTo();
+                    }
+                }
             } catch (IOException e) {
                 // Shall never happen
                 e.printStackTrace();
