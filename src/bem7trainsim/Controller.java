@@ -238,7 +238,7 @@ public class Controller {
 		    else out.println("CollisionException");
 			state = State.MAIN_MENU;
 		} catch (TableLeftException e){
-			System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: "+Integer.toString(currentTime));
+			if(state == State.PLAY) System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: "+Integer.toString(currentTime));
 			run = false;
 			state = State.MAIN_MENU;
 		}
@@ -265,8 +265,8 @@ public class Controller {
     	String line;
     	if((line = br.readLine()) != null){
     		String[] nums = line.split(" ");
-    		rows = Integer.parseInt(nums[0]);
-    		columns = Integer.parseInt(nums[1]);
+    		columns = Integer.parseInt(nums[0]);
+    		rows = Integer.parseInt(nums[1]);
 			fields = new Field[rows][columns];
     	} else throw new IOException("Nem sikerült a pálya méretének beolvasása.");
     	br.readLine();
@@ -284,8 +284,8 @@ public class Controller {
     	//beolvassuk a kezdő pozíciót
     	if((line = br.readLine()) != null){
     		String[] nums = line.split(" ");
-    		startY = Integer.parseInt(nums[0]);
-    		startX = Integer.parseInt(nums[1]);
+    		startX = Integer.parseInt(nums[0]);
+    		startY = Integer.parseInt(nums[1]);
     	} else throw new IOException("Nem sikerült a kezdő pozíció beolvasása.");
     	br.readLine();
     	
@@ -314,14 +314,14 @@ public class Controller {
 		for(int y = 0; y < rows; y++){
 			for(int x = 0; x < columns; x++){
 				switch(charMap[y][x]){
-				//Oriantation CORRECT
+				//Orientation CORRECT
     				case '╗': fields[y][x] = new SimpleRail(SimpleRail.Orientation.BOTTOM_LEFT); break;
     				case '╝': fields[y][x] = new SimpleRail(SimpleRail.Orientation.TOP_LEFT); break;
     				case '╚': fields[y][x] = new SimpleRail(SimpleRail.Orientation.TOP_RIGHT); break;
     				case '╔': fields[y][x] = new SimpleRail(SimpleRail.Orientation.BOTTOM_RIGHT); break;
     				case '═': fields[y][x] = new SimpleRail(SimpleRail.Orientation.HORIZONTAL); break;
     				case '║': fields[y][x] = new SimpleRail(SimpleRail.Orientation.VERTICAL); break;
-        		//Oriantation WRONG
+        		//Orientation WRONG
     				case '┐': fields[y][x] = new Switch(Switch.Orientation.WestRight); break;
     				case '└': fields[y][x] = new Switch(Switch.Orientation.EastRight); break;
     				case '┘': fields[y][x] = new Switch(Switch.Orientation.WestLeft); break;
@@ -342,8 +342,8 @@ public class Controller {
 		upstations = new ArrayList<>();
 		while((line = br.readLine()).length() > 1) {
 			String[] s = line.split(" ");
-			int y = Integer.parseInt(s[1]) - 1;
-			int x = Integer.parseInt(s[2]) - 1;
+			int x = Integer.parseInt(s[1]) - 1;
+			int y = Integer.parseInt(s[2]) - 1;
 			switch(s[0].charAt(0)){
 			//DownStation
 				case 'I':
