@@ -58,7 +58,9 @@ public class PlayControllerState extends ControllerState {
     @Override
     public ControllerState handleCommand(String command) {
         try{
-            return handleCommandWithoutException(command);
+            ControllerState newState = handleCommandWithoutException(command);
+            System.out.println(table.getDrawData()); // Draws the table if there was no exception
+            return newState;
         } catch(CannotSwitchException | CannotBuildException e){
             System.out.println(e.getMessage());
         }
@@ -74,7 +76,6 @@ public class PlayControllerState extends ControllerState {
                 int x = Integer.parseInt(s[1]);
                 int y = Integer.parseInt(s[2]);
                 table.switchAt(x - 1, y - 1);
-                System.out.println(table.getDrawData());
             }
             break;
             // build x y
@@ -83,16 +84,17 @@ public class PlayControllerState extends ControllerState {
                 int x = Integer.parseInt(s[1]);
                 int y = Integer.parseInt(s[2]);
                 table.buildAt(x - 1, y - 1);
-                System.out.println(table.getDrawData());
             }
             break;
             //enter 10
             case "enter":
-                int moveTimes = Integer.parseInt(s[1]);
-                for (int i = 0; i < moveTimes; i++) {
-                    ControllerState newState = tick();
-                    if (newState != this) {
-                        return newState;
+                if (s.length > 1) {
+                    int moveTimes = Integer.parseInt(s[1]);
+                    for (int i = 0; i < moveTimes; i++) {
+                        ControllerState newState = tick();
+                        if (newState != this) {
+                            return newState;
+                        }
                     }
                 }
                 //default = enter 1
@@ -161,5 +163,8 @@ public class PlayControllerState extends ControllerState {
         if(!trainData.isEmpty())
             win = false;
         return  win;
+    }
+    @Override
+    public void changedTo() {
     }
 }

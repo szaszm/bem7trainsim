@@ -6,9 +6,6 @@ import java.io.IOException;
  * Created by Csuto on 4/18/2017.
  */
 public class LevelSelectControllerState extends ControllerState {
-    public LevelSelectControllerState() {
-        System.out.println("LEVEL_MENU");
-    }
     @Override
     public ControllerState handleCommand(String command) {
         String[] s = command.split(" ");
@@ -40,5 +37,9 @@ public class LevelSelectControllerState extends ControllerState {
             return new MainMenuControllerState();
         }
         return this;
+    }
+    @Override
+    public void changedTo() {
+        System.out.println("LEVEL_MENU");
     }
 }

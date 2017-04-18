@@ -77,7 +77,7 @@ public class TestControllerState extends PlayControllerState {
         catch(CannotBuildException e){
             out.println("CannotBuildException");
         }
-        return this;
+        return new MainMenuControllerState(); // exit if exception happened
     }
 
     @Override
@@ -109,5 +109,9 @@ public class TestControllerState extends PlayControllerState {
         testCommands = tl.testCommands;
         testDescription = tl.testDescription;
         expectedOutput = tl.expectedOutput;
+    }
+
+    @Override
+    public void changedTo() {
     }
 }

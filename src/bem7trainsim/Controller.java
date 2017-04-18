@@ -10,10 +10,17 @@ import java.io.InputStreamReader;
 public class Controller {
     public void start() {
     	ControllerState state = new MainMenuControllerState();
+    	state.changedTo();
 		BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
         while (state != null) {
             try {
-                state = state.handleCommand(buffer.readLine());
+                ControllerState newState = state.handleCommand(buffer.readLine());
+                if (newState != state) {
+                    state = newState;
+                    if (newState != null) {
+                        state.changedTo();
+                    }
+                }
             } catch (IOException e) {
                 // Shall never happen
                 e.printStackTrace();
