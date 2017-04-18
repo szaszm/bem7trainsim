@@ -46,11 +46,15 @@ public class PlayControllerState extends ControllerState {
      */
     protected int currentTime = 0;
 
-    public PlayControllerState(String map) throws CollisionException, TableLeftException, IOException {
+    public PlayControllerState(String map) throws IOException {
         loadMap(map);
+    }
+
+    public void start() throws CollisionException, TableLeftException {
         moveTrains();
         System.out.println(table.getDrawData());
     }
+
     @Override
     public ControllerState handleCommand(String command) {
         try{
