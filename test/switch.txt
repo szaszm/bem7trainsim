@@ -16,9 +16,9 @@ Váltó váltás tesztelése.
 5 Z
 
 switch 4 2
-enter 5
-switch 4 2
 enter 4
+switch 4 2
+enter 3
 
 #123456789#
 1         1
