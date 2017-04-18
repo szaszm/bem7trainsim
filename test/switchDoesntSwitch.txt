@@ -7,20 +7,18 @@ Váltón állás tesztelése.
 #1234567#
 1       1
 2═┐═══╗ 2
-3 ╚=══╝ 3
+3 ╚═══╝ 3
 #1234567#
 
 
 1 PP
 
-switch 2 2
-enter 3
-switch 2 2
 enter 1
+switch 2 2
 
 #1234567#
 1       1
-2═─pp>╗ 2
-3 ╚=══╝ 3
+2PP>══╗ 2
+3 ╚═══╝ 3
 #1234567#
 CannotSwitchException
