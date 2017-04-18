@@ -2,68 +2,79 @@ package bem7trainsim;
 
 import javafx.util.Pair;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * Created by Csuto on 4/9/2017.
  */
 public class Controller {
 	/**
-	 * A játékmező
+	 * The game table
 	 */
 	private Table table;
 
 	/**
-	 * A már elindult vonatok listája
+	 * The list of the trains which have already started
 	 */
 	private List<Train> trains;
 
 	/**
-	 * A felszálló állomások listája
+	 * The list of UpStations
 	 */
 	private List<UpStation> upstations;
 
 	/**
-	 * A vonatok induló mezője. A vonatok indításához kell ismerni.
+	 * The starting rail of the trains. Needed for train construction.
 	 */
 	private Rail startRail;
 
 	/**
-	 * A még el nem indult vonatok indulási idejei és vagonjai.
+	 * The start time and wagons of the trains which have not yet started
 	 */
 	private List<Pair<Integer, List<Wagon>>> trainData;
 
 	/**
-	 * A játék kilépését lehetővé tevő változó.
+	 * Makes exiting game possible
 	 */
 	private boolean run;
 
 	/**
-	 * A jelenlegi vezérlőállapotot leíró típus
+	 * An enumeration of the possible states of the controller
 	 */
 	private enum State{ MAIN_MENU, LEVEL_MENU, PLAY, TEST }
 
 	/**
-	 * Az aktuális vezérlőállapot
+	 * The state of the controller
 	 */
 	private State state = State.MAIN_MENU;
 
 	/**
-	 * Az aktuális időpillanat
+	 * The current timestamp
 	 */
 	private int currentTime = 0;
 
 	/**
-	 * A teszt végén kiírandó szöveg
+	 * The description of the current test case
 	 */
-	private String testString;
+	private String testDescription;
+
+	/**
+	 * The commands of test cases when running a test
+	 */
+	private List<String> testCommands;
+
+	/**
+	 * The expected end result of the test case
+	 */
+	private String expectedOutput;
+
+	private PrintStream out = System.out;
 
     private void moveTrains() throws CollisionException {
 		// Firstly move existing trains
@@ -91,10 +102,10 @@ public class Controller {
         	switch (s[0]) {
             case "play":
                 state = State.LEVEL_MENU;
-                System.out.println("LEVEL_MENU");
+                out.println("LEVEL_MENU");
                 break;
             case "credits":
-                System.out.println("Csutorás Robin\nGnandt Balázs\nSzász Márton\nTamás Csongor\nZabó Kristóf");
+                out.println("Csutorás Robin\nGnandt Balázs\nSzász Márton\nTamás Csongor\nZabó Kristóf");
                 break;
             case "exit":
                 run = false;
@@ -104,14 +115,14 @@ public class Controller {
         case LEVEL_MENU:
         	if(s[0].startsWith("map_")){
         		try{
-        			state = State.PLAY;	
+        			state = State.PLAY;
 	        		loadMap(s[0].substring(4));
                     moveTrains();
-	        		System.out.println(table.getDrawData());
+	        		out.println(table.getDrawData());
         		} catch(IOException e){
-        			System.out.println(e.getMessage());
+        			out.println(e.getMessage());
         		} catch (CollisionException e) {
-					System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
+					out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
 					run = false;
 					state = State.MAIN_MENU;
 				}
@@ -120,18 +131,51 @@ public class Controller {
         		try{
         			state = State.TEST;
 	        		loadMap(s[0].substring(5), true);
+	        		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	        		out = new PrintStream(baos);
+
+					try {
+						moveTrains();
+						for(String cmd: testCommands) {
+							handleCommand(cmd);
+						}
+					} catch (CollisionException e) {
+					    out.println("CollisionException");
+					}
+
+					String content = table.getDrawData();
+					content += new String(baos.toByteArray(), StandardCharsets.UTF_8);
+	        		out = System.out;
+					boolean success = Objects.equals(content, expectedOutput);
+					if(success) {
+	        		    out.print("[OK]   ");
+					} else {
+	        			out.print("[FAIL] ");
+					}
+					out.println(testDescription);
+
+					if(!success) {
+						out.println("expected:");
+						out.println(expectedOutput);
+						out.println("got:");
+						out.println(content);
+					}
+
+					state = State.LEVEL_MENU;
+
         		} catch(IOException e){
-        			System.out.println(e.getMessage());
+        			out.println(e.getMessage());
         		}
         	} else if (s[0].equals("back")){
         		state = State.MAIN_MENU;
-        		System.out.println("MAIN_MENU");
+        		out.println("MAIN_MENU");
         	}
         	break;
-        	//TODO play és test bemenetek
-        case PLAY:
+
+			case PLAY:
+			case TEST:
         	switch (s[0]) {
-        		//switch y x
+        		//switch x y
 				case "switch":
 				{
 				    int x = Integer.parseInt(s[1]);
@@ -139,12 +183,13 @@ public class Controller {
 					try{
 						table.switchAt(x - 1, y - 1);
 					} catch(CannotSwitchException e){
-						System.out.println(e.getMessage());
+					    if(state == State.PLAY) out.println(e.getMessage());
+					    else out.println("CannotSwitchException");
 					}
-					System.out.println(table.getDrawData());
+					if(state == State.PLAY) out.println(table.getDrawData());
 				}
                 break;
-				// build y x
+				// build x y
 				case "build":
 				{
 					int x = Integer.parseInt(s[1]);
@@ -152,10 +197,11 @@ public class Controller {
 					try{
 						table.buildAt(x - 1, y - 1);
 					} catch(CannotBuildException e){
-						System.out.println(e.getMessage());
+					    if(state == State.PLAY) out.println(e.getMessage());
+					    else out.println("CannotBuildException");
 					}
 
-					System.out.println(table.getDrawData());
+					if(state == State.PLAY) out.println(table.getDrawData());
 				}
 				break;
 				//enter 10
@@ -174,7 +220,6 @@ public class Controller {
 					break;
 			}
         	break;
-        case TEST: break;
         default: break;
         }
     }
@@ -184,14 +229,13 @@ public class Controller {
 		try {
 			moveTrains();
 		} catch (CollisionException e) {
-			System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
-			run = false;
+		    if(state == State.PLAY) out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
+		    else out.println("CollisionException");
 			state = State.MAIN_MENU;
 		}
-		System.out.println(table.getDrawData());
+		if(state == State.PLAY) out.println(table.getDrawData());
 		if(isWin()) {
-			System.out.println("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
-			run = false;
+			if(state == State.PLAY) out.println("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
 			state = State.MAIN_MENU;
 		}
 	}
@@ -221,7 +265,7 @@ public class Controller {
     	//ha test-et olvasunk be, akkor be kell olvasni a kiírandó szöveget
     	if(state == State.TEST){
     		if((line = br.readLine()) != null){
-    			testString = line;
+    			testDescription = line;
     		} else throw new IOException("Nem sikerült a teszt szövegnek beolvasása.");
     		br.readLine();
     	}
@@ -332,7 +376,7 @@ public class Controller {
 			//TunnelEntrance
 				case 't':
 					//Tunnel paraméter null, mivel még nincs meg az alagutunk, azt majd csak a Table hozza létre
-					TunnelEntrance tunnelEntrance = new TunnelEntrance(null, ((SimpleRail) fields[y][x]).orientation);
+					TunnelEntrance tunnelEntrance = new TunnelEntrance(((SimpleRail) fields[y][x]).orientation);
 					tunnelEntrances.add(tunnelEntrance);
 					fields[y][x] = tunnelEntrance;
 					charMap[y][x] = 't';
@@ -371,6 +415,18 @@ public class Controller {
 			}
 
 			trainData.add(new Pair<>(start, wagons));
+		}
+
+		if(test) {
+		    testCommands = new ArrayList<>();
+		    while((line = br.readLine()) != null && line.length() > 0) {
+		    	testCommands.add(line);
+			}
+
+			expectedOutput = "";
+			while((line = br.readLine()) != null) {
+			    expectedOutput += line + "\n";
+			}
 		}
 
 		
@@ -416,16 +472,16 @@ public class Controller {
 		    					if(y+1 == startY && x+1 == startX){
 		    						((SimpleRail) fields[y][x]).addLink((Rail)fields[y][x+1]);
 		    					} else {
-		    						((SimpleRail) fields[y][x]).addLink((Rail)fields[y][x-1]);
-		    						((SimpleRail) fields[y][x]).addLink((Rail)fields[y][x+1]);
+		    						if(x > 0) ((SimpleRail) fields[y][x]).addLink((Rail)fields[y][x-1]);
+		    						if(x < fields[y].length - 1) ((SimpleRail) fields[y][x]).addLink((Rail)fields[y][x+1]);
 		    					}
 		    					break;
 	    					case VERTICAL:
 		    					if(y+1 == startY && x+1 == startX){
 		    						((SimpleRail) fields[y][x]).addLink((Rail)fields[y+1][x]);
 		    					} else {
-		    						((SimpleRail) fields[y][x]).addLink((Rail)fields[y-1][x]);
-		    						((SimpleRail) fields[y][x]).addLink((Rail)fields[y+1][x]);
+		    						if(y > 0) ((SimpleRail) fields[y][x]).addLink((Rail)fields[y-1][x]);
+		    						if(y < fields.length - 1) ((SimpleRail) fields[y][x]).addLink((Rail)fields[y+1][x]);
 		    					}
 		    					break;
     					}
@@ -574,7 +630,7 @@ public class Controller {
     public void start() {
         // TODO: Elinditja az esemenyek kezeleset. Ha teszt van betoltve, akkor futtatja a tesztet, majd a vegen kiirja a vegso allapotot.
         run = true;
-        System.out.println("MAIN_MENU");
+        out.println("MAIN_MENU");
         while (run) {
             BufferedReader buffer=new BufferedReader(new InputStreamReader(System.in));
             try {

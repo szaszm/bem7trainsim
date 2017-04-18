@@ -23,25 +23,16 @@ public class TunnelEntrance extends Rail {
      */
     private Tunnel tunnel;
 
-    public TunnelEntrance(Tunnel tunnel, SimpleRail.Orientation orientation) {
+    public TunnelEntrance(SimpleRail.Orientation orientation) {
         super();
         state = new TunnelEntranceStateStraight();
         this.orientation = orientation;
-        this.tunnel = tunnel;
     }
 
     public void setTunnel(Tunnel tunnel){
         this.tunnel = tunnel;
     }
     
-    public void setOrientation(Orientation orientation){
-    	this.orientation = orientation;
-    }
-    
-    public SimpleRail.Orientation getOrientation(){
-    	return this.orientation;
-    }
-
     //Úgy írtam át, hogy minden irányból az alagút felé megy
     @Override
     public Rail next(Rail from) {
@@ -97,7 +88,7 @@ public class TunnelEntrance extends Rail {
     public void arrive(Train train) throws CollisionException {
         super.arrive(train);
         //Ha a vonat kintről jött és az alagúrba terel a vágány, akkor belépünk az alagútba
-        if(tunnel != null && !tunnel.fromInside(train, this)) {
+        if(tunnel != null && !tunnel.hasTrain(train, this)) {
             if(!state.nextStraight())
                 tunnel.enter(this, train);
         } else {
@@ -108,7 +99,7 @@ public class TunnelEntrance extends Rail {
 
     public void leave() {
         //ha bentről jött a vonat, akkor elhagyja az alagutat
-        if(tunnel != null && tunnel.fromInside(train, this)) {
+        if(tunnel != null && tunnel.hasTrain(train, this)) {
             tunnel.leave(this, train);
         }
         super.leave();

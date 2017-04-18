@@ -48,8 +48,7 @@ public class Tunnel {
         train.onSurface = true;
     }
 
-    //hasTrain(Train)-t átneveztem erre, hogy jobban követhető legyen
-    public boolean fromInside(Train train, TunnelEntrance te) {
+    public boolean hasTrain(Train train, TunnelEntrance te) {
         for (Map.Entry<Train, TunnelEntrance> entry : trainTunnelEntranceMap) {
             if (entry.getKey() == train && entry.getValue() != te) {
                 return true;
