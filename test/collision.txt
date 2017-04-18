@@ -15,6 +15,7 @@ Sima ütközés tesztelése.
 1 Z
 5 S
 
+switch 3 2
 enter 4
 switch 3 2
 enter 5
