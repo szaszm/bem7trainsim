@@ -36,19 +36,28 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) { }
+    public void mousePressed(MouseEvent e) {
+    }
 
     @Override
-    public void mouseReleased(MouseEvent e) { }
+    public void mouseReleased(MouseEvent e) {
+    }
 
     @Override
-    public void mouseEntered(MouseEvent e) { }
+    public void mouseEntered(MouseEvent e) {
+    }
 
     @Override
-    public void mouseExited(MouseEvent e) { }
+    public void mouseExited(MouseEvent e) {
+    }
 
     @Override
     public void close() throws Exception {
         setVisible(false);
+    }
+
+    public void Invalidate() {
+        repaint(0, 0, getWidth(), getHeight());
+        revalidate();
     }
 }
