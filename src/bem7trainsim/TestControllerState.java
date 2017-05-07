@@ -36,8 +36,8 @@ public class TestControllerState extends PlayControllerState implements ActionLi
      * @param map The name of the map in string format. Available names in the documentation.
      * @throws IOException thrown when the input is not correct
      */
-    public TestControllerState(String map) throws IOException  {
-        super(null, null, map); // loads the map
+    public TestControllerState(Controller c, String map) throws IOException  {
+        super(c, map); // loads the map
     }
 
     /**
@@ -58,7 +58,7 @@ public class TestControllerState extends PlayControllerState implements ActionLi
         } catch (TableLeftException e) {
             out.print("TableLeftException\n");
         }
-        String content = table.getDrawData();
+        FieldDrawData[][] content = table.getDrawData();
         content += new String(baos.toByteArray(), StandardCharsets.UTF_8);
         out = System.out;
         boolean success = Objects.equals(content, expectedOutput);
