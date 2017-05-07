@@ -49,12 +49,34 @@ public class FieldDrawData {
     static private BufferedImage downStationHorizontalGreen;
     static private BufferedImage downStationHorizontalRed;
     static private BufferedImage downStationHorizontalYellow;
-    static private BufferedImage straightHorizontal;
-    static private BufferedImage straightHorizontal;
-    static private BufferedImage straightHorizontal;
-    static private BufferedImage straightHorizontal;
-    static private BufferedImage straightHorizontal;
-    static private BufferedImage straightHorizontal;
+    static private BufferedImage downStationVerticallBlue;
+    static private BufferedImage downStationVerticalGreen;
+    static private BufferedImage downStationVerticalRed;
+    static private BufferedImage downStationVerticalYellow;
+    static private BufferedImage upStationHorizontalBlue;
+    static private BufferedImage upStationHorizontalGreen;
+    static private BufferedImage upStationHorizontalRed;
+    static private BufferedImage upStationHorizontalYellow;
+    static private BufferedImage upStationVerticallBlue;
+    static private BufferedImage upStationVerticalGreen;
+    static private BufferedImage upStationVerticalRed;
+    static private BufferedImage upStationVerticalYellow;
+    static private BufferedImage switchNorthRightCurve;
+    static private BufferedImage switchNorthRightStraight;
+    static private BufferedImage switchNorthLeftCurve;
+    static private BufferedImage switchNorthLeftStraight;
+    static private BufferedImage switchSouthRightCurve;
+    static private BufferedImage switchSouthRightStraight;
+    static private BufferedImage switchSouthLeftCurve;
+    static private BufferedImage switchSouthLeftStraight;
+    static private BufferedImage switchWestRightCurve;
+    static private BufferedImage switchWestRightStraight;
+    static private BufferedImage switchWestLeftCurve;
+    static private BufferedImage switchWestLeftStraight;
+    static private BufferedImage switchEastRightCurve;
+    static private BufferedImage switchEastRightStraight;
+    static private BufferedImage switchEastLeftCurve;
+    static private BufferedImage switchEastLeftStraight;
 
 
 
