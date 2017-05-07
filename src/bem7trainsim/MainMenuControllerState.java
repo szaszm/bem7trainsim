@@ -1,6 +1,7 @@
 package bem7trainsim;
 
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -47,6 +48,12 @@ public class MainMenuControllerState extends ControllerState {
     }
 
     public void click(MenuEntry m){
-
+        if(m.GetLabel().equals("PLAY")) {
+            controller.setState(new LevelSelectControllerState(controller));
+        } else if(m.GetLabel().equals("CREDITS")){
+            controller.setState(new CreditsControllerState(controller));
+        } else if(m.GetLabel().equals("EXIT")){
+            //TODO kilépés
+        }
     }
 }

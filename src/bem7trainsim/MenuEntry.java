@@ -18,4 +18,8 @@ public class MenuEntry {
     public void click(){
         mcs.click(this);
     }
+
+    public String GetLabel(){
+        return label;
+    }
 }
