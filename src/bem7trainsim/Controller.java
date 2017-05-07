@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
 
 /**
  * Created by Csuto on 4/9/2017.
@@ -50,7 +51,7 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
 
     @Override
     public void close() throws Exception {
-        setVisible(false);
+        dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 
     public void Invalidate() {
