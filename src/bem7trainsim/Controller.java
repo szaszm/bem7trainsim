@@ -64,7 +64,7 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
     }
     class DrawPane extends JPanel{
         public void paintComponent(Graphics g){
-
+            state.view.draw(g);
         }
     }
 }

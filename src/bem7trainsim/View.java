@@ -11,4 +11,5 @@ public abstract class View {
     abstract void mouseClicked(MouseEvent e);
 
     abstract void draw(Graphics g);
+
 }
