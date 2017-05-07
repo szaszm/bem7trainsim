@@ -32,13 +32,13 @@ public class MenuView extends View {
     @Override
     void draw(Graphics g) {
         g.setColor(Color.RED);
-        g.fillRect(100, 50, 700,150 );
-        g.fillRect(100, 300, 700,150 );
-        g.fillRect(100, 550, 700,150 );
+        g.fillRect(100, 50, g.getClipBounds().width - 200,150 );
+        g.fillRect(100, 300, g.getClipBounds().width - 200,150 );
+        g.fillRect(100, 550, g.getClipBounds().width - 200,150 );
         g.setColor(Color.BLACK);
         g.setFont(new Font("Times New Roman", Font.BOLD, 45));
-        g.drawString("Play", 415,  135);
-        g.drawString("Credits", 390,  385);
-        g.drawString("Quit", 415,  635);
+        g.drawString("Play", g.getClipBounds().width / 2 - 45,  135);
+        g.drawString("Credits", g.getClipBounds().width / 2 - 70,  385);
+        g.drawString("Quit", g.getClipBounds().width / 2 - 45,  635);
     }
 }
