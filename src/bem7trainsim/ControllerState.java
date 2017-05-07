@@ -32,6 +32,6 @@ abstract public class ControllerState implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        controller.Invalidate();
+        controller.invalidate();
     }
 }
