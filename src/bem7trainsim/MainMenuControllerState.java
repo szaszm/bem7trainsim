@@ -1,7 +1,5 @@
 package bem7trainsim;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.ArrayList;
@@ -12,21 +10,23 @@ import java.util.ArrayList;
  * showing the credits or quitting the game.
  */
 public class MainMenuControllerState extends ControllerState {
-    protected MainMenuControllerState(Graphics g, Controller c) {
-        super(g, c);
+    protected MainMenuControllerState(Controller c) {
+        super(c);
         List<? extends MenuEntry> entries = new ArrayList<>();
         // TODO: fill entries
-        view = new MenuView(g, entries);
+        view = new MenuView(entries);
     }
 
-    private MenuView getView() { return (MenuView) view; }
+    private MenuView getView() {
+        return (MenuView) view;
+    }
 
     @Override
     public ControllerState handleCommand(String command) {
         String[] s = command.split(" ");
         switch (s[0]) {
             case "play":
-                LevelSelectControllerState state = new LevelSelectControllerState(graphics, controller);
+                LevelSelectControllerState state = new LevelSelectControllerState(controller);
                 controller.setState(state);
                 return state;
             case "credits":
@@ -37,6 +37,7 @@ public class MainMenuControllerState extends ControllerState {
         }
         return this;
     }
+
     @Override
     public void changedTo() {
         System.out.println("MAIN_MENU");

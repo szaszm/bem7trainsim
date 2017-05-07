@@ -9,8 +9,7 @@ import java.awt.event.MouseEvent;
 public class CreditsView extends View {
 
 
-    public CreditsView(Graphics g) {
-        super(g);
+    public CreditsView() {
     }
 
     @Override
@@ -19,7 +18,7 @@ public class CreditsView extends View {
     }
 
     @Override
-    void draw() {
+    void draw(Graphics g) {
 
     }
 }

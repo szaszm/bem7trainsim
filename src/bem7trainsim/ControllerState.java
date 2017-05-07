@@ -16,9 +16,8 @@ abstract public class ControllerState implements ActionListener {
     protected View view;
     protected Graphics graphics;
 
-    protected ControllerState(Graphics g, Controller c) {
+    protected ControllerState(Controller c) {
         controller = c;
-        graphics = g;
     }
 
     /**

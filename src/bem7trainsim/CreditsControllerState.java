@@ -1,14 +1,13 @@
 package bem7trainsim;
 
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 public class CreditsControllerState extends ControllerState implements ActionListener {
 
-    protected CreditsControllerState(Graphics g, Controller c) {
-        super(g, c);
-        view = new CreditsView(g);
+    protected CreditsControllerState(Controller c) {
+        super(c);
+        view = new CreditsView();
     }
 
     private CreditsView getView() { return (CreditsView) view; }

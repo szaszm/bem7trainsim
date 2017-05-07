@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class MenuView extends View {
     List<? extends MenuEntry> entries;
-    public MenuView(Graphics g, List<? extends MenuEntry> entries) {
-        super(g);
+    public MenuView(List<? extends MenuEntry> entries) {
+        super();
         this.entries = entries;
     }
 
@@ -20,7 +20,7 @@ public class MenuView extends View {
     }
 
     @Override
-    void draw() {
+    void draw(Graphics g) {
 
     }
 }
