@@ -1,8 +1,11 @@
 package bem7trainsim;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import static java.awt.image.BufferedImage.TYPE_CUSTOM;
@@ -27,16 +30,63 @@ public class FieldDrawData {
     }
 
     public void draw(Graphics g, int x, int y, int width, int height) {
-        float[] scales = {1f, 1f, 1f, 0.5f};
-        float[] offsets = new float[4];
-        RescaleOp rop = new RescaleOp(scales, offsets, null);
         for (String layer :
                 layers) {
             g.drawImage(getImage(layer), x * width, y * height, width, height, null);
         }
     }
 
-    static private final BufferedImage valto = new BufferedImage(50,50, TYPE_CUSTOM);
+    static private BufferedImage straightHorizontal;
+    static private BufferedImage straightVertical;
+    static private BufferedImage curveNE;
+    static private BufferedImage curveNW;
+    static private BufferedImage curveSE;
+    static private BufferedImage curveSW;
+    static private BufferedImage cross;
+    static private BufferedImage grass1;
+    static private BufferedImage grass2;
+    static private BufferedImage downStationHorizontalBlue;
+    static private BufferedImage downStationHorizontalGreen;
+    static private BufferedImage downStationHorizontalRed;
+    static private BufferedImage downStationHorizontalYellow;
+    static private BufferedImage downStationVerticallBlue;
+    static private BufferedImage downStationVerticalGreen;
+    static private BufferedImage downStationVerticalRed;
+    static private BufferedImage downStationVerticalYellow;
+    static private BufferedImage upStationHorizontalBlue;
+    static private BufferedImage upStationHorizontalGreen;
+    static private BufferedImage upStationHorizontalRed;
+    static private BufferedImage upStationHorizontalYellow;
+    static private BufferedImage upStationVerticallBlue;
+    static private BufferedImage upStationVerticalGreen;
+    static private BufferedImage upStationVerticalRed;
+    static private BufferedImage upStationVerticalYellow;
+    static private BufferedImage switchNorthRightCurve;
+    static private BufferedImage switchNorthRightStraight;
+    static private BufferedImage switchNorthLeftCurve;
+    static private BufferedImage switchNorthLeftStraight;
+    static private BufferedImage switchSouthRightCurve;
+    static private BufferedImage switchSouthRightStraight;
+    static private BufferedImage switchSouthLeftCurve;
+    static private BufferedImage switchSouthLeftStraight;
+    static private BufferedImage switchWestRightCurve;
+    static private BufferedImage switchWestRightStraight;
+    static private BufferedImage switchWestLeftCurve;
+    static private BufferedImage switchWestLeftStraight;
+    static private BufferedImage switchEastRightCurve;
+    static private BufferedImage switchEastRightStraight;
+    static private BufferedImage switchEastLeftCurve;
+    static private BufferedImage switchEastLeftStraight;
+
+
+
+    static {
+        try {
+            valto = ImageIO.read(new File("random.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     static private Image getImage(String layer) {
         if (layer == "Á")
