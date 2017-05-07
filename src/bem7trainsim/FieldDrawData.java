@@ -89,7 +89,8 @@ public class FieldDrawData {
     }
 
     static private Image getImage(String layer) {
-        if (layer == "Á")
+        String[] parts = layer.split(" ");
+        if (parts[0].equals())
             return valto;
         return valto;
     }
