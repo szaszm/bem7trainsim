@@ -1,8 +1,11 @@
 package bem7trainsim;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import static java.awt.image.BufferedImage.TYPE_CUSTOM;
@@ -33,7 +36,15 @@ public class FieldDrawData {
         }
     }
 
-    static private final BufferedImage valto = new BufferedImage(50,50, TYPE_CUSTOM);
+    static private BufferedImage valto;
+
+    static {
+        try {
+            valto = ImageIO.read(new File("random.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     static private Image getImage(String layer) {
         if (layer == "Á")
