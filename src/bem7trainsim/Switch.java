@@ -1,5 +1,8 @@
 package bem7trainsim;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by marci on 2017.03.18.
  * Represents the switch
@@ -85,34 +88,36 @@ public class Switch extends Rail {
      * @return the string representing the switch
      */
     @Override
-    public String getDrawData() {
-        if (coach != null)
-            return coach.getDrawData();
+    public FieldDrawData getDrawData() {
+        List<String> layers = new ArrayList<>();
         if (orientation == Orientation.NorthLeft) {
-            return (state.nextStraight())  ? "│" : "└";
+            layers.add((state.nextStraight())  ? "│" : "└");
         }
         if (orientation == Orientation.NorthRight) {
-            return (state.nextStraight())  ? "│" : "┘";
+            layers.add((state.nextStraight())  ? "│" : "┘");
         }
         if (orientation == Orientation.EastLeft) {
-            return (state.nextStraight())  ? "─" : "┌";
+            layers.add((state.nextStraight())  ? "─" : "┌");
         }
         if (orientation == Orientation.EastRight) {
-            return (state.nextStraight())  ? "─" : "└";
+            layers.add((state.nextStraight())  ? "─" : "└");
         }
         if (orientation == Orientation.SouthRight) {
-            return (state.nextStraight())  ? "│" : "┌";
+            layers.add((state.nextStraight())  ? "│" : "┌");
         }
         if (orientation == Orientation.SouthLeft) {
-            return (state.nextStraight())  ? "│" : "┐";
+            layers.add((state.nextStraight())  ? "│" : "┐");
         }
         if (orientation == Orientation.WestLeft) {
-            return (state.nextStraight())  ? "─" : "┘";
+            layers.add((state.nextStraight())  ? "─" : "┘");
         }
         if (orientation == Orientation.WestRight) {
-            return (state.nextStraight())  ? "─" : "┐";
+            layers.add((state.nextStraight())  ? "─" : "┐");
         }
-        // this will never happen:
-        return "?";
+
+        if (coach != null)
+            layers.add(coach.getDrawData());
+
+        return new FieldDrawData(layers);
     }
 }

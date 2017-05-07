@@ -1,4 +1,8 @@
 package bem7trainsim;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by marci on 2017.03.18..
  */
@@ -50,18 +54,36 @@ public class SimpleRail extends Rail {
      * @return the string representing the field
      */
     @Override
-    public String getDrawData() {
-        if (coach != null)
-            return coach.getDrawData();
+    public FieldDrawData getDrawData() {
+        List<String> layers = new ArrayList<>();
 
         switch(orientation){
-            case HORIZONTAL: return "═";
-            case VERTICAL: return "║";
-            case TOP_LEFT: return "╝";
-            case TOP_RIGHT: return "╚";
-            case BOTTOM_LEFT: return "╗";
-            case BOTTOM_RIGHT: return "╔";
-            default: return " ";
+            case HORIZONTAL:
+                layers.add("═");
+                break;
+            case VERTICAL:
+                layers.add("║");
+                break;
+            case TOP_LEFT:
+                layers.add("╝");
+                break;
+            case TOP_RIGHT:
+                layers.add("╚");
+                break;
+            case BOTTOM_LEFT:
+                layers.add("╗");
+                break;
+            case BOTTOM_RIGHT:
+                layers.add("╔");
+                break;
+            default:
+                layers.add(" ");
+                break;
         }
+
+        if (coach != null)
+            layers.add(coach.getDrawData());
+
+        return new FieldDrawData(layers);
     }
 }

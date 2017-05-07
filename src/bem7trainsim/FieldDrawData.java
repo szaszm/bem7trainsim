@@ -13,14 +13,13 @@ public class FieldDrawData {
         layers=l;
     }
 
-    public String getLayer(){
-       //TODO
+    public String getLayer(int i)
+    {
+        return layers.get(i);
     }
 
     public int getNumberOfLayers(){
         return layers.size();
     }
-
-
 
 }

@@ -1,6 +1,7 @@
 package bem7trainsim;
 
 import java.awt.*;
+import java.util.*;
 
 /**
  * Created by Csuto on 4/9/2017.
@@ -47,29 +48,33 @@ public class UpStation extends SimpleRail {
      * @return the string representing the field
      */
     @Override
-    public String getDrawData() {
-        if (coach != null)
-            return coach.getDrawData();
+    public FieldDrawData getDrawData() {
+        ArrayList<String> layers = new ArrayList<>();
 
         if (gone && orientation == SimpleRail.Orientation.HORIZONTAL){
-            return "═";
+            layers.add("═");
         }
         else if (gone && orientation == SimpleRail.Orientation.VERTICAL){
-            return "║";
+            layers.add("║");
         }
         else if (color.equals(Color.RED)) {
-            return "i";
+            layers.add("i");
         }
         else if (color.equals(Color.YELLOW)) {
-            return "á";
+            layers.add("á");
         }
         else if (color.equals(Color.GREEN)) {
-            return "ö";
+            layers.add("ö");
         }
         else if (color.equals(Color.BLUE)) {
-            return "é";
+            layers.add("é");
         }
-        else return " ";
+        else layers.add(" ");
+
+        if (coach != null)
+            layers.add(coach.getDrawData());
+
+        return new FieldDrawData(layers);
     }
 
 

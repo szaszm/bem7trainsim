@@ -95,6 +95,8 @@ public class Table {
                 result[y][x] = fields[y][x].getDrawData();
             }
         }
+
+        return result;
     }
 
     /**
