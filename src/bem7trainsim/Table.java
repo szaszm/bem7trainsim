@@ -15,6 +15,16 @@ public class Table {
     private Field[][] fields;
 
     /**
+     * List of switches on the table
+     */
+    private List<Point> switches;
+
+    /**
+     * List of entrances on the table
+     */
+    private List<Point> entrances;
+
+    /**
      * The tunnel on the table
      */
     private Tunnel tunnel;
@@ -171,4 +181,25 @@ public class Table {
             throw new CannotBuildException("That is not a tunnel entrance.");
         }
     }
+
+
+    /**
+     * Changes the state of the element to user interactions if possible
+     * @param x
+     * @param y
+     */
+    public void changeAt(int x,int y){
+      //TODO
+    }
+
+
+    /**
+     * @return the data necessary for the drawing
+     */
+    public FieldDrawData getDrawData(){
+
+        //TODO
+        return FieldDrawData();
+    }
+
 }

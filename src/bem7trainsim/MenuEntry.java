@@ -6,6 +6,11 @@ package bem7trainsim;
 public abstract class MenuEntry {
     protected String label;
 
+    /**
+     * The Controller which connects with the instance of the MenuEntry
+     * */
+    private MainMenuControllerState mcs;
+
     public MenuEntry(String label) {
         this.label = label;
     }

@@ -16,4 +16,12 @@ public class CollisionException extends Exception {
         this.train = train;
         this.rail = rail;
     }
+
+    public Train getTrain() {
+        return train;
+    }
+
+    public Rail getRail() {
+        return rail;
+    }
 }

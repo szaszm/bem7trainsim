@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Csuto on 4/18/2017.
  */
-public class PlayControllerState extends ControllerState {
+public class PlayControllerState extends ControllerState implements ActionListener{
 
     /**
      * The game table
@@ -235,6 +235,16 @@ public class PlayControllerState extends ControllerState {
     @Override
     public void mouseClicked(MouseEvent e) {
         getView().mouseClicked(e);
+    }
+
+    //Felhasználói interakció kezelése az adott mezőre.
+    public void clickAt(int x,int y){
+        //TODO(Ne hagyd magyarul a kommentet!)
+    }
+
+    //Vonatok mozgatása
+    public void moveTrains(){
+        //TODO(Ne hagyd magyarul a kommentet!)
     }
 
 }

@@ -1,5 +1,6 @@
 package bem7trainsim;
 
+import java.awt.event.ActionListener;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -10,7 +11,7 @@ import java.util.Objects;
 /**
  * Created by Csuto on 4/18/2017.
  */
-public class TestControllerState extends PlayControllerState {
+public class TestControllerState extends PlayControllerState implements ActionListener {
     /**
      * The expected end result of the test case
      */
