@@ -1,14 +1,9 @@
 package bem7trainsim;
 
-import oracle.jrockit.jfr.JFR;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  * Created by Csuto on 4/9/2017.
