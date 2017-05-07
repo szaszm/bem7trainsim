@@ -1,5 +1,8 @@
 package bem7trainsim;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by marci on 2017.03.17..
  */
@@ -123,8 +126,10 @@ public class TunnelEntrance extends Rail {
      * Gets the draw data of the field
      * @return the string representing the field
      */
-    public String getDrawData() {
+    public FieldDrawData getDrawData() {
         //if (coach != null) return coach.getDrawData();
-        return state.getDrawData();
+        List<String> layers = new ArrayList<>();
+        layers.add(state.getDrawData());
+        return new FieldDrawData(layers);
     }
 }

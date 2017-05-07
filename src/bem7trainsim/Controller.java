@@ -1,14 +1,10 @@
 package bem7trainsim;
 
-import oracle.jrockit.jfr.JFR;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.awt.event.WindowEvent;
 
 /**
  * Created by Csuto on 4/9/2017.
@@ -24,12 +20,19 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
+        setSize(900, 900);
         setState(new MainMenuControllerState(this));
     }
 
     public void setState(ControllerState state) {
+        if(state == null){
+            try {
+                close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         this.state = state;
-        state.changedTo();
     }
 
     @Override
@@ -54,14 +57,10 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
-        setVisible(false);
+    public void close() {
+        dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 
-    public void Invalidate() {
-        repaint(0, 0, getWidth(), getHeight());
-        revalidate();
-    }
     class DrawPane extends JPanel{
         public void paintComponent(Graphics g){
             state.view.draw(g);

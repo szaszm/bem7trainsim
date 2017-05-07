@@ -45,9 +45,11 @@ public class CrossRail extends Rail {
      * Gets the draw data of the field
      * @return the string representing the field
      */
-    public String getDrawData() {
+    public FieldDrawData getDrawData() {
+        List<String> layers = new ArrayList<>();
+        layers.add("╬");
         if (coach != null)
-            return coach.getDrawData();
-        return "╬";
+            layers.add(coach.getDrawData());
+        return new FieldDrawData(layers);
     }
 }

@@ -3,7 +3,7 @@ package bem7trainsim;
 /**
  * Created by marci on 5/7/17.
  */
-public abstract class MenuEntry {
+public class MenuEntry {
     protected String label;
 
     /**
@@ -15,5 +15,11 @@ public abstract class MenuEntry {
         this.label = label;
     }
 
-    public abstract void click();
+    public void click(){
+        mcs.click(this);
+    }
+
+    public String GetLabel(){
+        return label;
+    }
 }

@@ -1,5 +1,8 @@
 package bem7trainsim;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by marci on 2017.03.18.
  * Represents the decoration on the table
@@ -22,7 +25,9 @@ public class Decoration extends Field {
      * Gets the draw data of the field
      * @return the string representing the field
      */
-    public String getDrawData() {
-        return " ";
+    public FieldDrawData getDrawData() {
+        List<String> layers = new ArrayList<>();
+        layers.add(" ");
+        return new FieldDrawData(layers);
     }
 }

@@ -1,5 +1,7 @@
 package bem7trainsim;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by marci on 2017.03.18.
@@ -31,18 +33,23 @@ public class DownStation extends SimpleRail {
      * @return the string representing the field
      */
     @Override
-    public String getDrawData() {
-        if (coach != null)
-            return coach.getDrawData();
+    public FieldDrawData getDrawData() {
+        List<String> layers = new ArrayList<>();
+
         if (color.equals(Color.RED)) {
-            return "I";
+            layers.add("I");
         }
         else if (color.equals(Color.YELLOW)) {
-            return "Á";
+            layers.add("Á");
         }
         else if (color.equals(Color.GREEN)) {
-            return "Ö";
+            layers.add("Ö");
         }
-        return "É";
+        else layers.add("É");
+
+        if (coach != null)
+            layers.add(coach.getDrawData());
+
+        return new FieldDrawData(layers);
     }
 }

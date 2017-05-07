@@ -7,11 +7,6 @@ public class Main {
      * @param args console args
      */
     public static void main(String[] args) {
-        try(Controller ctrl = new Controller())
-        {
-            ctrl.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        new Controller();
     }
 }

@@ -1,6 +1,5 @@
 package bem7trainsim;
 
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
@@ -16,11 +15,6 @@ public class CreditsControllerState extends ControllerState implements ActionLis
     @Override
     public ControllerState handleCommand(String command) {
         return null;
-    }
-
-    @Override
-    public void changedTo() {
-
     }
 
     @Override

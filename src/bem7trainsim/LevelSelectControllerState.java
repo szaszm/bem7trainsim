@@ -1,6 +1,5 @@
 package bem7trainsim;
 
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
@@ -25,24 +24,24 @@ public class LevelSelectControllerState extends ControllerState {
                 controller.setState(newState);
                 return newState;
             } catch(IOException e){
-                System.out.println(e.getMessage());
+                //TODO: message(e.getMessage());
                 MainMenuControllerState state = new MainMenuControllerState(controller);
                 controller.setState(state);
                 return state;
             } catch (CollisionException e) {
-                System.out.println("Utkozes, jatek vege. Ido: 0");
+                //TODO: message("Utkozes, jatek vege. Ido: 0");
                 MainMenuControllerState state = new MainMenuControllerState(controller);
                 controller.setState(state);
                 return state;
             } catch (TableLeftException e){
-                System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: 0");
+                //TODO: message("Nem ures vonat elhagyta a palyat, jatek vege. Ido: 0");
                 MainMenuControllerState state = new MainMenuControllerState(controller);
                 controller.setState(state);
                 return state;
             }
         } else if (s[0].startsWith("test_")){
             try{
-                TestControllerState newState = new TestControllerState(s[0].substring(5));
+                TestControllerState newState = new TestControllerState(controller, s[0].substring(5));
                 newState.start();
             } catch(IOException e){
                 System.out.println(e.getMessage());
@@ -56,10 +55,6 @@ public class LevelSelectControllerState extends ControllerState {
             return state;
         }
         return this;
-    }
-    @Override
-    public void changedTo() {
-        System.out.println("LEVEL_MENU");
     }
 
     @Override

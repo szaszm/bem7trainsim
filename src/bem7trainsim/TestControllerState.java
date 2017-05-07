@@ -36,8 +36,8 @@ public class TestControllerState extends PlayControllerState implements ActionLi
      * @param map The name of the map in string format. Available names in the documentation.
      * @throws IOException thrown when the input is not correct
      */
-    public TestControllerState(String map) throws IOException  {
-        super(null, null, map); // loads the map
+    public TestControllerState(Controller c, String map) throws IOException  {
+        super(c, map); // loads the map
     }
 
     /**
@@ -58,7 +58,16 @@ public class TestControllerState extends PlayControllerState implements ActionLi
         } catch (TableLeftException e) {
             out.print("TableLeftException\n");
         }
-        String content = table.getDrawData();
+        String content = "";
+        FieldDrawData[][] fdd = table.getDrawData();
+        for (int y = 0; y < fdd.length; y++) {
+            FieldDrawData[] row = fdd[y];
+            for (int x = 0; x < row.length; x++) {
+                FieldDrawData field = row[x];
+                content += field.getLayer(field.getNumberOfLayers() - 1).substring(0, 1);
+            }
+            content += "\n";
+        }
         content += new String(baos.toByteArray(), StandardCharsets.UTF_8);
         out = System.out;
         boolean success = Objects.equals(content, expectedOutput);
@@ -92,7 +101,7 @@ public class TestControllerState extends PlayControllerState implements ActionLi
         catch(CannotBuildException e){
             out.print("CannotBuildException\n");
         }
-        MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+        MainMenuControllerState state = new MainMenuControllerState(controller);
         controller.setState(state);
         return state; // exit if exception happened
     }
@@ -108,17 +117,17 @@ public class TestControllerState extends PlayControllerState implements ActionLi
             moveTrains();
         } catch (CollisionException e) {
             out.print("CollisionException\n");
-            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
         } catch (TableLeftException e){
             out.print("TableLeftException\n");
-            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
         }
         if(isWin()) {
-            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
         }
@@ -140,9 +149,5 @@ public class TestControllerState extends PlayControllerState implements ActionLi
         testCommands = tl.testCommands;
         testDescription = tl.testDescription;
         expectedOutput = tl.expectedOutput;
-    }
-
-    @Override
-    public void changedTo() {
     }
 }

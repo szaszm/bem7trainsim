@@ -3,7 +3,6 @@ package bem7trainsim;
 import javafx.util.Pair;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -80,7 +79,6 @@ public class PlayControllerState extends ControllerState implements ActionListen
      */
     public void start() throws CollisionException, TableLeftException {
         moveTrains();
-        System.out.println(table.getDrawData());
     }
 
     /**
@@ -95,9 +93,8 @@ public class PlayControllerState extends ControllerState implements ActionListen
         try {
             newState = handleCommandWithoutException(command);
         } catch (CannotSwitchException | CannotBuildException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
-        System.out.println(table.getDrawData()); // Draws the table if there was no exception and statechange
         return newState;
     }
 
@@ -182,19 +179,18 @@ public class PlayControllerState extends ControllerState implements ActionListen
         try {
             moveTrains();
         } catch (CollisionException e) {
-            System.out.println("Utkozes, jatek vege. Ido: " + Integer.toString(currentTime));
+            //TODO: message("Utkozes, jatek vege. Ido: " + Integer.toString(currentTime));
             MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
         } catch (TableLeftException e) {
-            System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: " + Integer.toString(currentTime));
+            // TODO: message("Nem ures vonat elhagyta a palyat, jatek vege. Ido: " + Integer.toString(currentTime));
             MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
         }
-        System.out.println(table.getDrawData());
         if (isWin()) {
-            System.out.println("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
+            // TODO: message("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
             MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
@@ -231,10 +227,6 @@ public class PlayControllerState extends ControllerState implements ActionListen
         if (!trainData.isEmpty())
             win = false;
         return win;
-    }
-
-    @Override
-    public void changedTo() {
     }
 
     @Override
