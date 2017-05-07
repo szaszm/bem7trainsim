@@ -82,7 +82,7 @@ public class FieldDrawData {
 
     static {
         try {
-            valto = ImageIO.read(new File("random.png"));
+            cross = ImageIO.read(new File("random.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,9 +90,7 @@ public class FieldDrawData {
 
     static private Image getImage(String layer) {
         String[] parts = layer.split(" ");
-        if (parts[0].equals())
-            return valto;
-        return valto;
+        return cross; //valto;
     }
 
 }
