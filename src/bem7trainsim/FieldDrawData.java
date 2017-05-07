@@ -36,7 +36,27 @@ public class FieldDrawData {
         }
     }
 
-    static private BufferedImage valto;
+    static private BufferedImage straightHorizontal;
+    static private BufferedImage straightVertical;
+    static private BufferedImage curveNE;
+    static private BufferedImage curveNW;
+    static private BufferedImage curveSE;
+    static private BufferedImage curveSW;
+    static private BufferedImage cross;
+    static private BufferedImage grass1;
+    static private BufferedImage grass2;
+    static private BufferedImage downStationHorizontalBlue;
+    static private BufferedImage downStationHorizontalGreen;
+    static private BufferedImage downStationHorizontalRed;
+    static private BufferedImage downStationHorizontalYellow;
+    static private BufferedImage straightHorizontal;
+    static private BufferedImage straightHorizontal;
+    static private BufferedImage straightHorizontal;
+    static private BufferedImage straightHorizontal;
+    static private BufferedImage straightHorizontal;
+    static private BufferedImage straightHorizontal;
+
+
 
     static {
         try {
