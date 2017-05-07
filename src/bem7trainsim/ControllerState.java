@@ -26,12 +26,13 @@ abstract public class ControllerState implements ActionListener {
      * @return The controller state which the controller steps into
      */
     public abstract ControllerState handleCommand(String command);
+
     public abstract void changedTo();
 
     public abstract void mouseClicked(MouseEvent e);
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(view != null) view.draw();
+        controller.Invalidate();
     }
 }
