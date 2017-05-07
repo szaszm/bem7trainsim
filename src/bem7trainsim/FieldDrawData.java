@@ -27,9 +27,6 @@ public class FieldDrawData {
     }
 
     public void draw(Graphics g, int x, int y, int width, int height) {
-        float[] scales = {1f, 1f, 1f, 0.5f};
-        float[] offsets = new float[4];
-        RescaleOp rop = new RescaleOp(scales, offsets, null);
         for (String layer :
                 layers) {
             g.drawImage(getImage(layer), x * width, y * height, width, height, null);
