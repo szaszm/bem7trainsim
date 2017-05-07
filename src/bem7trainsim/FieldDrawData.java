@@ -67,15 +67,15 @@ public class FieldDrawData {
         try {
             String path = "Piskels/";
             images = new HashMap<>();
-            images.put("straightHorizontal",ImageIO.read(new File(path + "/straightHorizontal.png")));
-            images.put("straightVertical",ImageIO.read(new File(path + "/straightVertical.png")));
-            images.put("curveNE",ImageIO.read(new File(path + "/curveNE.png")));
-            images.put("curveNW",ImageIO.read(new File(path + "/curveNW.png")));
-            images.put("curveSE",ImageIO.read(new File(path + "/curveSE.png")));
-            images.put("curveSW",ImageIO.read(new File(path + "/curveSW.png")));
-            images.put("cross",ImageIO.read(new File(path + "/cross.png")));
-            images.put("grass1",ImageIO.read(new File(path + "/grass1.png")));
-            images.put("grass2",ImageIO.read(new File(path + "/grass2.png")));
+            images.put("═",ImageIO.read(new File(path + "/SimpleRails/SimpleRailEW.png")));
+            images.put("║",ImageIO.read(new File(path + "/SimpleRails/SimpleRailNS.png")));
+            images.put("╚",ImageIO.read(new File(path + "/Curves/curveNE.png")));
+            images.put("╝",ImageIO.read(new File(path + "/Curves/curveNW.png")));
+            images.put("╔",ImageIO.read(new File(path + "/Curves/curveSE.png")));
+            images.put("╗",ImageIO.read(new File(path + "/Curves/curveSW.png")));
+            images.put("╬",ImageIO.read(new File(path + "/crossRail.png")));
+            images.put(" 1",ImageIO.read(new File(path + "/Decoration/Grass1.png")));
+            images.put(" 2",ImageIO.read(new File(path + "/Decoration/Grass2.png")));
             images.put("downStationHorizontalBlue",ImageIO.read(new File(path + "/downStationHorizontalBlue.png")));
             images.put("downStationHorizontalGreen",ImageIO.read(new File(path + "/downStationHorizontalGreen.png")));
             images.put("downStationHorizontalRed",ImageIO.read(new File(path + "/downStationHorizontalRed.png")));
