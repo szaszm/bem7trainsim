@@ -29,13 +29,16 @@ public class MainMenuControllerState extends ControllerState {
     public ControllerState handleCommand(String command) {
         String[] s = command.split(" ");
         switch (s[0]) {
-            case "play":
+            case "play": {
                 LevelSelectControllerState state = new LevelSelectControllerState(controller);
                 controller.setState(state);
                 return state;
-            case "credits":
-                System.out.println("Csutorás Robin\nGnandt Balázs\nSzász Márton\nTamás Csongor\nZabó Kristóf");
-                break;
+            }
+            case "credits": {
+                CreditsControllerState state = new CreditsControllerState(controller);
+                controller.setState(state);
+                return state;
+            }
             case "exit":
                 return null;
         }
