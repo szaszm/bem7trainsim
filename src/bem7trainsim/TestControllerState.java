@@ -92,7 +92,7 @@ public class TestControllerState extends PlayControllerState implements ActionLi
         catch(CannotBuildException e){
             out.print("CannotBuildException\n");
         }
-        MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+        MainMenuControllerState state = new MainMenuControllerState(controller);
         controller.setState(state);
         return state; // exit if exception happened
     }
@@ -108,17 +108,17 @@ public class TestControllerState extends PlayControllerState implements ActionLi
             moveTrains();
         } catch (CollisionException e) {
             out.print("CollisionException\n");
-            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
         } catch (TableLeftException e){
             out.print("TableLeftException\n");
-            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
         }
         if(isWin()) {
-            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
         }
