@@ -15,8 +15,9 @@ public class MenuEntry {
      * Menu entry constructor
      * @param label The label of the menu entry
      */
-    public MenuEntry(String label) {
+    public MenuEntry(String label, MainMenuControllerState mcs) {
         this.label = label;
+        this.mcs = mcs;
     }
 
     /**
