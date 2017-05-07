@@ -26,8 +26,6 @@ abstract public class ControllerState implements ActionListener {
      */
     public abstract ControllerState handleCommand(String command);
 
-    public abstract void changedTo();
-
     public abstract void mouseClicked(MouseEvent e);
 
     @Override

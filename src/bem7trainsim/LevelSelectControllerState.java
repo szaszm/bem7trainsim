@@ -24,17 +24,17 @@ public class LevelSelectControllerState extends ControllerState {
                 controller.setState(newState);
                 return newState;
             } catch(IOException e){
-                System.out.println(e.getMessage());
+                //TODO: message(e.getMessage());
                 MainMenuControllerState state = new MainMenuControllerState(controller);
                 controller.setState(state);
                 return state;
             } catch (CollisionException e) {
-                System.out.println("Utkozes, jatek vege. Ido: 0");
+                //TODO: message("Utkozes, jatek vege. Ido: 0");
                 MainMenuControllerState state = new MainMenuControllerState(controller);
                 controller.setState(state);
                 return state;
             } catch (TableLeftException e){
-                System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: 0");
+                //TODO: message("Nem ures vonat elhagyta a palyat, jatek vege. Ido: 0");
                 MainMenuControllerState state = new MainMenuControllerState(controller);
                 controller.setState(state);
                 return state;
@@ -55,10 +55,6 @@ public class LevelSelectControllerState extends ControllerState {
             return state;
         }
         return this;
-    }
-    @Override
-    public void changedTo() {
-        System.out.println("LEVEL_MENU");
     }
 
     @Override

@@ -18,11 +18,6 @@ public class CreditsControllerState extends ControllerState implements ActionLis
     }
 
     @Override
-    public void changedTo() {
-
-    }
-
-    @Override
     public void mouseClicked(MouseEvent e) {
 
     }

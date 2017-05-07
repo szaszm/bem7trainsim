@@ -150,8 +150,4 @@ public class TestControllerState extends PlayControllerState implements ActionLi
         testDescription = tl.testDescription;
         expectedOutput = tl.expectedOutput;
     }
-
-    @Override
-    public void changedTo() {
-    }
 }

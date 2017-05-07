@@ -39,11 +39,6 @@ public class MainMenuControllerState extends ControllerState {
     }
 
     @Override
-    public void changedTo() {
-        System.out.println("MAIN_MENU");
-    }
-
-    @Override
     public void mouseClicked(MouseEvent e) {
 
     }
