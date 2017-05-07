@@ -2,12 +2,12 @@ package bem7trainsim;
 
 import javafx.util.Pair;
 
+import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,13 +46,29 @@ public class PlayControllerState extends ControllerState {
      */
     protected int currentTime = 0;
 
+    private Timer timerTick = new Timer(1000, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                moveTrains();
+            } catch (CollisionException | TableLeftException e1) {
+                e1.printStackTrace();
+                controller.setState(new MainMenuControllerState(graphics, controller));
+            }
+        }
+    });
+
     /**
      * @param map The name of the map in string format. Available names in the documentation.
      * @throws IOException thrown when the input is not correct.
      */
-    public PlayControllerState(String map) throws IOException {
+    public PlayControllerState(Graphics g, Controller c, String map) throws IOException {
+        super(g, c);
         loadMap(map);
+        view = new TableView(table, this, g);
     }
+
+    private TableView getView() { return (TableView) view; }
 
     /**
      * Starts the movement of the trains
@@ -92,7 +108,9 @@ public class PlayControllerState extends ControllerState {
         String[] s = command.split(" ");
         switch (s[0]) {
             case "back":
-                return new LevelSelectControllerState();
+                LevelSelectControllerState state = new LevelSelectControllerState(graphics, controller);
+                controller.setState(state);
+                return state;
             //switch x y
             case "switch":
             {
@@ -160,15 +178,21 @@ public class PlayControllerState extends ControllerState {
             moveTrains();
         } catch (CollisionException e) {
             System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
-            return new MainMenuControllerState();
+            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            controller.setState(state);
+            return state;
         } catch (TableLeftException e){
             System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: "+Integer.toString(currentTime));
-            return new MainMenuControllerState();
+            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            controller.setState(state);
+            return state;
         }
         System.out.println(table.getDrawData());
         if(isWin()) {
             System.out.println("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
-            return new MainMenuControllerState();
+            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            controller.setState(state);
+            return state;
         }
         return this;
     }
@@ -203,7 +227,14 @@ public class PlayControllerState extends ControllerState {
             win = false;
         return  win;
     }
+
     @Override
     public void changedTo() {
     }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        getView().mouseClicked(e);
+    }
+
 }

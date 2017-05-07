@@ -36,7 +36,7 @@ public class TestControllerState extends PlayControllerState {
      * @throws IOException thrown when the input is not correct
      */
     public TestControllerState(String map) throws IOException  {
-        super(map); // loads the map
+        super(null, null, map); // loads the map
     }
 
     /**
@@ -91,7 +91,9 @@ public class TestControllerState extends PlayControllerState {
         catch(CannotBuildException e){
             out.print("CannotBuildException\n");
         }
-        return new MainMenuControllerState(); // exit if exception happened
+        MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+        controller.setState(state);
+        return state; // exit if exception happened
     }
 
     /**
@@ -105,13 +107,19 @@ public class TestControllerState extends PlayControllerState {
             moveTrains();
         } catch (CollisionException e) {
             out.print("CollisionException\n");
-            return new MainMenuControllerState();
+            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            controller.setState(state);
+            return state;
         } catch (TableLeftException e){
             out.print("TableLeftException\n");
-            return new MainMenuControllerState();
+            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            controller.setState(state);
+            return state;
         }
         if(isWin()) {
-            return new MainMenuControllerState();
+            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            controller.setState(state);
+            return state;
         }
         return this;
     }
