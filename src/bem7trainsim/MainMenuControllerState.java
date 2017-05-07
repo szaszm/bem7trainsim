@@ -1,9 +1,7 @@
 package bem7trainsim;
 
-import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Csuto on 4/18/2017.
@@ -11,6 +9,10 @@ import java.util.ArrayList;
  * showing the credits or quitting the game.
  */
 public class MainMenuControllerState extends ControllerState {
+    /**
+     * MainMenuControllerState constructor
+     * @param c The controller
+     */
     protected MainMenuControllerState(Controller c) {
         super(c);
         List<MenuEntry> entries = new ArrayList<>();
@@ -21,10 +23,19 @@ public class MainMenuControllerState extends ControllerState {
         view = new MenuView(entries);
     }
 
+    /**
+     * Returns the view properly downcasted
+     * @return The view
+     */
     private MenuView getView() {
         return (MenuView) view;
     }
 
+    /**
+     * Handles textual commands
+     * @param command The command in string format. Available commands list is in the documentation.
+     * @return The new controller state
+     */
     @Override
     public ControllerState handleCommand(String command) {
         String[] s = command.split(" ");
@@ -46,6 +57,10 @@ public class MainMenuControllerState extends ControllerState {
     }
 
 
+    /**
+     * Handles menu entry selection
+     * @param m The selected menu entry
+     */
     public void click(MenuEntry m){
         if(m.GetLabel().equals("PLAY")) {
             controller.setState(new LevelSelectControllerState(controller));

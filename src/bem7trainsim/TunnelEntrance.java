@@ -26,7 +26,7 @@ public class TunnelEntrance extends Rail {
 
     /**
      * Creates entrance with the given orientation
-     * @param orientation
+     * @param orientation The orientation of the entrance
      */
     public TunnelEntrance(SimpleRail.Orientation orientation) {
         super();
@@ -36,7 +36,7 @@ public class TunnelEntrance extends Rail {
 
     /**
      * sets the tunnel of the entrance
-     * @param tunnel
+     * @param tunnel The tunnel which is accessible through this entrance
      */
     public void setTunnel(Tunnel tunnel){
         this.tunnel = tunnel;
@@ -93,12 +93,17 @@ public class TunnelEntrance extends Rail {
 
     /**
      * Gets if the red light is on.
-     * @return
+     * @return Whether the red light is on or not.
      */
     public boolean redLight() {
         return state.redLight();
     }
 
+    /**
+     * Indicated the arrival of a train to the field
+     * @param train The train which is arrived
+     * @throws CollisionException When there is a collision
+     */
     public void arrive(Train train) throws CollisionException {
         super.arrive(train);
         //Ha a vonat kintről jött és az alagúrba terel a vágány, akkor belépünk az alagútba

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Loads test tables
  * Created by Csuto on 4/18/2017.
  */
 public class TestTableLoader extends TableLoader {
@@ -53,7 +54,7 @@ public class TestTableLoader extends TableLoader {
 
     /**
      * Loading the expected results with a bufferedreader
-     * @param br
+     * @param br The reader to load expected results from
      * @throws IOException thrown when the input is not correct
      */
     private void LoadExpectedResults(BufferedReader br) throws IOException {
@@ -66,7 +67,7 @@ public class TestTableLoader extends TableLoader {
 
     /**
      * Loading the test commands with a bufferedreader
-     * @param br
+     * @param br The reader to load test commands from
      * @throws IOException thrown when the input is not correct
      */
     private void LoadTestCommands(BufferedReader br) throws IOException {
@@ -79,7 +80,7 @@ public class TestTableLoader extends TableLoader {
 
     /**
      * Loading the test text with a bufferedreader
-     * @param br
+     * @param br The reader to load test text from
      * @throws IOException thrown when the input is not correct
      */
     private void LoadTestText(BufferedReader br) throws IOException {

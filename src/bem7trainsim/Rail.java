@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The base class of every rail type field
  * Created by marci on 2017.03.17..
  */
 public abstract class Rail extends Field {

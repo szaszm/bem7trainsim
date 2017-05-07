@@ -138,7 +138,7 @@ public class TableLoader {
 
     /**
      * Loading the trains with a bufferedreader
-     * @param br
+     * @param br Reader to load trains from
      * @throws IOException thrown when the characters read are not correct.
      */
     protected void LoadTrains(BufferedReader br) throws IOException {
@@ -198,8 +198,7 @@ public class TableLoader {
 
     /**
      * loading special fields, such as tunnel entrance, stations etc.
-     * @param br
-     * @throws IOException
+     * @param br The reader to load specials from
      */
     protected void LoadSpecials(BufferedReader br) throws IOException {
         String line;
@@ -446,7 +445,7 @@ public class TableLoader {
 
     /**
      * Loading characters with a bufferedreader
-     * @param br
+     * @param br The reader to load chars from
      * @throws IOException thrown when the input is not correct
      */
     protected void LoadChars(BufferedReader br) throws IOException {
@@ -473,7 +472,7 @@ public class TableLoader {
 
     /**
      * Loading start with a bufferedreader
-     * @param br
+     * @param br The reader to load starting position from
      * @throws IOException thrown when the input is not correct
      */
     protected void LoadStart(BufferedReader br) throws IOException {
@@ -488,7 +487,7 @@ public class TableLoader {
 
     /**
      * Loading size with a bufferedreader
-     * @param br
+     * @param br The reader to load size information from
      * @throws IOException thrown when the input is not correct
      */
     protected void LoadSize(BufferedReader br) throws IOException {

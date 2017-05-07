@@ -175,8 +175,8 @@ public class Table {
 
     /**
      * Changes the state of the element to user interactions if possible
-     * @param x
-     * @param y
+     * @param x The horizontal coordinate
+     * @param y The vertical coordinate
      */
     public void changeAt(int x,int y){
       //TODO

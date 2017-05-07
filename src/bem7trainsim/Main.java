@@ -1,5 +1,8 @@
 package bem7trainsim;
 
+/**
+ * The main class
+ */
 public class Main {
 
     /**

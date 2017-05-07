@@ -8,6 +8,9 @@ import java.util.List;
  * Represents the stations where the passengers can get down from the trains
  */
 public class DownStation extends SimpleRail {
+    /**
+     * The color of the station
+     */
     private Color color;
 
     /**

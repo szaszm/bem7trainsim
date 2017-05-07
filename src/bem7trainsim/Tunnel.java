@@ -30,8 +30,8 @@ public class Tunnel {
 
     /**
      * Creates tunnel with the given table and entrances
-     * @param table
-     * @param tunnelEntrances
+     * @param table The table on which the tunnel resides
+     * @param tunnelEntrances Tunnel entrances
      */
     public Tunnel(Table table, List<TunnelEntrance> tunnelEntrances) {
         rails = new ArrayList<>();
@@ -42,8 +42,8 @@ public class Tunnel {
 
     /**
      * Putting the train into the tunnel through the tunnel entrance
-     * @param te
-     * @param train
+     * @param te The tunnel entrance on which the train entered
+     * @param train The train that entered the tunnel
      */
     public void enter(TunnelEntrance te, Train train) {
         trainTunnelEntranceMap.add(new AbstractMap.SimpleEntry<>(train, te));
@@ -64,8 +64,8 @@ public class Tunnel {
 
     /**
      * Getting the train out of the tunnel through the entrance
-     * @param te
-     * @param train
+     * @param te The tunnel entrance through which the train leaves the tunnel
+     * @param train The train that leaves
      */
     public void leave(TunnelEntrance te, Train train) {
         trainTunnelEntranceMap.removeIf(x->x.getKey() == train);
@@ -85,8 +85,9 @@ public class Tunnel {
     }
 
     /**
-     * @param train
-     * @param te
+     * Checks if the tunnel has a train which entered through the specified entrance
+     * @param train The train whose existence is checked
+     * @param te The tunnel entrance on which the train entered
      * @return true if the train got into the tunnel through the entrance and is still there
      */
     public boolean hasTrain(Train train, TunnelEntrance te) {
@@ -101,7 +102,6 @@ public class Tunnel {
     /**
      * Sets the entrance's state determined by the other entracnce
      * @param te other entrance
-     * @throws CannotBuildException
      */
     public void checkEntrance(TunnelEntrance te) throws CannotBuildException {
         //ha még nincs felépítve egy bejárat sem, akkor ez UnderConstruction lesz

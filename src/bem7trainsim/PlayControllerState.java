@@ -3,14 +3,13 @@ package bem7trainsim;
 import javafx.util.Pair;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
 /**
+ * Represents the controller state while in-game
  * Created by Csuto on 4/18/2017.
  */
 public class PlayControllerState extends ControllerState implements ActionListener {
@@ -45,15 +44,15 @@ public class PlayControllerState extends ControllerState implements ActionListen
      */
     protected int currentTime = 0;
 
-    private Timer timerTick = new Timer(1000, new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
-                moveTrains();
-            } catch (CollisionException | TableLeftException e1) {
-                e1.printStackTrace();
-                controller.setState(new MainMenuControllerState(controller));
-            }
+    /**
+     * Handles game logic updates
+     */
+    private Timer timerTick = new Timer(1000, e -> {
+        try {
+            moveTrains();
+        } catch (CollisionException | TableLeftException e1) {
+            e1.printStackTrace();
+            controller.setState(new MainMenuControllerState(controller));
         }
     });
 
@@ -67,6 +66,10 @@ public class PlayControllerState extends ControllerState implements ActionListen
         view = new TableView(table, this);
     }
 
+    /**
+     * Returns the current view property typecasted
+     * @return The view
+     */
     private TableView getView() {
         return (TableView) view;
     }
@@ -229,13 +232,12 @@ public class PlayControllerState extends ControllerState implements ActionListen
         return win;
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        getView().mouseClicked(e);
-    }
-
-    //Felhasználói interakció kezelése az adott mezőre.
+    /**
+     * Handles user interaction
+     * @param x The horizontal coordinate of the clicked field
+     * @param y The vertical coordinate of the clicked field
+     */
     public void clickAt(int x, int y) {
-        //TODO(Ne hagyd magyarul a kommentet!)
+
     }
 }

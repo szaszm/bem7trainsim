@@ -4,7 +4,14 @@ package bem7trainsim;
  * Thrown when two trains collide
  */
 public class CollisionException extends Exception {
+    /**
+     * The train which collided into another
+     */
     private Train train;
+
+    /**
+     * The rail on which the collision happened
+     */
     private Rail rail;
 
     /**
@@ -17,10 +24,16 @@ public class CollisionException extends Exception {
         this.rail = rail;
     }
 
+    /**
+     * @return The train which collided into another
+     */
     public Train getTrain() {
         return train;
     }
 
+    /**
+     * @return The rail on which the collision happened
+     */
     public Rail getRail() {
         return rail;
     }

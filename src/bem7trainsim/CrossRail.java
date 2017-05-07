@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Represents cross rails
  * Created by marci on 2017.03.18..
  */
 public class CrossRail extends Rail {
@@ -11,6 +12,9 @@ public class CrossRail extends Rail {
      */
     private List<Rail> crossLinks;
 
+    /**
+     * CrossRail constructor
+     */
     public CrossRail() {
         super();
         this.crossLinks = new ArrayList<>();
