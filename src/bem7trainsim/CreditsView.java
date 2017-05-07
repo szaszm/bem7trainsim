@@ -7,10 +7,6 @@ import java.awt.event.MouseEvent;
  * Created by Kristóf on 2017. 05. 07..
  */
 public class CreditsView extends View {
-    /**
-     * Stores the height of the line in pixels
-     */
-    static int lineHeight = 20;
 
     /**
      * The controller state which shows this view
@@ -40,11 +36,16 @@ public class CreditsView extends View {
      */
     @Override
     void draw(Graphics g) {
-        g.drawString("Csutorás Robin",g.getClipBounds().width / 2 - 45, g.getClipBounds().height / 2 - lineHeight * 2);
-        g.drawString("Gnandt Balázs",g.getClipBounds().width / 2 - 40, g.getClipBounds().height / 2 - lineHeight);
-        g.drawString("Szász Márton",g.getClipBounds().width / 2 - 35, g.getClipBounds().height / 2);
-        g.drawString("Tamás Csongor",g.getClipBounds().width / 2 - 45, g.getClipBounds().height / 2 + lineHeight);
-        g.drawString("Zabó Kristóf",g.getClipBounds().width / 2 - 32, g.getClipBounds().height / 2 + lineHeight * 2);
-        g.drawString("Back",g.getClipBounds().width / 2 - 12, g.getClipBounds().height / 2 + lineHeight * 3);
+        g.setColor(Color.RED);
+        g.fillRect(100, 50, g.getClipBounds().width - 200,150 );
+        g.fillRect(100, 300, g.getClipBounds().width - 200,150 );
+        g.fillRect(100, 550, g.getClipBounds().width - 200,150 );
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Times New Roman", Font.BOLD, 45));
+        g.drawString("Credits",g.getClipBounds().width / 2 - 70,  135);
+        g.drawString("Back",g.getClipBounds().width / 2 - 45, 635);
+        g.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        g.drawString("Csutorás Robin, Gnandt Balázs, Szász Márton",g.getClipBounds().width / 2 - 285, 350);
+        g.drawString("Tamás Csongor, Zabó Kristóf",g.getClipBounds().width / 2 - 190, 400);
     }
 }

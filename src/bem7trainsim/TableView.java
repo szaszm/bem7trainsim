@@ -45,6 +45,17 @@ public class TableView extends View {
      */
     @Override
     void draw(Graphics g) {
-
+        FieldDrawData[][] fdd = table.getDrawData();
+        int sideLength = g.getClipBounds().width / fdd.length;
+        if (fdd[0] != null && g.getClipBounds().height / fdd[0].length < sideLength) {
+            sideLength = g.getClipBounds().height / fdd[0].length;
+        }
+        for (int y = 0; y < fdd.length; y++) {
+            FieldDrawData[] row = fdd[y];
+            for (int x = 0; x < row.length; x++) {
+                FieldDrawData field = row[x];
+                field.draw(g,x,y,sideLength,sideLength);
+            }
+        }
     }
 }
