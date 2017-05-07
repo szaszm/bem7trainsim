@@ -58,7 +58,16 @@ public class TestControllerState extends PlayControllerState implements ActionLi
         } catch (TableLeftException e) {
             out.print("TableLeftException\n");
         }
-        FieldDrawData[][] content = table.getDrawData();
+        String content = "";
+        FieldDrawData[][] fdd = table.getDrawData();
+        for (int y = 0; y < fdd.length; y++) {
+            FieldDrawData[] row = fdd[y];
+            for (int x = 0; x < row.length; x++) {
+                FieldDrawData field = row[x];
+                content += field.getLayer(field.getNumberOfLayers() - 1);
+            }
+            content += "\n";
+        }
         content += new String(baos.toByteArray(), StandardCharsets.UTF_8);
         out = System.out;
         boolean success = Objects.equals(content, expectedOutput);
