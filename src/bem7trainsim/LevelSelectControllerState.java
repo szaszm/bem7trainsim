@@ -41,7 +41,7 @@ public class LevelSelectControllerState extends ControllerState {
             }
         } else if (s[0].startsWith("test_")){
             try{
-                TestControllerState newState = new TestControllerState(s[0].substring(5));
+                TestControllerState newState = new TestControllerState(controller, s[0].substring(5));
                 newState.start();
             } catch(IOException e){
                 System.out.println(e.getMessage());
