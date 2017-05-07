@@ -64,7 +64,7 @@ public class TestControllerState extends PlayControllerState implements ActionLi
             FieldDrawData[] row = fdd[y];
             for (int x = 0; x < row.length; x++) {
                 FieldDrawData field = row[x];
-                content += field.getLayer(field.getNumberOfLayers() - 1);
+                content += field.getLayer(field.getNumberOfLayers() - 1).substring(0, 1);
             }
             content += "\n";
         }

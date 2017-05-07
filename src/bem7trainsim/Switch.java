@@ -91,28 +91,28 @@ public class Switch extends Rail {
     public FieldDrawData getDrawData() {
         List<String> layers = new ArrayList<>();
         if (orientation == Orientation.NorthLeft) {
-            layers.add((state.nextStraight())  ? "│" : "└");
+            layers.add((state.nextStraight())  ? "│└" : "└│");
         }
         if (orientation == Orientation.NorthRight) {
-            layers.add((state.nextStraight())  ? "│" : "┘");
+            layers.add((state.nextStraight())  ? "│┘" : "┘│");
         }
         if (orientation == Orientation.EastLeft) {
-            layers.add((state.nextStraight())  ? "─" : "┌");
+            layers.add((state.nextStraight())  ? "─┌" : "┌─");
         }
         if (orientation == Orientation.EastRight) {
-            layers.add((state.nextStraight())  ? "─" : "└");
+            layers.add((state.nextStraight())  ? "─└" : "└─");
         }
         if (orientation == Orientation.SouthRight) {
-            layers.add((state.nextStraight())  ? "│" : "┌");
+            layers.add((state.nextStraight())  ? "│┌" : "┌│");
         }
         if (orientation == Orientation.SouthLeft) {
-            layers.add((state.nextStraight())  ? "│" : "┐");
+            layers.add((state.nextStraight())  ? "│┐" : "┐│");
         }
         if (orientation == Orientation.WestLeft) {
-            layers.add((state.nextStraight())  ? "─" : "┘");
+            layers.add((state.nextStraight())  ? "─┘" : "┘─");
         }
         if (orientation == Orientation.WestRight) {
-            layers.add((state.nextStraight())  ? "─" : "┐");
+            layers.add((state.nextStraight())  ? "─┐" : "┐─");
         }
 
         if (coach != null)
