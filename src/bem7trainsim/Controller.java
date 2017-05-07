@@ -22,30 +22,12 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
-    }
-
-    public void start() {
-        state = new MainMenuControllerState(getGraphics(), this);
-    	state.changedTo();
-		BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
-        while (state != null) {
-            try {
-                ControllerState newState = state.handleCommand(buffer.readLine());
-                if (newState != state) {
-                    state = newState;
-                    if (newState != null) {
-                        state.changedTo();
-                    }
-                }
-            } catch (IOException e) {
-                // Shall never happen
-                e.printStackTrace();
-            }
-        }
+        setState(new MainMenuControllerState(getGraphics(), this));
     }
 
     public void setState(ControllerState state) {
         this.state = state;
+        state.changedTo();
     }
 
     @Override
