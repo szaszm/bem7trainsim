@@ -9,11 +9,20 @@ import java.io.IOException;
  */
 public class LevelSelectControllerState extends ControllerState {
 
+    /**
+     * LevelSelectControllerState constructor
+     * @param c The controller
+     */
     protected LevelSelectControllerState(Controller c) {
         super(c);
         view = new LevelSelectView();
     }
 
+    /**
+     * Handles textual commands
+     * @param command The command in string format. Available commands list is in the documentation.
+     * @return The new controller state
+     */
     @Override
     public ControllerState handleCommand(String command) {
         String[] s = command.split(" ");
@@ -23,18 +32,8 @@ public class LevelSelectControllerState extends ControllerState {
                 newState.start();
                 controller.setState(newState);
                 return newState;
-            } catch(IOException e){
+            } catch(IOException | TableLeftException | CollisionException e){
                 //TODO: message(e.getMessage());
-                MainMenuControllerState state = new MainMenuControllerState(controller);
-                controller.setState(state);
-                return state;
-            } catch (CollisionException e) {
-                //TODO: message("Utkozes, jatek vege. Ido: 0");
-                MainMenuControllerState state = new MainMenuControllerState(controller);
-                controller.setState(state);
-                return state;
-            } catch (TableLeftException e){
-                //TODO: message("Nem ures vonat elhagyta a palyat, jatek vege. Ido: 0");
                 MainMenuControllerState state = new MainMenuControllerState(controller);
                 controller.setState(state);
                 return state;
@@ -55,10 +54,5 @@ public class LevelSelectControllerState extends ControllerState {
             return state;
         }
         return this;
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
     }
 }

@@ -8,8 +8,14 @@ import java.util.List;
  * Represents the decoration on the table
  */
 public class Decoration extends Field {
+    /**
+     * Stores the state of the decoration
+     */
     private boolean state;
 
+    /**
+     * Decoration constructor
+     */
     public Decoration() {
         state = false;
     }

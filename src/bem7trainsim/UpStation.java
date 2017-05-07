@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.*;
 
 /**
+ * Represents a station where passengers can get up
  * Created by Csuto on 4/9/2017.
  */
 public class UpStation extends SimpleRail {
@@ -20,8 +21,8 @@ public class UpStation extends SimpleRail {
 
     /**
      * Creating az upstation with the color and orientation given.
-     * @param color
-     * @param orientation
+     * @param color Color of the station
+     * @param orientation Orientation of the station
      */
     public UpStation(Color color, Orientation orientation) {
         super(orientation);
@@ -79,6 +80,7 @@ public class UpStation extends SimpleRail {
 
 
     /**
+     * Returns whether passengers have left the station or not
      * @return true if gone, else false
      */
     public boolean isGone(){

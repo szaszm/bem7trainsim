@@ -5,10 +5,18 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
+ * Represents a train
  * Created by marci on 2017.03.17..
  */
 public class Train {
+    /**
+     * The locomotive
+     */
     private Locomotive locomotive;
+
+    /**
+     * The wagons of the train
+     */
     private List<Wagon> wagons;
 
     /**
@@ -19,7 +27,7 @@ public class Train {
     /**
      * Creates train
      * @param start Starting field
-     * @param table
+     * @param table The table on which the train resides
      * @throws CollisionException thrown if trains collided
      */
     public Train(Rail start, Table table) throws CollisionException {
@@ -31,7 +39,7 @@ public class Train {
     /**
      * Creates train
      * @param start Starting field
-     * @param table
+     * @param table The table on which the train resides
      * @param wagons list of wagons
      * @throws CollisionException thrown if trains collided
      */
@@ -45,7 +53,7 @@ public class Train {
 
     /**
      * empties the wagons determined by the color
-     * @param color
+     * @param color The color of the station
      */
     public void empty(Color color) {
         Iterator<Wagon> it = wagons.iterator();
@@ -85,7 +93,7 @@ public class Train {
 
     /**
      * Gets the passangers on the train
-     * @param color
+     * @param color The color of the station
      * @return true if the getting on is succesful
      */
     public boolean getOn(Color color) {
@@ -101,6 +109,7 @@ public class Train {
     }
 
     /**
+     * Checks emptiness of the train
      * @return true if the train is empty
      */
     public boolean isEmpty(){

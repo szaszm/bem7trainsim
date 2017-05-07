@@ -11,10 +11,17 @@ public class MenuEntry {
      * */
     private MainMenuControllerState mcs;
 
+    /**
+     * Menu entry constructor
+     * @param label The label of the menu entry
+     */
     public MenuEntry(String label) {
         this.label = label;
     }
 
+    /**
+     * Handles click on this menu entry
+     */
     public void click(){
         mcs.click(this);
     }

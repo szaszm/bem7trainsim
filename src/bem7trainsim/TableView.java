@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 
 /**
+ * Represents the view of the whole table
  * Created by marci on 5/7/17.
  */
 public class TableView extends View {
@@ -13,19 +14,35 @@ public class TableView extends View {
      */
     private Table table;
 
+    /**
+     * The controller state while playing
+     */
     private PlayControllerState controllerState;
 
+    /**
+     * TableView constructor
+     * @param table The table shown
+     * @param pcs Controller state
+     */
     public TableView(Table table, PlayControllerState pcs) {
         super();
         this.table = table;
         controllerState = pcs;
     }
 
+    /**
+     * Handles mouse click events
+     * @param e Event datThe a
+     */
     @Override
     void mouseClicked(MouseEvent e) {
 
     }
 
+    /**
+     * Draws the scene
+     * @param g Graphics object
+     */
     @Override
     void draw(Graphics g) {
         FieldDrawData[][] fdd = table.getDrawData();

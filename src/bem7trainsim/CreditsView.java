@@ -8,14 +8,32 @@ import java.awt.event.MouseEvent;
  */
 public class CreditsView extends View {
 
-    public CreditsView() {
+    /**
+     * The controller state which shows this view
+     */
+    private CreditsControllerState state;
+
+    /**
+     * CreditsView constructor.
+     * @param state The controller state which shows this view
+     */
+    public CreditsView(CreditsControllerState state) {
+        this.state = state;
     }
 
+    /**
+     * Handles mouse clicks
+     * @param e Event data
+     */
     @Override
     void mouseClicked(MouseEvent e) {
-
+        state.handleCommand("exit");
     }
 
+    /**
+     * Draws the content
+     * @param g Graphics object
+     */
     @Override
     void draw(Graphics g) {
         g.setColor(Color.RED);

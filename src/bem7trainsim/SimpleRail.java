@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Represents a simple basic rail type
  * Created by marci on 2017.03.18..
  */
 public class SimpleRail extends Rail {
@@ -30,6 +31,7 @@ public class SimpleRail extends Rail {
     }
 
     /**
+     * Sets the orientation of the rail
      * @param orientation new orientation to be set to the SimpleRail
      */
     public void setOrientation(Orientation orientation){
@@ -37,6 +39,7 @@ public class SimpleRail extends Rail {
     }
 
     /**
+     * Returns the next rail given the previous one
      * @param from The rail where the train comes from
      * @return The next rail
      */

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * Controller state which runs tests
  * Created by Csuto on 4/18/2017.
  */
 public class TestControllerState extends PlayControllerState implements ActionListener {
@@ -135,6 +136,7 @@ public class TestControllerState extends PlayControllerState implements ActionLi
     }
 
     /**
+     * Loads a map from file name
      * @param mapFileName the name of the map in string format. Available names in the documentation.
      * @throws IOException thrown when the input is not correct.
      */

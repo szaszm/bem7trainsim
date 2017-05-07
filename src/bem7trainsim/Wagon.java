@@ -2,6 +2,7 @@ package bem7trainsim;
 import java.awt.Color;
 
 /**
+ * Represents a wagon.
  * Created by marci on 2017.03.17..
  */
 public class Wagon extends Coach {
@@ -21,16 +22,18 @@ public class Wagon extends Coach {
      */
     private boolean empty;
 
-    /** Creates a wagon with the given color
-     * @param color
+    /**
+     * Creates a wagon with the given color
+     * @param color The color of the wagon
      */
     public Wagon(Color color) {
         this(color, false);
     }
 
-    /** Creates a wagon with the given color
-     * @param color
-     * @param empty
+    /**
+     * Creates a wagon with the given color
+     * @param color The color of the wagon
+     * @param empty True when the wagon is empty
      */
     public Wagon(Color color, boolean empty) {
         this.color = color;
@@ -39,7 +42,7 @@ public class Wagon extends Coach {
 
     /**
      * Empties the wagon if the colors matching
-     * @param color
+     * @param color The color of the station
      */
     public void empty(Color color) {
         if(color == this.color) {
@@ -70,7 +73,7 @@ public class Wagon extends Coach {
 
     /**
      * Putting passengers to the wagon
-     * @param color
+     * @param color The color of the station
      * @return true if the getting on was succesful
      */
     public boolean getOn(Color color) {
@@ -115,7 +118,7 @@ public class Wagon extends Coach {
 
     /**
      * updating the direction to the given value
-     * @param direction
+     * @param direction The new direction
      * @return the previous direction
      */
     public Table.Direction updateDirection(Table.Direction direction) {

@@ -12,8 +12,14 @@ import java.awt.event.WindowEvent;
  */
 public class Controller extends JFrame implements MouseListener, AutoCloseable {
 
+    /**
+     * The current state of the controller
+     */
     private ControllerState state;
 
+    /**
+     * Creates the controller and shows the main window
+     */
     public Controller() {
         super("best_ever_magic_7 Train Simulator");
         setContentPane(new DrawPane());
@@ -24,6 +30,10 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
         setState(new MainMenuControllerState(this));
     }
 
+    /**
+     * Sets the state of the controller
+     * @param state The new state
+     */
     public void setState(ControllerState state) {
         if(state == null){
             try {
@@ -35,33 +45,63 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
         this.state = state;
     }
 
+    /**
+     * Handles mouse clicks
+     * @param e Event data
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         state.mouseClicked(e);
     }
 
+    /**
+     * Handles mouse button down events
+     * @param e Event data
+     */
     @Override
     public void mousePressed(MouseEvent e) {
     }
 
+    /**
+     * Handles mouse button up events
+     * @param e Event data
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
     }
 
+    /**
+     * Handles mouse enter events
+     * @param e Event data
+     */
     @Override
     public void mouseEntered(MouseEvent e) {
     }
 
+    /**
+     * Handles mouse leave events
+     * @param e Event data
+     */
     @Override
     public void mouseExited(MouseEvent e) {
     }
 
+    /**
+     * Closes the main window and exits the application
+     */
     @Override
     public void close() {
         dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 
+    /**
+     * Makes drawing possible
+     */
     class DrawPane extends JPanel{
+        /**
+         * Draws the component
+         * @param g Graphics object
+         */
         public void paintComponent(Graphics g){
             state.view.draw(g);
         }
