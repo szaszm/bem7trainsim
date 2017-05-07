@@ -241,10 +241,4 @@ public class PlayControllerState extends ControllerState implements ActionListen
     public void clickAt(int x,int y){
         //TODO(Ne hagyd magyarul a kommentet!)
     }
-
-    //Vonatok mozgatása
-    public void moveTrains(){
-        //TODO(Ne hagyd magyarul a kommentet!)
-    }
-
 }

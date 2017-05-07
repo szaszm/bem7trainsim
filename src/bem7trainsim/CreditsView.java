@@ -1,5 +1,6 @@
 package bem7trainsim;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 /**
@@ -8,6 +9,9 @@ import java.awt.event.MouseEvent;
 public class CreditsView extends View {
 
 
+    public CreditsView(Graphics g) {
+        super(g);
+    }
 
     @Override
     void mouseClicked(MouseEvent e) {

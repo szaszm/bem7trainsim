@@ -26,7 +26,7 @@ public class MainMenuControllerState extends ControllerState {
         String[] s = command.split(" ");
         switch (s[0]) {
             case "play":
-                LevelSelectControllerState state = new LevelSelectControllerState();
+                LevelSelectControllerState state = new LevelSelectControllerState(graphics, controller);
                 controller.setState(state);
                 return state;
             case "credits":

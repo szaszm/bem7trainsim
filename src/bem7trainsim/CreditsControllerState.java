@@ -8,7 +8,10 @@ public class CreditsControllerState extends ControllerState implements ActionLis
 
     protected CreditsControllerState(Graphics g, Controller c) {
         super(g, c);
+        view = new CreditsView(g);
     }
+
+    private CreditsView getView() { return (CreditsView) view; }
 
     @Override
     public ControllerState handleCommand(String command) {
