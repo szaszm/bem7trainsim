@@ -45,10 +45,6 @@ public class MainMenuControllerState extends ControllerState {
         return this;
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
 
     public void click(MenuEntry m){
         if(m.GetLabel().equals("PLAY")) {
@@ -56,7 +52,7 @@ public class MainMenuControllerState extends ControllerState {
         } else if(m.GetLabel().equals("CREDITS")){
             controller.setState(new CreditsControllerState(controller));
         } else if(m.GetLabel().equals("EXIT")){
-            //TODO kilépés
+            controller.setState(null);
         }
     }
 }
