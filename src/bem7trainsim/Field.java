@@ -9,5 +9,5 @@ public abstract class Field {
      * Gets the draw data of the field
      * @return the string representing the field
      */
-    abstract String getDrawData();
+    abstract FieldDrawData getDrawData();
 }

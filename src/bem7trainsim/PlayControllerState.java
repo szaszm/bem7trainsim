@@ -113,7 +113,7 @@ public class PlayControllerState extends ControllerState implements ActionListen
         String[] s = command.split(" ");
         switch (s[0]) {
             case "back":
-                LevelSelectControllerState state = new LevelSelectControllerState(graphics, controller);
+                LevelSelectControllerState state = new LevelSelectControllerState(controller);
                 controller.setState(state);
                 return state;
             //switch x y
@@ -246,10 +246,4 @@ public class PlayControllerState extends ControllerState implements ActionListen
     public void clickAt(int x, int y) {
         //TODO(Ne hagyd magyarul a kommentet!)
     }
-
-    //Vonatok mozgatása
-    public void moveTrains() {
-        //TODO(Ne hagyd magyarul a kommentet!)
-    }
-
 }

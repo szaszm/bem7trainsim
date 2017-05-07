@@ -17,6 +17,8 @@ public class TableView extends View {
 
     public TableView(Table table, PlayControllerState pcs) {
         super();
+        this.table = table;
+        controllerState = pcs;
     }
 
     @Override

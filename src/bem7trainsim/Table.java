@@ -87,26 +87,14 @@ public class Table {
      * Gets the data to be drawn
      * @return Data as String
      */
-    String getDrawData() {
-        String result = "#";
-        for(int i = 0; i < fields[0].length; i++){
-            result += Integer.toString(i + 1);
-        }
-        result += "#\n";
-        for (int y = 0; y < fields.length; y++) {
-            result += Integer.toString(y + 1);
-            for (int x = 0; x < fields[y].length; x++) {
-                result += fields[y][x].getDrawData();
+    public FieldDrawData[][] getDrawData() {
+        FieldDrawData[][] result = new FieldDrawData[fields.length][];
+        for(int y = 0; y < fields.length; ++y) {
+            result[y] = new FieldDrawData[fields[y].length];
+            for(int x = 0; x < fields[y].length; ++x) {
+                result[y][x] = fields[y][x].getDrawData();
             }
-            result += Integer.toString(y + 1);
-            result += "\n";
         }
-        result += "#";
-        for(int i = 0; i < fields[0].length; i++){
-            result += Integer.toString(i + 1);
-        }
-        result += "#\n";
-        return result;
     }
 
     /**
@@ -191,15 +179,4 @@ public class Table {
     public void changeAt(int x,int y){
       //TODO
     }
-
-
-    /**
-     * @return the data necessary for the drawing
-     */
-    public FieldDrawData getDrawData(){
-
-        //TODO
-        return FieldDrawData();
-    }
-
 }
