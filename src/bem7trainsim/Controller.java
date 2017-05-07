@@ -25,7 +25,11 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
 
     public void setState(ControllerState state) {
         if(state == null){
-            close();
+            try {
+                close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         this.state = state;
     }
