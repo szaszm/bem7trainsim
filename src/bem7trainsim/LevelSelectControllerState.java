@@ -10,9 +10,9 @@ import java.io.IOException;
  */
 public class LevelSelectControllerState extends ControllerState {
 
-    protected LevelSelectControllerState(Graphics g, Controller c) {
-        super(g, c);
-        view = new LevelSelectView(g);
+    protected LevelSelectControllerState(Controller c) {
+        super(c);
+        view = new LevelSelectView();
     }
 
     @Override
@@ -20,23 +20,23 @@ public class LevelSelectControllerState extends ControllerState {
         String[] s = command.split(" ");
         if(s[0].startsWith("map_")){
             try{
-                PlayControllerState newState = new PlayControllerState(graphics, controller, s[0].substring(4));
+                PlayControllerState newState = new PlayControllerState(controller, s[0].substring(4));
                 newState.start();
                 controller.setState(newState);
                 return newState;
             } catch(IOException e){
                 System.out.println(e.getMessage());
-                MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+                MainMenuControllerState state = new MainMenuControllerState(controller);
                 controller.setState(state);
                 return state;
             } catch (CollisionException e) {
                 System.out.println("Utkozes, jatek vege. Ido: 0");
-                MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+                MainMenuControllerState state = new MainMenuControllerState(controller);
                 controller.setState(state);
                 return state;
             } catch (TableLeftException e){
                 System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: 0");
-                MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+                MainMenuControllerState state = new MainMenuControllerState(controller);
                 controller.setState(state);
                 return state;
             }
@@ -47,11 +47,11 @@ public class LevelSelectControllerState extends ControllerState {
             } catch(IOException e){
                 System.out.println(e.getMessage());
             }
-            LevelSelectControllerState state = new LevelSelectControllerState(graphics, controller);
+            LevelSelectControllerState state = new LevelSelectControllerState(controller);
             controller.setState(state);
             return state;
         } else if (s[0].equals("back")){
-            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
         }

@@ -15,8 +15,8 @@ public class TableView extends View {
 
     private PlayControllerState controllerState;
 
-    public TableView(Table table, PlayControllerState pcs, Graphics g) {
-        super(g);
+    public TableView(Table table, PlayControllerState pcs) {
+        super();
     }
 
     @Override
@@ -25,7 +25,7 @@ public class TableView extends View {
     }
 
     @Override
-    void draw() {
+    void draw(Graphics g) {
 
     }
 }

@@ -3,6 +3,7 @@ package bem7trainsim;
 import oracle.jrockit.jfr.JFR;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.BufferedReader;
@@ -19,10 +20,11 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
 
     public Controller() {
         super("best_ever_magic_7 Train Simulator");
+        setContentPane(new DrawPane());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
-        setState(new MainMenuControllerState(getGraphics(), this));
+        setState(new MainMenuControllerState(this));
     }
 
     public void setState(ControllerState state) {
@@ -59,5 +61,10 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
     public void Invalidate() {
         repaint(0, 0, getWidth(), getHeight());
         revalidate();
+    }
+    class DrawPane extends JPanel{
+        public void paintComponent(Graphics g){
+
+        }
     }
 }

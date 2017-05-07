@@ -7,8 +7,7 @@ import java.awt.event.MouseEvent;
  * Created by marci on 5/7/17.
  */
 public class LevelSelectView extends View {
-    public LevelSelectView(Graphics g) {
-        super(g);
+    public LevelSelectView() {
     }
 
     @Override
@@ -17,7 +16,7 @@ public class LevelSelectView extends View {
     }
 
     @Override
-    void draw() {
+    void draw(Graphics g) {
 
     }
 }

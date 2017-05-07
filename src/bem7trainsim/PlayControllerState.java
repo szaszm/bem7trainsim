@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Csuto on 4/18/2017.
  */
-public class PlayControllerState extends ControllerState implements ActionListener{
+public class PlayControllerState extends ControllerState implements ActionListener {
 
     /**
      * The game table
@@ -53,7 +53,7 @@ public class PlayControllerState extends ControllerState implements ActionListen
                 moveTrains();
             } catch (CollisionException | TableLeftException e1) {
                 e1.printStackTrace();
-                controller.setState(new MainMenuControllerState(graphics, controller));
+                controller.setState(new MainMenuControllerState(controller));
             }
         }
     });
@@ -62,16 +62,19 @@ public class PlayControllerState extends ControllerState implements ActionListen
      * @param map The name of the map in string format. Available names in the documentation.
      * @throws IOException thrown when the input is not correct.
      */
-    public PlayControllerState(Graphics g, Controller c, String map) throws IOException {
-        super(g, c);
+    public PlayControllerState(Controller c, String map) throws IOException {
+        super(c);
         loadMap(map);
-        view = new TableView(table, this, g);
+        view = new TableView(table, this);
     }
 
-    private TableView getView() { return (TableView) view; }
+    private TableView getView() {
+        return (TableView) view;
+    }
 
     /**
      * Starts the movement of the trains
+     *
      * @throws CollisionException thrown when trains collide
      * @throws TableLeftException thrown when a not empty train leaves the table
      */
@@ -82,15 +85,16 @@ public class PlayControllerState extends ControllerState implements ActionListen
 
     /**
      * Handles the commands but not throwing exceptions.
+     *
      * @param command The command in string format. Available commands list is in the documentation.
      * @return The controller state which the controller steps into
      */
     @Override
     public ControllerState handleCommand(String command) {
         ControllerState newState = this;
-        try{
+        try {
             newState = handleCommandWithoutException(command);
-        } catch(CannotSwitchException | CannotBuildException e){
+        } catch (CannotSwitchException | CannotBuildException e) {
             System.out.println(e.getMessage());
         }
         System.out.println(table.getDrawData()); // Draws the table if there was no exception and statechange
@@ -99,10 +103,11 @@ public class PlayControllerState extends ControllerState implements ActionListen
 
     /**
      * Handles the command and throws exceptions while doing so.
+     *
      * @param command The command in string format. Available commands list is in the documentation.
      * @return The controller state which the controller steps into
      * @throws CannotSwitchException thrown when the switch cannot switch
-     * @throws CannotBuildException thrown when a tunnel entrance cannot be built
+     * @throws CannotBuildException  thrown when a tunnel entrance cannot be built
      */
     protected ControllerState handleCommandWithoutException(String command) throws CannotSwitchException, CannotBuildException {
         String[] s = command.split(" ");
@@ -112,16 +117,14 @@ public class PlayControllerState extends ControllerState implements ActionListen
                 controller.setState(state);
                 return state;
             //switch x y
-            case "switch":
-            {
+            case "switch": {
                 int x = Integer.parseInt(s[1]);
                 int y = Integer.parseInt(s[2]);
                 table.switchAt(x - 1, y - 1);
             }
             break;
             // build x y
-            case "build":
-            {
+            case "build": {
                 int x = Integer.parseInt(s[1]);
                 int y = Integer.parseInt(s[2]);
                 table.buildAt(x - 1, y - 1);
@@ -147,20 +150,21 @@ public class PlayControllerState extends ControllerState implements ActionListen
 
     /**
      * Moves the trains by one step
+     *
      * @throws CollisionException thrown when trains collide
      * @throws TableLeftException thrown when a not empty train leaves the table
      */
     protected void moveTrains() throws CollisionException, TableLeftException {
         // Firstly move existing trains
-        for (Train train: trains) {
+        for (Train train : trains) {
             train.move();
         }
 
         // Secondly add new trains as their constructor already moves them to the starting rail
-        for(Iterator<Pair<Integer, List<Wagon>>> iterator = trainData.iterator(); iterator.hasNext();) {
+        for (Iterator<Pair<Integer, List<Wagon>>> iterator = trainData.iterator(); iterator.hasNext(); ) {
             Pair<Integer, List<Wagon>> pair = iterator.next();
             int start = pair.getKey();
-            if(start == currentTime + 1) {
+            if (start == currentTime + 1) {
                 List<Wagon> wagons = pair.getValue();
                 trains.add(new Train(startRail, table, wagons));
                 iterator.remove();
@@ -170,6 +174,7 @@ public class PlayControllerState extends ControllerState implements ActionListen
 
     /**
      * Tries moving the trains and increments time.
+     *
      * @return The controller state which the controller steps into
      */
     protected ControllerState tick() {
@@ -177,20 +182,20 @@ public class PlayControllerState extends ControllerState implements ActionListen
         try {
             moveTrains();
         } catch (CollisionException e) {
-            System.out.println("Utkozes, jatek vege. Ido: "+Integer.toString(currentTime));
-            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            System.out.println("Utkozes, jatek vege. Ido: " + Integer.toString(currentTime));
+            MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
-        } catch (TableLeftException e){
-            System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: "+Integer.toString(currentTime));
-            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+        } catch (TableLeftException e) {
+            System.out.println("Nem ures vonat elhagyta a palyat, jatek vege. Ido: " + Integer.toString(currentTime));
+            MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
         }
         System.out.println(table.getDrawData());
-        if(isWin()) {
+        if (isWin()) {
             System.out.println("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
-            MainMenuControllerState state = new MainMenuControllerState(graphics, controller);
+            MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
         }
@@ -201,7 +206,7 @@ public class PlayControllerState extends ControllerState implements ActionListen
      * @param mapFileName the name of the map in string format. Available names in the documentation.
      * @throws IOException thrown when the input is not correct.
      */
-    protected void loadMap(String mapFileName) throws IOException{
+    protected void loadMap(String mapFileName) throws IOException {
         TableLoader tl = new TableLoader();
         table = tl.LoadTable(mapFileName);
         trains = tl.trains;
@@ -213,19 +218,19 @@ public class PlayControllerState extends ControllerState implements ActionListen
     /**
      * @return if the winning condition is fulfilled returns true, else false.
      */
-    protected boolean isWin(){
+    protected boolean isWin() {
         boolean win = true;
-        for (Train train: trains) {
+        for (Train train : trains) {
             if (!train.isEmpty())
                 win = false;
         }
-        for(UpStation upstation: upstations){
-            if(!upstation.isGone())
+        for (UpStation upstation : upstations) {
+            if (!upstation.isGone())
                 win = false;
         }
-        if(!trainData.isEmpty())
+        if (!trainData.isEmpty())
             win = false;
-        return  win;
+        return win;
     }
 
     @Override
@@ -238,12 +243,12 @@ public class PlayControllerState extends ControllerState implements ActionListen
     }
 
     //Felhasználói interakció kezelése az adott mezőre.
-    public void clickAt(int x,int y){
+    public void clickAt(int x, int y) {
         //TODO(Ne hagyd magyarul a kommentet!)
     }
 
     //Vonatok mozgatása
-    public void moveTrains(){
+    public void moveTrains() {
         //TODO(Ne hagyd magyarul a kommentet!)
     }
 

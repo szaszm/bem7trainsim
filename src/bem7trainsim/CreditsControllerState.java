@@ -6,8 +6,8 @@ import java.awt.event.MouseEvent;
 
 public class CreditsControllerState extends ControllerState implements ActionListener {
 
-    protected CreditsControllerState(Graphics g, Controller c) {
-        super(g, c);
+    protected CreditsControllerState(Controller c) {
+        super(c);
     }
 
     @Override
