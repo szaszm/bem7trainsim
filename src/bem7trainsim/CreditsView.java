@@ -19,6 +19,6 @@ public class CreditsView extends View {
 
     @Override
     void draw(Graphics g) {
-
+        g.drawString("Csutorás Robin\nGnandt Balázs\nSzász Márton\nTamás Csongor\nZabó Kristóf",g.getClipBounds().width / 2, g.getClipBounds().height / 2);
     }
 }
