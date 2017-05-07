@@ -19,6 +19,7 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
+        setSize(900, 900);
         setState(new MainMenuControllerState(this));
     }
 
