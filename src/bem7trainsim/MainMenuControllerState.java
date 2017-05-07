@@ -12,8 +12,11 @@ import java.util.ArrayList;
 public class MainMenuControllerState extends ControllerState {
     protected MainMenuControllerState(Controller c) {
         super(c);
-        List<? extends MenuEntry> entries = new ArrayList<>();
+        List<MenuEntry> entries = new ArrayList<>();
         // TODO: fill entries
+        entries.add(new MenuEntry("PLAY"));
+        entries.add(new MenuEntry("CREDITS"));
+        entries.add(new MenuEntry("EXIT"));
         view = new MenuView(entries);
     }
 
@@ -45,6 +48,10 @@ public class MainMenuControllerState extends ControllerState {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
+    }
+
+    public void click(MenuEntry m){
 
     }
 }
