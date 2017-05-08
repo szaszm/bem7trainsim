@@ -240,4 +240,8 @@ public class PlayControllerState extends ControllerState implements ActionListen
     public void clickAt(int x, int y) {
 
     }
+
+    public int getCurrentTime() {
+        return currentTime;
+    }
 }

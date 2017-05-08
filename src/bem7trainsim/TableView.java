@@ -45,6 +45,7 @@ public class TableView extends View {
      */
     @Override
     void draw(Graphics g) {
+        g.drawString(Integer.toString(controllerState.getCurrentTime()),0,0);
         FieldDrawData[][] fdd = table.getDrawData();
         int sideLength = g.getClipBounds().width / fdd.length;
         if (fdd[0] != null && g.getClipBounds().height / fdd[0].length < sideLength) {
