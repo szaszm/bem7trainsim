@@ -47,14 +47,7 @@ public class PlayControllerState extends ControllerState implements ActionListen
     /**
      * Handles game logic updates
      */
-    private Timer timerTick = new Timer(1000, e -> {
-        try {
-            moveTrains();
-        } catch (CollisionException | TableLeftException e1) {
-            e1.printStackTrace();
-            controller.setState(new MainMenuControllerState(controller));
-        }
-    });
+    private Timer timerTick = new Timer(1000, e -> tick());
 
     /**
      * @param map The name of the map in string format. Available names in the documentation.
@@ -64,6 +57,7 @@ public class PlayControllerState extends ControllerState implements ActionListen
         super(c);
         loadMap(map);
         view = new TableView(table, this);
+        timerTick.start();
     }
 
     /**

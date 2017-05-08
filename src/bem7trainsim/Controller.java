@@ -103,9 +103,7 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
          * Draws the component
          * @param g Graphics object
          */
-        public void paintComponent(Graphics g){
-            state.view.draw(g);
-        }
+        public void paintComponent(Graphics g){ state.view.draw(g); }
     }
 
     /**

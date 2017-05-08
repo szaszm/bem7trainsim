@@ -38,17 +38,25 @@ public class DownStation extends SimpleRail {
     @Override
     public FieldDrawData getDrawData() {
         List<String> layers = new ArrayList<>();
+        String s = "";
+        if(orientation == Orientation.HORIZONTAL){
+            s += "═";
+        } else {
+            s += "║";
+        }
 
         if (color.equals(Color.RED)) {
-            layers.add("I");
+            s += "I";
         }
         else if (color.equals(Color.YELLOW)) {
-            layers.add("Á");
+            s += "Á";
         }
         else if (color.equals(Color.GREEN)) {
-            layers.add("Ö");
+            s += "Ö";
         }
-        else layers.add("É");
+        else s += "É";
+
+        layers.add(s);
 
         if (coach != null)
             layers.add(coach.getDrawData());
