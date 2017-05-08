@@ -62,6 +62,7 @@ public class PlayControllerState extends ControllerState implements ActionListen
 
     /**
      * Returns the current view property typecasted
+     *
      * @return The view
      */
     private TableView getView() {
@@ -176,23 +177,23 @@ public class PlayControllerState extends ControllerState implements ActionListen
         try {
             moveTrains();
         } catch (CollisionException e) {
-            message("Utkozes, jatek vege. Ido: " + Integer.toString(currentTime));
-            MainMenuControllerState state = new MainMenuControllerState(controller);
-            controller.setState(state);
-            return state;
+            return endGame("Utkozes, jatek vege. Ido: " + Integer.toString(currentTime));
         } catch (TableLeftException e) {
-            message("Nem ures vonat elhagyta a palyat, jatek vege. Ido: " + Integer.toString(currentTime));
-            MainMenuControllerState state = new MainMenuControllerState(controller);
-            controller.setState(state);
-            return state;
+            return endGame("Nem ures vonat elhagyta a palyat, jatek vege. Ido: " + Integer.toString(currentTime));
         }
         if (isWin()) {
-            message("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
-            MainMenuControllerState state = new MainMenuControllerState(controller);
-            controller.setState(state);
-            return state;
+            return endGame("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
         }
+        table.changeDecoration();
         return this;
+    }
+
+    private ControllerState endGame(String cause) {
+        timerTick.stop();
+        message(cause);
+        MainMenuControllerState state = new MainMenuControllerState(controller);
+        controller.setState(state);
+        return state;
     }
 
     /**
@@ -228,6 +229,7 @@ public class PlayControllerState extends ControllerState implements ActionListen
 
     /**
      * Handles user interaction
+     *
      * @param x The horizontal coordinate of the clicked field
      * @param y The vertical coordinate of the clicked field
      */

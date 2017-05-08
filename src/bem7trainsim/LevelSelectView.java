@@ -15,8 +15,14 @@ public class LevelSelectView extends View {
      */
     private LevelSelectControllerState state;
 
-
+    /**
+     * Stores maps name
+     */
     private List<String> maplist;
+
+    /**
+     * Size of maplist
+     */
     private int mapsize;
 
     /**
@@ -37,7 +43,7 @@ public class LevelSelectView extends View {
         if(e.getX() >= 100 && e.getX() <= 800 && e.getY() >= 550+30 && e.getY() <= 700+30)
         {state.handleCommand("exit");return;}
         if(e.getX() >= 100 && e.getX() <= 250 && e.getY() >= 50+30 && e.getY() <= 200+30 && mapsize > 0)
-        {state.handleCommand("map_" + maplist.get(1)); return;}
+        {state.handleCommand("map_" + maplist.get(0)); return;}
         if(e.getX() >= 283 && e.getX() <= 333 && e.getY() >= 50+30 && e.getY() <= 200+30 && mapsize > 1)
         {state.handleCommand("map_" + maplist.get(1)); return;}
         if(e.getX() >= 466 && e.getX() <= 616 && e.getY() >= 50+30 && e.getY() <= 200+30 && mapsize > 2)
