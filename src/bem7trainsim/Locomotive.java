@@ -83,12 +83,16 @@ public class Locomotive extends Coach {
         switch (direction) {
             case Up:
                 result.add("A");
+                break;
             case Left:
                 result.add("<");
+                break;
             case Down:
                 result.add("V");
+                break;
             case Right:
                 result.add(">");
+                break;
         }
         return result;
     }
