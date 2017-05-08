@@ -92,8 +92,7 @@ public class SimpleRail extends Rail {
         }
 
         if (coach != null) {
-            c += coach.getDrawData();
-            layers.add(c);
+            layers.add(coach.getDrawData() + c);
         }
 
         return new FieldDrawData(layers);

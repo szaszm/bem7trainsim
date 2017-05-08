@@ -168,8 +168,7 @@ public class Switch extends Rail {
         layers.add(s);
 
         if (coach != null)
-            c += coach.getDrawData();
-            layers.add(c);
+            layers.add(coach.getDrawData() + c);
 
         return new FieldDrawData(layers);
     }
