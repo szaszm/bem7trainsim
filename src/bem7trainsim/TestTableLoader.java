@@ -49,7 +49,7 @@ public class TestTableLoader extends TableLoader {
         ConnectRails();
 
         //Creating the table with the necessary parameters.
-        return new Table(fields, tunnelEntrances);
+        return new Table(fields, tunnelEntrances, entrances, switches);
     }
 
     /**

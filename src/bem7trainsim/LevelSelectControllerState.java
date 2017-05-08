@@ -18,7 +18,7 @@ public class LevelSelectControllerState extends ControllerState {
      */
     protected LevelSelectControllerState(Controller c) {
         super(c);
-        view = new LevelSelectView();
+        view = new LevelSelectView(this);
     }
 
     /**
