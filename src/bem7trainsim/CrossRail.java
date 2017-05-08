@@ -13,6 +13,11 @@ public class CrossRail extends Rail {
     private List<Rail> crossLinks;
 
     /**
+     * Last orientation of the train
+     */
+    private String lastState = "═";
+
+    /**
      * CrossRail constructor
      */
     public CrossRail() {
@@ -28,9 +33,11 @@ public class CrossRail extends Rail {
     @Override
     public Rail next(Rail from) {
         if(links.contains(from)) {
+            lastState = "═";
             if(links.indexOf(from) == 0) return links.get(1);
             else return links.get(0);
         } else {
+            lastState = "║";
             if(crossLinks.indexOf(from) == 0) return crossLinks.get(1);
             else return crossLinks.get(0);
         }
@@ -53,7 +60,7 @@ public class CrossRail extends Rail {
         List<String> layers = new ArrayList<>();
         layers.add("╬");
         if (coach != null)
-            layers.addAll(coach.getDrawData());
+            layers.add(coach.getDrawData() + lastState);
         return new FieldDrawData(layers);
     }
 }
