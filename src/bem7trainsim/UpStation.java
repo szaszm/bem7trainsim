@@ -60,6 +60,8 @@ public class UpStation extends SimpleRail {
             s += "║";
         }
 
+        String c = s;
+
         if(!gone){
             if (color.equals(Color.RED)) {
                 s += "i";
@@ -80,7 +82,8 @@ public class UpStation extends SimpleRail {
         layers.add(s);
 
         if (coach != null)
-            layers.add(coach.getDrawData());
+            c += coach.getDrawData();
+            layers.add(c);
 
         return new FieldDrawData(layers);
     }

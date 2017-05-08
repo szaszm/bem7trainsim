@@ -75,16 +75,6 @@ public class Locomotive extends Coach {
      * @return Returns the character drawn to the terminal when rendering the table
      */
     public String getDrawData() {
-        if(direction == null)
-            return "???";
-        switch (direction) {
-            case Up: return "A";
-            case Left: return "<";
-            case Down: return "V";
-            case Right: return ">";
-
-            // Impossible case to silence warning
-            default: return "?";
-        }
+        return "L";
     }
 }
