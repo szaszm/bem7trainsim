@@ -158,7 +158,7 @@ public class Switch extends Rail {
         if (orientation == Orientation.WestRight) {
             if(state.nextStraight()){
                 s += "─┐";
-                postfix += "─";
+                postfix += "═";
             } else {
                 s += "┐─";
                 postfix += "┐";
