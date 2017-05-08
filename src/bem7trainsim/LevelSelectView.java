@@ -42,7 +42,7 @@ public class LevelSelectView extends View {
     @Override
     void mouseClicked(MouseEvent e) {
         if (e.getX() >= 100 && e.getX() <= 800 && e.getY() >= 550 + 30 && e.getY() <= 700 + 30) {
-            state.handleCommand("exit");
+            state.handleCommand("back");
             return;
         }
         if (e.getX() >= 100 && e.getX() <= 250 && e.getY() >= 50 + 30 && e.getY() <= 200 + 30 && mapsize > 0) {
