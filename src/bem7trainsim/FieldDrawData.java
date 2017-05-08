@@ -181,16 +181,16 @@ public class FieldDrawData {
             images.put("K┌",ImageIO.read(new File(path + "/Wagons/BlueWagonSouthRight.png")));
             images.put("F┌",ImageIO.read(new File(path + "/Wagons/BlackWagonSouthRight.png")));
 
-            images.put("p┐",ImageIO.read(new File(path + "/Wagons/RedWagonSouthWest.png")));
-            images.put("s┐",ImageIO.read(new File(path + "/Wagons/YellowWagonSouthWest.png")));
-            images.put("z┐",ImageIO.read(new File(path + "/Wagons/GreenWagonSouthWest.png")));
-            images.put("k┐",ImageIO.read(new File(path + "/Wagons/BlueWagonSouthWest.png")));
-            images.put("x┐",ImageIO.read(new File(path + "/Wagons/GreyWagonSouthWest.png")));
-            images.put("P┐",ImageIO.read(new File(path + "/Wagons/RedWagonSouthWest.png")));
-            images.put("S┐",ImageIO.read(new File(path + "/Wagons/YellowWagonSouthWest.png")));
-            images.put("Z┐",ImageIO.read(new File(path + "/Wagons/GreenWagonSouthWest.png")));
-            images.put("K┐",ImageIO.read(new File(path + "/Wagons/BlueWagonSouthWest.png")));
-            images.put("F┐",ImageIO.read(new File(path + "/Wagons/BlackWagonSouthWest.png")));
+            images.put("p┐",ImageIO.read(new File(path + "/Wagons/RedWagonSouthLeft.png")));
+            images.put("s┐",ImageIO.read(new File(path + "/Wagons/YellowWagonSouthLeft.png")));
+            images.put("z┐",ImageIO.read(new File(path + "/Wagons/GreenWagonSouthLeft.png")));
+            images.put("k┐",ImageIO.read(new File(path + "/Wagons/BlueWagonSouthLeft.png")));
+            images.put("x┐",ImageIO.read(new File(path + "/Wagons/GreyWagonSouthLeft.png")));
+            images.put("P┐",ImageIO.read(new File(path + "/Wagons/RedWagonSouthLeft.png")));
+            images.put("S┐",ImageIO.read(new File(path + "/Wagons/YellowWagonSouthLeft.png")));
+            images.put("Z┐",ImageIO.read(new File(path + "/Wagons/GreenWagonSouthLeft.png")));
+            images.put("K┐",ImageIO.read(new File(path + "/Wagons/BlueWagonSouthLeft.png")));
+            images.put("F┐",ImageIO.read(new File(path + "/Wagons/BlackWagonSouthLeft.png")));
 
             images.put(">═",ImageIO.read(new File(path + "/Wagons/LocomotiveEast.png")));
             images.put("<═",ImageIO.read(new File(path + "/Wagons/LocomotiveWest.png")));
