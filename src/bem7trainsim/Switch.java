@@ -97,7 +97,7 @@ public class Switch extends Rail {
                 s += "│└";
                 postfix += "║";
             } else {
-                s += "│└";
+                s += "└│└";
                 postfix += "└";
             }
         }
