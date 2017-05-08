@@ -59,7 +59,7 @@ public class DownStation extends SimpleRail {
         layers.add(s);
 
         if (coach != null)
-            layers.add(coach.getDrawData());
+            layers.addAll(coach.getDrawData());
 
         return new FieldDrawData(layers);
     }
