@@ -95,7 +95,7 @@ public class Switch extends Rail {
         if (orientation == Orientation.NorthLeft) {
             if(state.nextStraight()){
                 s += "│└";
-                c += "│";
+                c += "║";
             } else {
                 s += "│└";
                 c += "└";
@@ -104,7 +104,7 @@ public class Switch extends Rail {
         if (orientation == Orientation.NorthRight) {
             if(state.nextStraight()){
                 s += "│┘";
-                c += "│";
+                c += "║";
             } else {
                 s += "┘│";
                 c += "┘";
@@ -113,7 +113,7 @@ public class Switch extends Rail {
         if (orientation == Orientation.EastLeft) {
             if(state.nextStraight()){
                 s += "─┌";
-                c += "─";
+                c += "═";
             } else {
                 s += "┌─";
                 c += "┌";
@@ -122,7 +122,7 @@ public class Switch extends Rail {
         if (orientation == Orientation.EastRight) {
             if(state.nextStraight()){
                 s += "─└";
-                c += "─";
+                c += "═";
             } else {
                 s += "└─";
                 c += "└";
@@ -131,7 +131,7 @@ public class Switch extends Rail {
         if (orientation == Orientation.SouthRight) {
             if(state.nextStraight()){
                 s += "│┌";
-                c += "│";
+                c += "║";
             } else {
                 s += "┌│";
                 c += "┌";
@@ -140,7 +140,7 @@ public class Switch extends Rail {
         if (orientation == Orientation.SouthLeft) {
             if(state.nextStraight()){
                 s += "│┐";
-                c += "│";
+                c += "║";
             } else {
                 s += "┐│";
                 c += "┐";
@@ -149,7 +149,7 @@ public class Switch extends Rail {
         if (orientation == Orientation.WestLeft) {
             if(state.nextStraight()){
                 s += "─┘";
-                c += "─";
+                c += "═";
             } else {
                 s += "┘─";
                 c += "┘";
