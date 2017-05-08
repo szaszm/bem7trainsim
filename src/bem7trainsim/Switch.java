@@ -91,84 +91,88 @@ public class Switch extends Rail {
     public FieldDrawData getDrawData() {
         List<String> layers = new ArrayList<>();
         String s = "";
-        String c = "";
+        String postfix = "";
         if (orientation == Orientation.NorthLeft) {
             if(state.nextStraight()){
                 s += "│└";
-                c += "║";
+                postfix += "║";
             } else {
                 s += "│└";
-                c += "└";
+                postfix += "└";
             }
         }
         if (orientation == Orientation.NorthRight) {
             if(state.nextStraight()){
                 s += "│┘";
-                c += "║";
+                postfix += "║";
             } else {
                 s += "┘│";
-                c += "┘";
+                postfix += "┘";
             }
         }
         if (orientation == Orientation.EastLeft) {
             if(state.nextStraight()){
                 s += "─┌";
-                c += "═";
+                postfix += "═";
             } else {
                 s += "┌─";
-                c += "┌";
+                postfix += "┌";
             }
         }
         if (orientation == Orientation.EastRight) {
             if(state.nextStraight()){
                 s += "─└";
-                c += "═";
+                postfix += "═";
             } else {
                 s += "└─";
-                c += "└";
+                postfix += "└";
             }
         }
         if (orientation == Orientation.SouthRight) {
             if(state.nextStraight()){
                 s += "│┌";
-                c += "║";
+                postfix += "║";
             } else {
                 s += "┌│";
-                c += "┌";
+                postfix += "┌";
             }
         }
         if (orientation == Orientation.SouthLeft) {
             if(state.nextStraight()){
                 s += "│┐";
-                c += "║";
+                postfix += "║";
             } else {
                 s += "┐│";
-                c += "┐";
+                postfix += "┐";
             }
         }
         if (orientation == Orientation.WestLeft) {
             if(state.nextStraight()){
                 s += "─┘";
-                c += "═";
+                postfix += "═";
             } else {
                 s += "┘─";
-                c += "┘";
+                postfix += "┘";
             }
         }
         if (orientation == Orientation.WestRight) {
             if(state.nextStraight()){
                 s += "─┐";
-                c += "─";
+                postfix += "─";
             } else {
                 s += "┐─";
-                c += "┐";
+                postfix += "┐";
             }
         }
 
         layers.add(s);
 
-        if (coach != null)
-            layers.add(coach.getDrawData() + c);
+        if (coach != null) {
+            List<String> coachDrawData = coach.getDrawData();
+            for(String dd: coachDrawData) {
+                layers.add(dd + postfix);
+            }
+        }
 
         return new FieldDrawData(layers);
     }

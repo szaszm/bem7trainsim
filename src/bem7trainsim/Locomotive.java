@@ -1,4 +1,8 @@
 package bem7trainsim;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by marci on 2017.03.17.
  * Represents the locomotive, which is the first object of the train
@@ -74,7 +78,9 @@ public class Locomotive extends Coach {
     /**
      * @return Returns the character drawn to the terminal when rendering the table
      */
-    public String getDrawData() {
-        return "L";
+    public List<String> getDrawData() {
+        List<String> result = new ArrayList<>();
+        result.add("L");
+        return result;
     }
 }

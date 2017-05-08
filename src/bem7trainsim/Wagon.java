@@ -1,5 +1,8 @@
 package bem7trainsim;
-import java.awt.Color;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a wagon.
@@ -88,32 +91,35 @@ public class Wagon extends Coach {
      * Gets the draw data of the field
      * @return the string representing the field
      */
-    public String getDrawData() {
+    public List<String> getDrawData() {
+        List<String> result = new ArrayList<>();
         if (empty) {
             if (color.equals(Color.RED)) {
-                return "p";
+                result.add("p");
             }
             else if (color.equals(Color.YELLOW)) {
-                return "s";
+                result.add("s");
             }
             else if (color.equals(Color.GREEN)) {
-                return "z";
+                result.add("z");
             }
-            return "k";
+            else result.add("k");
         }
-        if (color.equals(Color.RED)) {
-            return "P";
+        else if (color.equals(Color.RED)) {
+            result.add("P");
         }
         else if (color.equals(Color.YELLOW)) {
-            return "S";
+            result.add("S");
         }
         else if (color.equals(Color.GREEN)) {
-            return "Z";
+            result.add("Z");
         }
         else if (color.equals(Color.BLUE)) {
-            return "K";
+            result.add("K");
         }
-        return "F";
+        else result.add("F");
+
+        return result;
     }
 
     /**
