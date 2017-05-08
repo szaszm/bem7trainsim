@@ -131,31 +131,36 @@ public class Table {
     Direction getDirection(Field from, Field to) {
         int x = -1, y = -1;
 
+        boolean found = false;
+
         outerloop:
         for (y = 0; y < fields.length; ++y) {
             for (x = 0; x < fields[y].length; ++x) {
                 if (fields[y][x] == from) {
+                    found = true;
                     break outerloop;
                 }
             }
         }
 
-        if (y > 0 && to == fields[y - 1][x]) {
-            return Direction.Up;
-        }
+        if(found){
+            if (y > 0 && to == fields[y - 1][x]) {
+                return Direction.Up;
+            }
 
-        if (x > 0 && to == fields[y][x - 1]) {
-            return Direction.Left;
-        }
+            if (x > 0 && to == fields[y][x - 1]) {
+                return Direction.Left;
+            }
 
-        if (y < fields.length - 1 && to == fields[y + 1][x]) {
-            return Direction.Down;
-        }
+            if (y < fields.length - 1 && to == fields[y + 1][x]) {
+                return Direction.Down;
+            }
 
-        if (x < fields[y].length - 1 && to == fields[y][x + 1]) {
-            return Direction.Right;
-        }
-
+            if (x < fields[y].length - 1 && to == fields[y][x + 1]) {
+                return Direction.Right;
+            }
+        } else return Direction.Up;
+        
         return null;
     }
 
