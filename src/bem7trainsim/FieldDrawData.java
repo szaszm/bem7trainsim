@@ -196,14 +196,14 @@ public class FieldDrawData {
             images.put("<═",ImageIO.read(new File(path + "/Wagons/LocomotiveWest.png")));
             images.put("A║",ImageIO.read(new File(path + "/Wagons/LocomotiveNorth.png")));
             images.put("V║",ImageIO.read(new File(path + "/Wagons/LocomotiveSouth.png")));
-            images.put("A└",ImageIO.read(new File(path + "/Wagons/LocomotiveNorthWest.png")));
-            images.put(">└",ImageIO.read(new File(path + "/Wagons/LocomotiveSouthEast.png")));
-            images.put("A┘",ImageIO.read(new File(path + "/Wagons/LocomotiveNorthEast.png")));
-            images.put("<┘",ImageIO.read(new File(path + "/Wagons/LocomotiveSouthWest.png")));
-            images.put("V┌",ImageIO.read(new File(path + "/Wagons/LocomotiveSouthWest.png")));
-            images.put(">┌",ImageIO.read(new File(path + "/Wagons/LocomotiveNorthEast.png")));
-            images.put("V┐",ImageIO.read(new File(path + "/Wagons/LocomotiveSouthEast.png")));
-            images.put("<┐",ImageIO.read(new File(path + "/Wagons/LocomotiveNorthWest.png")));
+            images.put("A└",ImageIO.read(new File(path + "/Wagons/LocomotiveEastRight.png")));
+            images.put(">└",ImageIO.read(new File(path + "/Wagons/LocomotiveNorthLeft.png")));
+            images.put("A┘",ImageIO.read(new File(path + "/Wagons/LocomotiveWestLeft.png")));
+            images.put("<┘",ImageIO.read(new File(path + "/Wagons/LocomotiveNorthRight.png")));
+            images.put("V┌",ImageIO.read(new File(path + "/Wagons/LocomotiveEastLeft.png")));
+            images.put(">┌",ImageIO.read(new File(path + "/Wagons/LocomotiveSouthRight.png")));
+            images.put("V┐",ImageIO.read(new File(path + "/Wagons/LocomotiveWestRight.png")));
+            images.put("<┐",ImageIO.read(new File(path + "/Wagons/LocomotiveSouthLeft.png")));
 
         } catch (IOException e) {
             e.printStackTrace();
