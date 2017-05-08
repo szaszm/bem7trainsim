@@ -115,7 +115,6 @@ public class FieldDrawData {
             images.put("┌─",ImageIO.read(new File(path + "/Switches/EastLeftCurve.png")));
             images.put("─┌",ImageIO.read(new File(path + "/Switches/EastLeftStraight.png")));
 
-            images.put("─┌",ImageIO.read(new File(path + "/switchEastLeftStraight.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
