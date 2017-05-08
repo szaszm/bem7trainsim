@@ -14,6 +14,15 @@ import java.util.List;
  * Created by Csuto on 4/18/2017.
  */
 public class TableLoader {
+    /**
+     * List of switches on the table
+     */
+    protected List<Point> switches;
+
+    /**
+     * List of entrances on the table
+     */
+    protected List<Point> entrances;
 
     /**
      * The list of the trains which have already started
@@ -62,6 +71,7 @@ public class TableLoader {
 
     /**
      * Loads the table given by its name.
+     *
      * @param mapFileName The name of the map in string format. Available names in the documentation.
      * @return the loaded table
      * @throws IOException thrown when the input is not correct
@@ -80,7 +90,7 @@ public class TableLoader {
         ConnectRails();
 
         //Creating the table with the necessary parameters.
-        return new Table(fields, tunnelEntrances);
+        return new Table(fields, tunnelEntrances, entrances, switches);
     }
 
     /**
@@ -138,6 +148,7 @@ public class TableLoader {
 
     /**
      * Loading the trains with a bufferedreader
+     *
      * @param br Reader to load trains from
      * @throws IOException thrown when the characters read are not correct.
      */
@@ -198,6 +209,7 @@ public class TableLoader {
 
     /**
      * loading special fields, such as tunnel entrance, stations etc.
+     *
      * @param br The reader to load specials from
      */
     protected void LoadSpecials(BufferedReader br) throws IOException {
@@ -267,6 +279,8 @@ public class TableLoader {
      * Connecting rails on the table
      */
     protected void ConnectRails() {
+        switches = new ArrayList<>();
+        entrances = new ArrayList<>();
         //Trains can only start from:'║' or '═'
         //There can not be a switch or tunnel entrance next to a switch
         for (int y = 0; y < rows; y++) {
@@ -329,6 +343,7 @@ public class TableLoader {
                     //Ha ez dekoráció, másfele mutató sín vagy állomás, aminek az orientációja más felé néz, akkor az egyik eset van
                     //különben a másik
                     case '┐':
+                        switches.add(new Point(x, y));
                         if (charMap[y][x + 1] == ' ' ||
                                 "╚╔║".contains(Character.toString(charMap[y][x + 1])) ||
                                 ("IÁÖÉiáöé".contains(Character.toString(charMap[y][x + 1])) &&
@@ -347,6 +362,7 @@ public class TableLoader {
                         }
                         break;
                     case '└':
+                        switches.add(new Point(x, y));
                         if (charMap[y][x - 1] == ' ' ||
                                 "╗╝║".contains(Character.toString(charMap[y][x - 1])) ||
                                 ("IÁÖÉiáöé".contains(Character.toString(charMap[y][x - 1])) &&
@@ -365,6 +381,7 @@ public class TableLoader {
                         }
                         break;
                     case '┘':
+                        switches.add(new Point(x, y));
                         if (charMap[y][x + 1] == ' ' ||
                                 "╚╔║".contains(Character.toString(charMap[y][x + 1])) ||
                                 ("IÁÖÉiáöé".contains(Character.toString(charMap[y][x + 1])) &&
@@ -383,6 +400,7 @@ public class TableLoader {
                         }
                         break;
                     case '┌':
+                        switches.add(new Point(x, y));
                         if (charMap[y][x - 1] == ' ' ||
                                 "╗╝║".contains(Character.toString(charMap[y][x - 1])) ||
                                 ("IÁÖÉiáöé".contains(Character.toString(charMap[y][x - 1])) &&
@@ -409,6 +427,7 @@ public class TableLoader {
                         break;
                     //Alagútbejárat
                     case 't':
+                        entrances.add(new Point(x, y));
                         switch (((TunnelEntrance) fields[y][x]).orientation) {
                             case BOTTOM_LEFT:
                                 ((TunnelEntrance) fields[y][x]).addLink((Rail) fields[y][x - 1]);
@@ -445,6 +464,7 @@ public class TableLoader {
 
     /**
      * Loading characters with a bufferedreader
+     *
      * @param br The reader to load chars from
      * @throws IOException thrown when the input is not correct
      */
@@ -472,6 +492,7 @@ public class TableLoader {
 
     /**
      * Loading start with a bufferedreader
+     *
      * @param br The reader to load starting position from
      * @throws IOException thrown when the input is not correct
      */
@@ -487,6 +508,7 @@ public class TableLoader {
 
     /**
      * Loading size with a bufferedreader
+     *
      * @param br The reader to load size information from
      * @throws IOException thrown when the input is not correct
      */

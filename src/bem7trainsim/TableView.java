@@ -36,7 +36,7 @@ public class TableView extends View {
      */
     @Override
     void mouseClicked(MouseEvent e) {
-
+        controllerState.clickAt(e.getX() / sideLength, e.getY() / sideLength);
     }
 
     /**
@@ -47,7 +47,7 @@ public class TableView extends View {
     void draw(Graphics g) {
         g.drawString(Integer.toString(controllerState.getCurrentTime()),0,0);
         FieldDrawData[][] fdd = table.getDrawData();
-        int sideLength = g.getClipBounds().height / fdd.length;
+        sideLength = g.getClipBounds().height / fdd.length;
         if (fdd[0] != null && g.getClipBounds().width / fdd[0].length < sideLength) {
             sideLength = g.getClipBounds().width / fdd[0].length;
         }
@@ -59,4 +59,6 @@ public class TableView extends View {
             }
         }
     }
+
+    private int sideLength = 50;
 }

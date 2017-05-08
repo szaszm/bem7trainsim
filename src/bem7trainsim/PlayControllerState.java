@@ -232,7 +232,13 @@ public class PlayControllerState extends ControllerState implements ActionListen
      * @param y The vertical coordinate of the clicked field
      */
     public void clickAt(int x, int y) {
-
+        try {
+            table.changeAt(x, y);
+        } catch (CannotSwitchException e) {
+            e.printStackTrace();
+        } catch (CannotBuildException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getCurrentTime() {
