@@ -96,14 +96,20 @@ public class Wagon extends Coach {
         if (empty) {
             if (color.equals(Color.RED)) {
                 result.add("p");
+                result.add("x");
             }
             else if (color.equals(Color.YELLOW)) {
                 result.add("s");
+                result.add("x");
             }
             else if (color.equals(Color.GREEN)) {
                 result.add("z");
+                result.add("x");
             }
-            else result.add("k");
+            else {
+                result.add("k");
+                result.add("x");
+            }
         }
         else if (color.equals(Color.RED)) {
             result.add("P");
