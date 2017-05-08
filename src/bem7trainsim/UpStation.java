@@ -52,25 +52,30 @@ public class UpStation extends SimpleRail {
     public FieldDrawData getDrawData() {
         ArrayList<String> layers = new ArrayList<>();
 
-        if (gone && orientation == SimpleRail.Orientation.HORIZONTAL){
-            layers.add("═");
+        String s = "";
+
+        if (orientation == SimpleRail.Orientation.HORIZONTAL){
+            s += "═";
+        } else {
+            s += "║";
         }
-        else if (gone && orientation == SimpleRail.Orientation.VERTICAL){
-            layers.add("║");
+
+        if(!gone){
+            if (color.equals(Color.RED)) {
+                s += "i";
+            }
+            else if (color.equals(Color.YELLOW)) {
+                s += "á";
+            }
+            else if (color.equals(Color.GREEN)) {
+                s += "ö";
+            }
+            else if (color.equals(Color.BLUE)) {
+                s += "é";
+            }
         }
-        else if (color.equals(Color.RED)) {
-            layers.add("i");
-        }
-        else if (color.equals(Color.YELLOW)) {
-            layers.add("á");
-        }
-        else if (color.equals(Color.GREEN)) {
-            layers.add("ö");
-        }
-        else if (color.equals(Color.BLUE)) {
-            layers.add("é");
-        }
-        else layers.add(" ");
+
+        layers.add(s);
 
         if (coach != null)
             layers.add(coach.getDrawData());
