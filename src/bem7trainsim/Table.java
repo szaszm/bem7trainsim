@@ -2,6 +2,7 @@ package bem7trainsim;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by marci on 2017.03.17.
@@ -25,6 +26,11 @@ public class Table {
     private List<Point> entrances;
 
     /**
+     * List of decorations
+     */
+    private List<Decoration> decorations;
+
+    /**
      * The tunnel on the table
      */
     private Tunnel tunnel;
@@ -35,7 +41,7 @@ public class Table {
      * @param fields          The array of fields of the table
      * @param tunnelEntrances The tunnel entrances of the table
      */
-    public Table(Field[][] fields, List<TunnelEntrance> tunnelEntrances, List<Point> entrances, List<Point> switches) {
+    public Table(Field[][] fields, List<TunnelEntrance> tunnelEntrances, List<Point> entrances, List<Point> switches, List<Decoration> decorations) {
         this.fields = fields;
 
         /**
@@ -51,6 +57,7 @@ public class Table {
 
         this.entrances = entrances;
         this.switches = switches;
+        this.decorations = decorations;
     }
 
     /**
@@ -202,6 +209,15 @@ public class Table {
             if (point.getX() == x && point.getY() == y) {
                 ((TunnelEntrance) fields[y][x]).click();
             }
+        }
+    }
+
+    public void changeDecoration() {
+        Random r = new Random();
+        for (Decoration d :
+                decorations) {
+            if (r.nextBoolean())
+                d.changeState();
         }
     }
 }

@@ -91,77 +91,77 @@ public class Switch extends Rail {
     public FieldDrawData getDrawData() {
         List<String> layers = new ArrayList<>();
         String s = "";
-        String prefix = "";
+        String postfix = "";
         if (orientation == Orientation.NorthLeft) {
             if(state.nextStraight()){
                 s += "│└";
-                prefix += "║";
+                postfix += "║";
             } else {
                 s += "│└";
-                prefix += "└";
+                postfix += "└";
             }
         }
         if (orientation == Orientation.NorthRight) {
             if(state.nextStraight()){
                 s += "│┘";
-                prefix += "║";
+                postfix += "║";
             } else {
                 s += "┘│";
-                prefix += "┘";
+                postfix += "┘";
             }
         }
         if (orientation == Orientation.EastLeft) {
             if(state.nextStraight()){
                 s += "─┌";
-                prefix += "═";
+                postfix += "═";
             } else {
                 s += "┌─";
-                prefix += "┌";
+                postfix += "┌";
             }
         }
         if (orientation == Orientation.EastRight) {
             if(state.nextStraight()){
                 s += "─└";
-                prefix += "═";
+                postfix += "═";
             } else {
                 s += "└─";
-                prefix += "└";
+                postfix += "└";
             }
         }
         if (orientation == Orientation.SouthRight) {
             if(state.nextStraight()){
                 s += "│┌";
-                prefix += "║";
+                postfix += "║";
             } else {
                 s += "┌│";
-                prefix += "┌";
+                postfix += "┌";
             }
         }
         if (orientation == Orientation.SouthLeft) {
             if(state.nextStraight()){
                 s += "│┐";
-                prefix += "║";
+                postfix += "║";
             } else {
                 s += "┐│";
-                prefix += "┐";
+                postfix += "┐";
             }
         }
         if (orientation == Orientation.WestLeft) {
             if(state.nextStraight()){
                 s += "─┘";
-                prefix += "═";
+                postfix += "═";
             } else {
                 s += "┘─";
-                prefix += "┘";
+                postfix += "┘";
             }
         }
         if (orientation == Orientation.WestRight) {
             if(state.nextStraight()){
                 s += "─┐";
-                prefix += "─";
+                postfix += "─";
             } else {
                 s += "┐─";
-                prefix += "┐";
+                postfix += "┐";
             }
         }
 
@@ -170,7 +170,7 @@ public class Switch extends Rail {
         if (coach != null) {
             List<String> coachDrawData = coach.getDrawData();
             for(String dd: coachDrawData) {
-                layers.add(prefix + dd);
+                layers.add(dd + postfix);
             }
         }
 

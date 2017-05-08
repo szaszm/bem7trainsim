@@ -17,16 +17,10 @@ public class Decoration extends Field implements ActionListener {
     private boolean state;
 
     /**
-     * Periodically redraws the field
-     */
-    protected Timer timer = new Timer(10000, this);
-
-    /**
      * Decoration constructor
      */
     public Decoration() {
         state = false;
-        timer.start();
     }
 
     /**
