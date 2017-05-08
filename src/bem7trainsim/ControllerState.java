@@ -31,6 +31,7 @@ abstract public class ControllerState implements ActionListener {
      */
     protected ControllerState(Controller c) {
         controller = c;
+        timerDraw.start();
     }
 
     /**
@@ -54,6 +55,6 @@ abstract public class ControllerState implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        controller.invalidate();
+        controller.Redraw();
     }
 }

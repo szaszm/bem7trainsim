@@ -107,4 +107,13 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
             state.view.draw(g);
         }
     }
+
+    /**
+     * Redraws the frame
+     */
+    public void Redraw() {
+        invalidate();
+        repaint(0, 0, getWidth(), getHeight());
+        revalidate();
+    }
 }
