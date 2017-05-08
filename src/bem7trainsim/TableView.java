@@ -45,7 +45,7 @@ public class TableView extends View {
             controllerState.clickAt(0,0);
             return;
         }
-        controllerState.clickAt((e.getX() + topHeight) / sideLength, e.getY() / sideLength);
+        controllerState.clickAt(e.getX() / sideLength, (e.getY() - topHeight) / sideLength);
     }
 
     /**
@@ -76,8 +76,11 @@ public class TableView extends View {
         g.setColor(Color.BLACK);
         g.setFont(new Font("Times New Roman", Font.BOLD, 30));
         String time = Integer.toString(controllerState.getCurrentTime());
-        g.drawString(time,50 - time.length() * 7,25);
+        g.drawString(time,50 - time.length() * 7,30);
         if (!started) {
+            g.setColor(Color.PINK);
+            g.fillRect(g.getClipBounds().width / 2 - 20,g.getClipBounds().height / 2 - 35, 100, 50);
+            g.setColor(Color.BLACK);
             g.drawString("Start",g.getClipBounds().width / 2,g.getClipBounds().height / 2);
         }
     }
