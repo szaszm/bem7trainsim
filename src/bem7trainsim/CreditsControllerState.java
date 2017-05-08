@@ -29,6 +29,8 @@ public class CreditsControllerState extends ControllerState implements ActionLis
      */
     @Override
     public ControllerState handleCommand(String command) {
-        return null;
+        MainMenuControllerState mainMenuControllerState = new MainMenuControllerState(controller);
+        controller.setState(mainMenuControllerState);
+        return mainMenuControllerState;
     }
 }
