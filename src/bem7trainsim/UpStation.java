@@ -72,6 +72,8 @@ public class UpStation extends SimpleRail {
             }
             else if (color.equals(Color.BLUE)) {
                 s += "é";
+            } else {
+                s += "g";
             }
         }
 
