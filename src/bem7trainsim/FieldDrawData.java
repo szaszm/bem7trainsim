@@ -80,23 +80,23 @@ public class FieldDrawData {
             images.put(" 1",ImageIO.read(new File(path + "/Decoration/Grass1.png")));
             images.put(" 2",ImageIO.read(new File(path + "/Decoration/Grass2.png")));
 
-            images.put("═É",ImageIO.read(new File(path + "/Stations/downStationHorizontalBlue.png")));
-            images.put("═Ö",ImageIO.read(new File(path + "/Stations/downStationHorizontalGreen.png")));
-            images.put("═I",ImageIO.read(new File(path + "/Stations/downStationHorizontalRed.png")));
-            images.put("═Á",ImageIO.read(new File(path + "/Stations/downStationHorizontalYellow.png")));
-            images.put("║É",ImageIO.read(new File(path + "/Stations/downStationVerticallBlue.png")));
-            images.put("║Ö",ImageIO.read(new File(path + "/Stations/downStationVerticalGreen.png")));
-            images.put("║I",ImageIO.read(new File(path + "/Stations/downStationVerticalRed.png")));
-            images.put("║Á",ImageIO.read(new File(path + "/Stations/downStationVerticalYellow.png")));
+            images.put("═É",ImageIO.read(new File(path + "/Stations/DownStationHorizontalBlue.png")));
+            images.put("═Ö",ImageIO.read(new File(path + "/Stations/DownStationHorizontalGreen.png")));
+            images.put("═I",ImageIO.read(new File(path + "/Stations/DownStationHorizontalRed.png")));
+            images.put("═Á",ImageIO.read(new File(path + "/Stations/DownStationHorizontalYellow.png")));
+            images.put("║É",ImageIO.read(new File(path + "/Stations/DownStationVerticallBlue.png")));
+            images.put("║Ö",ImageIO.read(new File(path + "/Stations/DownStationVerticalGreen.png")));
+            images.put("║I",ImageIO.read(new File(path + "/Stations/DownStationVerticalRed.png")));
+            images.put("║Á",ImageIO.read(new File(path + "/Stations/DownStationVerticalYellow.png")));
 
-            images.put("═é",ImageIO.read(new File(path + "/Stations/upStationHorizontalBlue.png")));
-            images.put("═ö",ImageIO.read(new File(path + "/Stations/upStationHorizontalGreen.png")));
-            images.put("═i",ImageIO.read(new File(path + "/Stations/upStationHorizontalRed.png")));
-            images.put("═á",ImageIO.read(new File(path + "/Stations/upStationHorizontalYellow.png")));
-            images.put("║é",ImageIO.read(new File(path + "/Stations/upStationVerticallBlue.png")));
-            images.put("║ö",ImageIO.read(new File(path + "/Stations/upStationVerticalGreen.png")));
-            images.put("║i",ImageIO.read(new File(path + "/Stations/upStationVerticalRed.png")));
-            images.put("║á",ImageIO.read(new File(path + "/Stations/upStationVerticalYellow.png")));
+            images.put("═é",ImageIO.read(new File(path + "/Stations/UpStationHorizontalBlue.png")));
+            images.put("═ö",ImageIO.read(new File(path + "/Stations/UpStationHorizontalGreen.png")));
+            images.put("═i",ImageIO.read(new File(path + "/Stations/UpStationHorizontalRed.png")));
+            images.put("═á",ImageIO.read(new File(path + "/Stations/UpStationHorizontalYellow.png")));
+            images.put("║é",ImageIO.read(new File(path + "/Stations/UpStationVerticallBlue.png")));
+            images.put("║ö",ImageIO.read(new File(path + "/Stations/UpStationVerticalGreen.png")));
+            images.put("║i",ImageIO.read(new File(path + "/Stations/UpStationVerticalRed.png")));
+            images.put("║á",ImageIO.read(new File(path + "/Stations/UpStationVerticalYellow.png")));
 
             images.put("┘│",ImageIO.read(new File(path + "/Switches/NorthRightCurve.png")));
             images.put("│┘",ImageIO.read(new File(path + "/Switches/NorthRightStraight.png")));
