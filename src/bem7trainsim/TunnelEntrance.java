@@ -144,9 +144,11 @@ public class TunnelEntrance extends Rail {
         s += state.getDrawData();
         List<String> layers = new ArrayList<>();
         layers.add(s);
-        List<String> drawData = coach.getDrawData();
-        for(String dd: drawData) {
-            layers.add(dd + c);
+        if(coach != null) {
+            List<String> drawData = coach.getDrawData();
+            for (String dd : drawData) {
+                layers.add(dd + c);
+            }
         }
         return new FieldDrawData(layers);
     }
