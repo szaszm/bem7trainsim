@@ -33,10 +33,9 @@ public class LevelSelectControllerState extends ControllerState {
         if (s[0].startsWith("map_")) {
             try {
                 PlayControllerState newState = new PlayControllerState(controller, s[0].substring(4));
-                newState.start();
                 controller.setState(newState);
                 return newState;
-            } catch (IOException | TableLeftException | CollisionException e) {
+            } catch (IOException e) {
                 message(e.getMessage());
                 MainMenuControllerState state = new MainMenuControllerState(controller);
                 controller.setState(state);

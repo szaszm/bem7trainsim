@@ -54,7 +54,7 @@ public class FieldDrawData {
      */
     public void draw(Graphics g, int x, int y, int width, int height) {
         for (String layer : layers) {
-            g.drawImage(getImage(layer), x * width, y * height, width, height, null);
+            g.drawImage(getImage(layer), x, y, width, height, null);
         }
     }
 

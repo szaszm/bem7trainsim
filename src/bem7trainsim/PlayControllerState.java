@@ -57,7 +57,6 @@ public class PlayControllerState extends ControllerState implements ActionListen
         super(c);
         loadMap(map);
         view = new TableView(table, this);
-        timerTick.start();
     }
 
     /**
@@ -77,6 +76,7 @@ public class PlayControllerState extends ControllerState implements ActionListen
      */
     public void start() throws CollisionException, TableLeftException {
         moveTrains();
+        timerTick.start();
     }
 
     /**
@@ -235,6 +235,17 @@ public class PlayControllerState extends ControllerState implements ActionListen
      */
     public void clickAt(int x, int y) {
         try {
+            if (!timerTick.isRunning()) {
+                try {
+                    start();
+                } catch (CollisionException e) {
+                    e.printStackTrace();
+                } catch (TableLeftException e) {
+                    e.printStackTrace();
+                }
+                getView().started = true;
+                return;
+            }
             table.changeAt(x, y);
         } catch (CannotSwitchException e) {
             e.printStackTrace();
