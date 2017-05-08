@@ -182,18 +182,18 @@ public class PlayControllerState extends ControllerState implements ActionListen
         try {
             moveTrains();
         } catch (CollisionException e) {
-            //TODO: message("Utkozes, jatek vege. Ido: " + Integer.toString(currentTime));
+            message("Utkozes, jatek vege. Ido: " + Integer.toString(currentTime));
             MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
         } catch (TableLeftException e) {
-            // TODO: message("Nem ures vonat elhagyta a palyat, jatek vege. Ido: " + Integer.toString(currentTime));
+            message("Nem ures vonat elhagyta a palyat, jatek vege. Ido: " + Integer.toString(currentTime));
             MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;
         }
         if (isWin()) {
-            // TODO: message("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
+            message("Pálya sikeresen teljesítve. Ido: " + Integer.toString(currentTime));
             MainMenuControllerState state = new MainMenuControllerState(controller);
             controller.setState(state);
             return state;

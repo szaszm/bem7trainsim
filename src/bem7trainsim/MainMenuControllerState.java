@@ -16,7 +16,6 @@ public class MainMenuControllerState extends ControllerState {
     protected MainMenuControllerState(Controller c) {
         super(c);
         List<MenuEntry> entries = new ArrayList<>();
-        // TODO: fill entries
         entries.add(new MenuEntry("PLAY", this));
         entries.add(new MenuEntry("CREDITS", this));
         entries.add(new MenuEntry("EXIT", this));

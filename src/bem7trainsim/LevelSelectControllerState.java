@@ -33,7 +33,7 @@ public class LevelSelectControllerState extends ControllerState {
                 controller.setState(newState);
                 return newState;
             } catch(IOException | TableLeftException | CollisionException e){
-                //TODO: message(e.getMessage());
+                message(e.getMessage());
                 MainMenuControllerState state = new MainMenuControllerState(controller);
                 controller.setState(state);
                 return state;
