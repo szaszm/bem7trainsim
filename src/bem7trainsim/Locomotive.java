@@ -80,20 +80,7 @@ public class Locomotive extends Coach {
      */
     public List<String> getDrawData() {
         List<String> result = new ArrayList<>();
-        if(direction == null) {
-            result.add("???");
-            return result;
-        }
-        switch (direction) {
-            case Up: result.add("A"); break;
-            case Left: result.add("<"); break;
-            case Down: result.add("V"); break;
-            case Right: result.add(">"); break;
-
-            // Impossible case to silence warning
-            default: result.add("?"); break;
-        }
-
+        result.add("L");
         return result;
     }
 }

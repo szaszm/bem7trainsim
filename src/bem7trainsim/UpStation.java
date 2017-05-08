@@ -1,7 +1,8 @@
 package bem7trainsim;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a station where passengers can get up
@@ -60,6 +61,8 @@ public class UpStation extends SimpleRail {
             s += "║";
         }
 
+        String prefix = s;
+
         if(!gone){
             if (color.equals(Color.RED)) {
                 s += "i";
@@ -79,8 +82,12 @@ public class UpStation extends SimpleRail {
 
         layers.add(s);
 
-        if (coach != null)
-            layers.addAll(coach.getDrawData());
+        if (coach != null) {
+            List<String> coachDrawData = coach.getDrawData();
+            for(String dd: coachDrawData) {
+                layers.add(prefix + dd);
+            }
+        }
 
         return new FieldDrawData(layers);
     }

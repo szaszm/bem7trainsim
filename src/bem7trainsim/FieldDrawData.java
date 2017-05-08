@@ -126,18 +126,75 @@ public class FieldDrawData {
             images.put("║TU",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceUnderConstructionEastWest.png")));
             images.put("║TR",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceBuiltRedEastWest.png")));
 
-            images.put("┘│",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
-            images.put("│┘",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
-            images.put("┘│",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
-            images.put("│┘",ImageIO.read(new File(path + "/Wagons/BlueWagonNorthSouth.png")));
-            images.put("┘│",ImageIO.read(new File(path + "/Wagons/GreenWagonEastWest.png")));
-            images.put("│┘",ImageIO.read(new File(path + "/Wagons/GreenWagonNorthSouth.png")));
-            images.put("┘│",ImageIO.read(new File(path + "/Wagons/GreyWagonEastWest.png")));
-            images.put("│┘",ImageIO.read(new File(path + "/Wagons/GreyWagonNorthSouth.png")));
-            images.put("┘│",ImageIO.read(new File(path + "/Wagons/RedWagonEastWest.png")));
-            images.put("│┘",ImageIO.read(new File(path + "/Wagons/RedWagonNorthSouth.png")));
-            images.put("┘│",ImageIO.read(new File(path + "/Wagons/YellowWagonEastWest.png")));
-            images.put("│┘",ImageIO.read(new File(path + "/Wagons/YellowWagonNorthSouth.png")));
+            images.put("═p",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
+            images.put("═s",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
+            images.put("═z",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
+            images.put("═k",ImageIO.read(new File(path + "/Wagons/BlueWagonNorthSouth.png")));
+            images.put("═P",ImageIO.read(new File(path + "/Wagons/GreenWagonEastWest.png")));
+            images.put("═S",ImageIO.read(new File(path + "/Wagons/GreenWagonNorthSouth.png")));
+            images.put("═Z",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
+            images.put("═K",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
+            images.put("═F",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
+
+            images.put("║p",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
+            images.put("║s",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
+            images.put("║z",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
+            images.put("║k",ImageIO.read(new File(path + "/Wagons/BlueWagonNorthSouth.png")));
+            images.put("║P",ImageIO.read(new File(path + "/Wagons/GreenWagonEastWest.png")));
+            images.put("║S",ImageIO.read(new File(path + "/Wagons/GreenWagonNorthSouth.png")));
+            images.put("║Z",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
+            images.put("║K",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
+            images.put("║F",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
+
+            images.put("└p",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
+            images.put("└s",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
+            images.put("└z",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
+            images.put("└k",ImageIO.read(new File(path + "/Wagons/BlueWagonNorthSouth.png")));
+            images.put("└P",ImageIO.read(new File(path + "/Wagons/GreenWagonEastWest.png")));
+            images.put("└S",ImageIO.read(new File(path + "/Wagons/GreenWagonNorthSouth.png")));
+            images.put("└Z",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
+            images.put("└K",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
+            images.put("└F",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
+
+            images.put("┘p",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
+            images.put("┘s",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
+            images.put("┘z",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
+            images.put("┘k",ImageIO.read(new File(path + "/Wagons/BlueWagonNorthSouth.png")));
+            images.put("┘P",ImageIO.read(new File(path + "/Wagons/GreenWagonEastWest.png")));
+            images.put("┘S",ImageIO.read(new File(path + "/Wagons/GreenWagonNorthSouth.png")));
+            images.put("┘Z",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
+            images.put("┘K",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
+            images.put("┘F",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
+
+            images.put("┌p",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
+            images.put("┌s",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
+            images.put("┌z",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
+            images.put("┌k",ImageIO.read(new File(path + "/Wagons/BlueWagonNorthSouth.png")));
+            images.put("┌P",ImageIO.read(new File(path + "/Wagons/GreenWagonEastWest.png")));
+            images.put("┌S",ImageIO.read(new File(path + "/Wagons/GreenWagonNorthSouth.png")));
+            images.put("┌Z",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
+            images.put("┌K",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
+            images.put("┌F",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
+
+            images.put("┐p",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
+            images.put("┐s",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
+            images.put("┐z",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
+            images.put("┐k",ImageIO.read(new File(path + "/Wagons/BlueWagonNorthSouth.png")));
+            images.put("┐P",ImageIO.read(new File(path + "/Wagons/GreenWagonEastWest.png")));
+            images.put("┐S",ImageIO.read(new File(path + "/Wagons/GreenWagonNorthSouth.png")));
+            images.put("┐Z",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
+            images.put("┐K",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
+            images.put("┐F",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
+
+            images.put("┐p",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
+            images.put("┐s",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
+            images.put("┐z",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
+            images.put("┐k",ImageIO.read(new File(path + "/Wagons/BlueWagonNorthSouth.png")));
+            images.put("┐P",ImageIO.read(new File(path + "/Wagons/GreenWagonEastWest.png")));
+            images.put("┐S",ImageIO.read(new File(path + "/Wagons/GreenWagonNorthSouth.png")));
+            images.put("┐Z",ImageIO.read(new File(path + "/Wagons/BlackWagonEastWest.png")));
+            images.put("┐K",ImageIO.read(new File(path + "/Wagons/BlackWagonNorthSouth.png")));
+            images.put("┐F",ImageIO.read(new File(path + "/Wagons/BlueWagonEastWest.png")));
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -60,32 +60,43 @@ public class SimpleRail extends Rail {
     public FieldDrawData getDrawData() {
         List<String> layers = new ArrayList<>();
 
+        String prefix = "";
         switch(orientation){
             case HORIZONTAL:
                 layers.add("═");
+                prefix += "═";
                 break;
             case VERTICAL:
                 layers.add("║");
+                prefix += "║";
                 break;
             case TOP_LEFT:
                 layers.add("╝");
+                prefix += "╝";
                 break;
             case TOP_RIGHT:
                 layers.add("╚");
+                prefix += "╚";
                 break;
             case BOTTOM_LEFT:
                 layers.add("╗");
+                prefix += "╗";
                 break;
             case BOTTOM_RIGHT:
                 layers.add("╔");
+                prefix += "╔";
                 break;
             default:
                 layers.add(" ");
                 break;
         }
 
-        if (coach != null)
-            layers.addAll(coach.getDrawData());
+        if (coach != null) {
+            List<String> coachDrawData = coach.getDrawData();
+            for(String dd: coachDrawData) {
+                layers.add(prefix + dd);
+            }
+        }
 
         return new FieldDrawData(layers);
     }

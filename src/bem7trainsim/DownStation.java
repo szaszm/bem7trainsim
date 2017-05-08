@@ -44,6 +44,7 @@ public class DownStation extends SimpleRail {
         } else {
             s += "║";
         }
+        String prefix = s;
 
         if (color.equals(Color.RED)) {
             s += "I";
@@ -58,8 +59,12 @@ public class DownStation extends SimpleRail {
 
         layers.add(s);
 
-        if (coach != null)
-            layers.addAll(coach.getDrawData());
+        if (coach != null) {
+            List<String> coachDrawData = coach.getDrawData();
+            for(String dd: coachDrawData) {
+                layers.add(prefix + dd);
+            }
+        }
 
         return new FieldDrawData(layers);
     }
