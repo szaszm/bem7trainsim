@@ -49,7 +49,7 @@ public class LevelSelectView extends View {
             state.handleCommand("map_" + maplist.get(0));
             return;
         }
-        if (e.getX() >= 283 && e.getX() <= 333 && e.getY() >= 50 + 30 && e.getY() <= 200 + 30 && mapsize > 1) {
+        if (e.getX() >= 283 && e.getX() <= 433 && e.getY() >= 50 + 30 && e.getY() <= 200 + 30 && mapsize > 1) {
             state.handleCommand("map_" + maplist.get(1));
             return;
         }
@@ -65,7 +65,7 @@ public class LevelSelectView extends View {
             state.handleCommand("map_" + maplist.get(4));
             return;
         }
-        if (e.getX() >= 283 && e.getX() <= 333 && e.getY() >= 300 + 30 && e.getY() <= 450 + 30 && mapsize > 5) {
+        if (e.getX() >= 283 && e.getX() <= 433 && e.getY() >= 300 + 30 && e.getY() <= 450 + 30 && mapsize > 5) {
             state.handleCommand("map_" + maplist.get(5));
             return;
         }

@@ -47,7 +47,7 @@ public class Tunnel {
      */
     public void enter(TunnelEntrance te, Train train) {
         trainTunnelEntranceMap.add(new AbstractMap.SimpleEntry<>(train, te));
-        te.setState(new TunnelEntranceStateBuiltRed());
+        otherEntrance(te).setState(new TunnelEntranceStateBuiltRed());
         //the train gets into the tunnel, we are setting onSurface to false
         train.onSurface = false;
     }
@@ -58,8 +58,12 @@ public class Tunnel {
      * @return the other entrance
      */
     private TunnelEntrance otherEntrance(TunnelEntrance te) {
-        if(tunnelEntrances.indexOf(te) == 1) return tunnelEntrances.get(0);
-        return  tunnelEntrances.get(1);
+        if (tunnelEntrances.size() != 2)
+            return null;
+        if (tunnelEntrances.get(0) == te) {
+            return tunnelEntrances.get(1);
+        }
+        return tunnelEntrances.get(0);
     }
 
     /**
