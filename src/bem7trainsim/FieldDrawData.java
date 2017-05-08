@@ -84,7 +84,7 @@ public class FieldDrawData {
             images.put("═Ö",ImageIO.read(new File(path + "/Stations/DownStationHorizontalGreen.png")));
             images.put("═I",ImageIO.read(new File(path + "/Stations/DownStationHorizontalRed.png")));
             images.put("═Á",ImageIO.read(new File(path + "/Stations/DownStationHorizontalYellow.png")));
-            images.put("║É",ImageIO.read(new File(path + "/Stations/DownStationVerticallBlue.png")));
+            images.put("║É",ImageIO.read(new File(path + "/Stations/DownStationVerticalBlue.png")));
             images.put("║Ö",ImageIO.read(new File(path + "/Stations/DownStationVerticalGreen.png")));
             images.put("║I",ImageIO.read(new File(path + "/Stations/DownStationVerticalRed.png")));
             images.put("║Á",ImageIO.read(new File(path + "/Stations/DownStationVerticalYellow.png")));
@@ -93,7 +93,7 @@ public class FieldDrawData {
             images.put("═ö",ImageIO.read(new File(path + "/Stations/UpStationHorizontalGreen.png")));
             images.put("═i",ImageIO.read(new File(path + "/Stations/UpStationHorizontalRed.png")));
             images.put("═á",ImageIO.read(new File(path + "/Stations/UpStationHorizontalYellow.png")));
-            images.put("║é",ImageIO.read(new File(path + "/Stations/UpStationVerticallBlue.png")));
+            images.put("║é",ImageIO.read(new File(path + "/Stations/UpStationVerticalBlue.png")));
             images.put("║ö",ImageIO.read(new File(path + "/Stations/UpStationVerticalGreen.png")));
             images.put("║i",ImageIO.read(new File(path + "/Stations/UpStationVerticalRed.png")));
             images.put("║á",ImageIO.read(new File(path + "/Stations/UpStationVerticalYellow.png")));
@@ -114,7 +114,7 @@ public class FieldDrawData {
             images.put("─└",ImageIO.read(new File(path + "/Switches/EastRightStraight.png")));
             images.put("┌─",ImageIO.read(new File(path + "/Switches/EastLeftCurve.png")));
             images.put("─┌",ImageIO.read(new File(path + "/Switches/EastLeftStraight.png")));
-
+            
             images.put("═t",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceNotConstructedEastWest.png")));
             images.put("═T",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceBuiltEastWest.png")));
             images.put("═TU",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceUnderConstructionEastWest.png")));
@@ -124,7 +124,6 @@ public class FieldDrawData {
             images.put("║TU",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceUnderConstructionEastWest.png")));
             images.put("║TR",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceBuiltRedEastWest.png")));
 
-            
         } catch (IOException e) {
             e.printStackTrace();
         }
