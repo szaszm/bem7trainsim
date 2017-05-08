@@ -24,5 +24,5 @@ public class TunnelEntranceStateUnderConstruction implements TunnelEntranceState
      * @return the string representing the field
      */
     @Override
-    public String getDrawData() { return "T";}
+    public String getDrawData() { return "TU";}
 }
