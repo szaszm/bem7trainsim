@@ -40,7 +40,9 @@ public class Wagon extends Coach {
      */
     public Wagon(Color color, boolean empty) {
         this.color = color;
-        this.empty = empty;
+        if(color.equals(Color.BLACK))
+            this.empty = true;
+        else this.empty = empty;
     }
 
     /**
@@ -106,10 +108,11 @@ public class Wagon extends Coach {
                 result.add("z");
                 result.add("x");
             }
-            else {
+            else if (color.equals(Color.BLUE)){
                 result.add("k");
                 result.add("x");
             }
+            else result.add("F");
         }
         else if (color.equals(Color.RED)) {
             result.add("P");
@@ -123,7 +126,6 @@ public class Wagon extends Coach {
         else if (color.equals(Color.BLUE)) {
             result.add("K");
         }
-        else result.add("F");
 
         return result;
     }

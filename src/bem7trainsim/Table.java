@@ -160,7 +160,7 @@ public class Table {
                 return Direction.Right;
             }
         } else return Direction.Up;
-        
+
         return null;
     }
 
