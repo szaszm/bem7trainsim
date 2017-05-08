@@ -132,9 +132,15 @@ public class TunnelEntrance extends Rail {
      * @return the string representing the field
      */
     public FieldDrawData getDrawData() {
-        String s;
+        String s = "";
+        if(orientation == SimpleRail.Orientation.HORIZONTAL){
+            s += "═";
+        } else {
+            s += "║";
+        }
+        s += state.getDrawData();
         List<String> layers = new ArrayList<>();
-        layers.add(state.getDrawData());
+        layers.add(s);
         return new FieldDrawData(layers);
     }
 }

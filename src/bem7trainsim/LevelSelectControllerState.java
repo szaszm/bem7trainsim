@@ -1,6 +1,5 @@
 package bem7trainsim;
 
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

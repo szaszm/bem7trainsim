@@ -27,8 +27,8 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
         pack();
         setVisible(true);
         setSize(900, 900);
-        setState(new MainMenuControllerState(this));
         addMouseListener(this);
+        setState(new MainMenuControllerState(this));
     }
 
     /**
@@ -103,7 +103,10 @@ public class Controller extends JFrame implements MouseListener, AutoCloseable {
          * Draws the component
          * @param g Graphics object
          */
-        public void paintComponent(Graphics g){ state.view.draw(g); }
+        public void paintComponent(Graphics g) {
+            if(state != null)
+                state.view.draw(g);
+        }
     }
 
     /**
