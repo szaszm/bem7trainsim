@@ -59,8 +59,12 @@ public class CrossRail extends Rail {
     public FieldDrawData getDrawData() {
         List<String> layers = new ArrayList<>();
         layers.add("╬");
-        if (coach != null)
-            layers.add(coach.getDrawData() + lastState);
+        if (coach != null){
+            List<String> coachDrawData = coach.getDrawData();
+            for(String dd: coachDrawData) {
+                layers.add(dd + lastState);
+            }
+        }
         return new FieldDrawData(layers);
     }
 }
