@@ -22,6 +22,10 @@ public class Point {
         y=_y;
     }
 
+    public Point() {
+        this(0, 0);
+    }
+
 
     /**
      * Returns the horizontal coordinate
