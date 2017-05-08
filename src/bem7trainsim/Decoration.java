@@ -19,13 +19,14 @@ public class Decoration extends Field implements ActionListener {
     /**
      * Periodically redraws the field
      */
-    protected Timer timerDraw = new Timer(10000, this);
+    protected Timer timer = new Timer(10000, this);
 
     /**
      * Decoration constructor
      */
     public Decoration() {
         state = false;
+        timer.start();
     }
 
     /**
