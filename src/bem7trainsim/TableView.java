@@ -47,9 +47,9 @@ public class TableView extends View {
     void draw(Graphics g) {
         g.drawString(Integer.toString(controllerState.getCurrentTime()),0,0);
         FieldDrawData[][] fdd = table.getDrawData();
-        int sideLength = g.getClipBounds().width / fdd.length;
-        if (fdd[0] != null && g.getClipBounds().height / fdd[0].length < sideLength) {
-            sideLength = g.getClipBounds().height / fdd[0].length;
+        int sideLength = g.getClipBounds().height / fdd.length;
+        if (fdd[0] != null && g.getClipBounds().width / fdd[0].length < sideLength) {
+            sideLength = g.getClipBounds().width / fdd[0].length;
         }
         for (int y = 0; y < fdd.length; y++) {
             FieldDrawData[] row = fdd[y];
