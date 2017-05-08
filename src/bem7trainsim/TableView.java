@@ -1,7 +1,11 @@
 package bem7trainsim;
 
+import javafx.util.Pair;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.*;
+import java.util.List;
 
 /**
  * Represents the view of the whole table
@@ -26,8 +30,9 @@ public class TableView extends View {
 
     /**
      * TableView constructor
+     *
      * @param table The table shown
-     * @param pcs Controller state
+     * @param pcs   Controller state
      */
     public TableView(Table table, PlayControllerState pcs) {
         super();
@@ -37,12 +42,13 @@ public class TableView extends View {
 
     /**
      * Handles mouse click events
+     *
      * @param e Event datThe a
      */
     @Override
     void mouseClicked(MouseEvent e) {
         if (!started) {
-            controllerState.clickAt(0,0);
+            controllerState.clickAt(0, 0);
             return;
         }
         controllerState.clickAt(e.getX() / sideLength, (e.getY() - topHeight) / sideLength);
@@ -55,6 +61,7 @@ public class TableView extends View {
 
     /**
      * Draws the scene
+     *
      * @param g Graphics object
      */
     @Override
@@ -68,20 +75,34 @@ public class TableView extends View {
             FieldDrawData[] row = fdd[y];
             for (int x = 0; x < row.length; x++) {
                 FieldDrawData field = row[x];
-                field.draw(g,x * sideLength,y * sideLength + topHeight,sideLength,sideLength);
+                field.draw(g, x * sideLength, y * sideLength + topHeight, sideLength, sideLength);
             }
         }
         g.setColor(Color.PINK);
-        g.fillRect(0,0,g.getClipBounds().width, topHeight);
+        g.fillRect(0, 0, g.getClipBounds().width, topHeight);
         g.setColor(Color.BLACK);
         g.setFont(new Font("Times New Roman", Font.BOLD, 30));
         String time = Integer.toString(controllerState.getCurrentTime());
-        g.drawString(time,50 - time.length() * 7,30);
+        g.drawString(time, 50 - time.length() * 7, 30);
         if (!started) {
             g.setColor(Color.PINK);
-            g.fillRect(g.getClipBounds().width / 2 - 20,g.getClipBounds().height / 2 - 35, 100, 50);
+            g.fillRect(g.getClipBounds().width / 2 - 20, g.getClipBounds().height / 2 - 35, 100, 50);
             g.setColor(Color.BLACK);
-            g.drawString("Start",g.getClipBounds().width / 2,g.getClipBounds().height / 2);
+            g.drawString("Start", g.getClipBounds().width / 2, g.getClipBounds().height / 2);
+            int left = 10;
+            for (Pair<Integer, List<Wagon>> t :
+                    controllerState.getLeftTrain()) {
+                g.setColor(Color.BLACK);
+                g.drawString(t.getKey().toString(), left, 70);
+                left += 30;
+                for (Wagon w :
+                        t.getValue()) {
+                    g.setColor(w.getColor());
+                    g.fillRect(left, 50, 20, 20);
+                    left += 30;
+                }
+                left += 40;
+            }
         }
     }
 

@@ -140,4 +140,8 @@ public class Wagon extends Coach {
         this.direction = direction;
         return oldDirection;
     }
+
+    public Color getColor() {
+        return color;
+    }
 }

@@ -257,4 +257,8 @@ public class PlayControllerState extends ControllerState implements ActionListen
     public int getCurrentTime() {
         return currentTime;
     }
+
+    public List<Pair<Integer,List<Wagon>>> getLeftTrain() {
+        return trainData;
+    }
 }
