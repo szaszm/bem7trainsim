@@ -57,6 +57,7 @@ public class PlayControllerState extends ControllerState implements ActionListen
         super(c);
         loadMap(map);
         view = new TableView(table, this);
+        timerTick.start();
     }
 
     /**
