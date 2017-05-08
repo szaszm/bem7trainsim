@@ -27,14 +27,17 @@ abstract public class ControllerState implements ActionListener {
 
     /**
      * The abstract base class constructor
+     *
      * @param c Reference to the controller
      */
     protected ControllerState(Controller c) {
         controller = c;
+        timerDraw.start();
     }
 
     /**
      * Handles a textual command
+     *
      * @param command The command in string format. Available commands list is in the documentation.
      * @return The controller state which the controller steps into
      */
@@ -42,18 +45,24 @@ abstract public class ControllerState implements ActionListener {
 
     /**
      * Mouse click event handler
+     *
      * @param e Mouse event
      */
-    public void mouseClicked(MouseEvent e){
+    public void mouseClicked(MouseEvent e) {
         view.mouseClicked(e);
     }
 
     /**
      * Timer tick handler, redraws the drawing area
+     *
      * @param e Event var
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        controller.invalidate();
+        controller.Redraw();
+    }
+
+    protected void message(String message) {
+        JOptionPane.showMessageDialog(controller, message, "Message", JOptionPane.INFORMATION_MESSAGE);
     }
 }
