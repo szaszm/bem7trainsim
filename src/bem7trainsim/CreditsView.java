@@ -27,7 +27,8 @@ public class CreditsView extends View {
      */
     @Override
     void mouseClicked(MouseEvent e) {
-        state.handleCommand("exit");
+        if(e.getX() >= 100 && e.getX() <= 800 && e.getY() >= 550+30 && e.getY() <= 700+30)
+            state.handleCommand("exit");
     }
 
     /**
@@ -42,8 +43,8 @@ public class CreditsView extends View {
         g.fillRect(100, 550, g.getClipBounds().width - 200,150 );
         g.setColor(Color.BLACK);
         g.setFont(new Font("Times New Roman", Font.BOLD, 45));
-        g.drawString("Credits",g.getClipBounds().width / 2 - 70,  135);
-        g.drawString("Back",g.getClipBounds().width / 2 - 45, 635);
+        g.drawString("Credits",g.getClipBounds().width / 2 - 70,  140);
+        g.drawString("Back",g.getClipBounds().width / 2 - 45, 645);
         g.setFont(new Font("Times New Roman", Font.BOLD, 30));
         g.drawString("Csutorás Robin, Gnandt Balázs, Szász Márton",g.getClipBounds().width / 2 - 285, 350);
         g.drawString("Tamás Csongor, Zabó Kristóf",g.getClipBounds().width / 2 - 190, 400);

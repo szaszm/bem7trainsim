@@ -30,13 +30,13 @@ public class MenuView extends View {
     @Override
     void mouseClicked(MouseEvent e) {
         if(e.getX() >= 100 && e.getX() <= 800) {
-            if(e.getY() >= 50 && e.getY() <= 200){
+            if(e.getY() >= 50+30 && e.getY() <= 200+30){
                 entries.get(0).click();
             }
-            if(e.getY() >= 300 && e.getY() <= 450){
+            if(e.getY() >= 300+30 && e.getY() <= 450+30){
                 entries.get(1).click();
             }
-            if(e.getY() >= 550 && e.getY() <= 700) {
+            if(e.getY() >= 550+30 && e.getY() <= 700+30) {
                 entries.get(2).click();
             }
         }
@@ -54,8 +54,8 @@ public class MenuView extends View {
         g.fillRect(100, 550, g.getClipBounds().width - 200,150 );
         g.setColor(Color.BLACK);
         g.setFont(new Font("Times New Roman", Font.BOLD, 45));
-        g.drawString("Play", g.getClipBounds().width / 2 - 45,  135);
-        g.drawString("Credits", g.getClipBounds().width / 2 - 70,  385);
-        g.drawString("Quit", g.getClipBounds().width / 2 - 45,  635);
+        g.drawString("Play", g.getClipBounds().width / 2 - 45,  140);
+        g.drawString("Credits", g.getClipBounds().width / 2 - 70,  390);
+        g.drawString("Quit", g.getClipBounds().width / 2 - 45,  645);
     }
 }
