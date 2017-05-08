@@ -132,7 +132,7 @@ public class TunnelEntrance extends Rail {
      * @return the string representing the field
      */
     public FieldDrawData getDrawData() {
-        //if (coach != null) return coach.getDrawData();
+        String s;
         List<String> layers = new ArrayList<>();
         layers.add(state.getDrawData());
         return new FieldDrawData(layers);
