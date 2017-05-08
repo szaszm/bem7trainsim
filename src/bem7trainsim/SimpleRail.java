@@ -72,19 +72,19 @@ public class SimpleRail extends Rail {
                 break;
             case TOP_LEFT:
                 layers.add("╝");
-                postfix += "╝";
+                postfix += "┘";
                 break;
             case TOP_RIGHT:
                 layers.add("╚");
-                postfix += "╚";
+                postfix += "└";
                 break;
             case BOTTOM_LEFT:
                 layers.add("╗");
-                postfix += "╗";
+                postfix += "┐";
                 break;
             case BOTTOM_RIGHT:
                 layers.add("╔");
-                postfix += "╔";
+                postfix += "┌";
                 break;
             default:
                 layers.add(" ");
