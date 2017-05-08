@@ -45,7 +45,6 @@ public class TableView extends View {
      */
     @Override
     void draw(Graphics g) {
-        g.drawString(Integer.toString(controllerState.getCurrentTime()),0,0);
         FieldDrawData[][] fdd = table.getDrawData();
         sideLength = g.getClipBounds().height / fdd.length;
         if (fdd[0] != null && g.getClipBounds().width / fdd[0].length < sideLength) {
@@ -58,6 +57,9 @@ public class TableView extends View {
                 field.draw(g,x,y,sideLength,sideLength);
             }
         }
+        g.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        String time = Integer.toString(controllerState.getCurrentTime());
+        g.drawString(time,50 - time.length() * 7,25);
     }
 
     private int sideLength = 50;
