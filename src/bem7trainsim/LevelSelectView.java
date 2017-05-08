@@ -15,8 +15,14 @@ public class LevelSelectView extends View {
      */
     private LevelSelectControllerState state;
 
-
+    /**
+     * Stores maps name
+     */
     private List<String> maplist;
+
+    /**
+     * Size of maplist
+     */
     private int mapsize;
 
     /**
