@@ -25,6 +25,11 @@ public class TableLoader {
     protected List<Point> entrances;
 
     /**
+     * List of decorations
+     */
+    protected List<Decoration> decorations;
+
+    /**
      * The list of the trains which have already started
      */
     protected List<Train> trains;
@@ -90,13 +95,14 @@ public class TableLoader {
         ConnectRails();
 
         //Creating the table with the necessary parameters.
-        return new Table(fields, tunnelEntrances, entrances, switches);
+        return new Table(fields, tunnelEntrances, entrances, switches, decorations);
     }
 
     /**
      * Loading the rails
      */
     protected void LoadRails() {
+        decorations = new ArrayList<>();
         //Filling the Fields[][] based on the characters
         //We only see rails and switches
         for (int y = 0; y < rows; y++) {
@@ -134,12 +140,13 @@ public class TableLoader {
                     case '┌':
                         fields[y][x] = new Switch(Switch.Orientation.EastLeft);
                         break;
-
                     case '╬':
                         fields[y][x] = new CrossRail();
                         break;
                     default:
-                        fields[y][x] = new Decoration();
+                        Decoration d = new Decoration();
+                        fields[y][x] = d;
+                        decorations.add(d);
                         break;
                 }
             }
