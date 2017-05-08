@@ -118,13 +118,13 @@ public class FieldDrawData {
             images.put("─┌",ImageIO.read(new File(path + "/Switches/EastLeftStraight.png")));
 
             images.put("t═",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceNotConstructedEastWest.png")));
-            images.put("T═T",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceBuiltEastWest.png")));
+            images.put("T═",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceBuiltEastWest.png")));
             images.put("TU═",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceUnderConstructionEastWest.png")));
-            images.put("TR═",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceBuiltRedEastWest.png")));
-            images.put("t║",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceNotConstructedEastWest.png")));
-            images.put("T║",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceBuiltEastWest.png")));
-            images.put("TU║",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceUnderConstructionEastWest.png")));
-            images.put("TR║",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceBuiltRedEastWest.png")));
+            images.put("TR═",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceExitWest.png")));
+            images.put("t║",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceNotConstructedNorthSouth.png")));
+            images.put("T║",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceBuiltNorthSouth.png")));
+            images.put("TU║",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceUnderConstructionNorthSouth.png")));
+            images.put("TR║",ImageIO.read(new File(path + "/TunnelEntrances/TunnelEntranceExitNorth.png")));
 
             images.put("p═",ImageIO.read(new File(path + "/Wagons/RedWagonEastWest.png")));
             images.put("s═",ImageIO.read(new File(path + "/Wagons/YellowWagonEastWest.png")));
